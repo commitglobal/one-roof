@@ -14,6 +14,7 @@
     "require": {
         "php": "^8.2",
         "filament/filament": "^3.2",
+        "filament/spatie-laravel-translatable-plugin": "^3.2",
         "laravel/framework": "^11.42",
         "laravel/tinker": "^2.10",
         "league/flysystem-aws-s3-v3": "^3.29",

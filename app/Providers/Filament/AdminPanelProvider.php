@@ -12,6 +12,7 @@ use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
+use Filament\SpatieLaravelTranslatablePlugin;
 use Filament\Support\Colors\Color;
 use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
@@ -41,6 +42,11 @@ class AdminPanelProvider extends PanelProvider
                 in: app_path('Filament/Admin/Pages'),
                 for: 'App\\Filament\\Admin\\Pages',
             )
+            ->plugins([
+                SpatieLaravelTranslatablePlugin::make()
+                    // TODO: decide on source for locale data
+                    ->defaultLocales(['en', 'es']),
+            ])
             ->pages([
                 Dashboard::class,
             ])
