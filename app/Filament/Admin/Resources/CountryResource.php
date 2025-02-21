@@ -74,7 +74,6 @@ class CountryResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-
             ]);
     }
 
