@@ -9,6 +9,7 @@ use App\Filament\Admin\Resources\LocationResource\Pages\ManageLocations;
 use App\Models\Location;
 use App\Models\User;
 use Filament\Actions\CreateAction;
+use Filament\Facades\Filament;
 use Filament\Tables\Actions\EditAction;
 use Livewire\Livewire;
 use PHPUnit\Framework\Attributes\Test;
@@ -16,19 +17,29 @@ use Tests\TestCase;
 
 class LocationsTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        Filament::setCurrentPanel(
+            Filament::getPanel('admin')
+        );
+
+        $this->actingAs(
+            User::factory()
+                ->superAdmin()
+                ->create()
+        );
+    }
+
     #[Test]
     public function superadmins_can_list_locations(): void
     {
-        $user = User::factory()
-            ->superAdmin()
-            ->create();
-
         $locations = Location::factory()
             ->count(10)
             ->create();
 
-        Livewire::actingAs($user)
-            ->test(ManageLocations::class)
+        Livewire::test(ManageLocations::class)
             ->assertSuccessful()
             ->assertTableColumnExists('id')
             ->assertTableColumnExists('name')
@@ -42,12 +53,7 @@ class LocationsTest extends TestCase
     #[Test]
     public function superadmins_can_create_a_location(): void
     {
-        $user = User::factory()
-            ->superAdmin()
-            ->create();
-
-        Livewire::actingAs($user)
-            ->test(ManageLocations::class)
+        Livewire::test(ManageLocations::class)
             ->callAction(CreateAction::class, [
                 'name' => fake()->word(),
             ])
@@ -58,15 +64,10 @@ class LocationsTest extends TestCase
     #[Test]
     public function superadmins_can_update_a_location(): void
     {
-        $user = User::factory()
-            ->superAdmin()
-            ->create();
-
         $location = Location::factory()
             ->create();
 
-        Livewire::actingAs($user)
-            ->test(ManageLocations::class)
+        Livewire::test(ManageLocations::class)
             ->callTableAction(EditAction::class, $location->id, [
                 'name' => 'Updated Location',
             ])
@@ -78,16 +79,11 @@ class LocationsTest extends TestCase
     #[Test]
     public function superadmins_can_bulk_merge_two_locations(): void
     {
-        $user = User::factory()
-            ->superAdmin()
-            ->create();
-
         $locations = Location::factory()
             ->count(2)
             ->create();
 
-        Livewire::actingAs($user)
-            ->test(ManageLocations::class)
+        Livewire::test(ManageLocations::class)
             ->assertCountTableRecords(2)
             ->callTableBulkAction(MergeBulkAction::class, $locations->pluck('id'))
             ->assertHasNoTableActionErrors()
