@@ -21,4 +21,10 @@ return [
         ],
     ],
 
+    'location' => [
+        'label' => [
+            'singular' => 'location',
+            'plural' => 'locations',
+        ],
+    ],
 ];
