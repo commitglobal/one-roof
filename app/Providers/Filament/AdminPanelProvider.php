@@ -6,16 +6,21 @@ namespace App\Providers\Filament;
 
 use App\Filament\Admin\Pages\Auth\Login;
 use App\Http\Middleware\SetLocale;
+use Filament\Actions\CreateAction;
+use Filament\Actions\MountableAction;
 use Filament\Facades\Filament;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Pages\Dashboard;
+use Filament\Pages\Page;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\SpatieLaravelTranslatablePlugin;
 use Filament\Support\Colors\Color;
+use Filament\Support\Enums\Alignment;
+use Filament\Support\Enums\MaxWidth;
 use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
@@ -36,6 +41,7 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Green,
             ])
+            ->maxContentWidth(MaxWidth::Full)
             ->discoverResources(
                 in: app_path('Filament/Admin/Resources'),
                 for: 'App\\Filament\\Admin\\Resources',
@@ -57,6 +63,17 @@ class AdminPanelProvider extends PanelProvider
                 for: 'App\\Filament\\Admin\\Widgets',
             )
             ->bootUsing(function () {
+                Page::alignFormActionsEnd();
+
+                MountableAction::configureUsing(function (MountableAction $action) {
+                    $action->modalFooterActionsAlignment(Alignment::End);
+                });
+
+                CreateAction::configureUsing(function (CreateAction $action) {
+                    $action->createAnother(false);
+                    // ->modalSubmitActionLabel($action->getModalHeading());
+                });
+
                 Filament::registerNavigationGroups([
                     __('app.navigation.activity'),
                     __('app.navigation.configurations'),

@@ -11,6 +11,7 @@ use App\Models\User;
 use Filament\Actions\CreateAction;
 use Filament\Facades\Filament;
 use Filament\Tables\Actions\EditAction;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Livewire\Livewire;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
@@ -25,11 +26,12 @@ class LocationsTest extends TestCase
             Filament::getPanel('admin')
         );
 
-        $this->actingAs(
-            User::factory()
-                ->superAdmin()
-                ->create()
-        );
+        /** @var Authenticatable */
+        $user = User::factory()
+            ->superAdmin()
+            ->create();
+
+        $this->actingAs($user);
     }
 
     #[Test]

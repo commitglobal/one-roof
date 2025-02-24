@@ -5,11 +5,14 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
 use Filament\Support\Facades\FilamentView;
 use Filament\Tables\Columns\Column;
 use Filament\Tables\Table;
 use Filament\View\PanelsRenderHook;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 
@@ -51,7 +54,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $this->enforceMorphMap();
+
+        tap($this->app->isLocal(), function (bool $shouldBeEnabled) {
+            Model::preventLazyLoading($shouldBeEnabled);
+            Model::preventAccessingMissingAttributes($shouldBeEnabled);
+            Model::preventSilentlyDiscardingAttributes($shouldBeEnabled);
+        });
+
+        TextEntry::configureUsing(function (TextEntry $entry) {
+            return $entry->default('—');
+        });
     }
 
     /**
@@ -68,6 +81,17 @@ class AppServiceProvider extends ServiceProvider
         }
 
         return trim(file_get_contents($version));
+    }
+
+    protected function enforceMorphMap(): void
+    {
+        Relation::enforceMorphMap([
+            'country' => \App\Models\Country::class,
+            'location' => \App\Models\Location::class,
+            'media' => \App\Models\Media::class,
+            'organization' => \App\Models\Organization::class,
+            'user' => \App\Models\User::class,
+        ]);
     }
 
     protected function registerMacros(): void
