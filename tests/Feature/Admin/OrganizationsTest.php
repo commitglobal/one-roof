@@ -9,6 +9,7 @@ use App\Filament\Admin\Resources\OrganizationResource\Pages\EditOrganization;
 use App\Filament\Admin\Resources\OrganizationResource\Pages\ListOrganizations;
 use App\Models\Location;
 use App\Models\Organization;
+use App\Models\Shelter;
 use App\Models\User;
 use Filament\Actions\DeleteAction;
 use Filament\Facades\Filament;
@@ -72,14 +73,48 @@ class OrganizationsTest extends TestCase
         $organization = Organization::factory()
             ->make();
 
+        $shelters = Shelter::factory()
+            ->withoutParents()
+            ->count(2)
+            ->make();
+
+        $admins = User::factory()
+
+            ->count(2)
+            ->make();
+
         $this->assertDatabaseEmpty(Organization::class);
 
         Livewire::test(CreateOrganization::class)
+            ->assertWizardCurrentStep(1)
+
+            // Details
             ->fillForm($organization->toArray())
+            ->goToNextWizardStep()
+            ->assertHasNoFormErrors()
+            ->assertWizardCurrentStep(2)
+
+            // Shelters
+            ->set('data.shelters', null)
+            ->fillForm([
+                'shelters' => $shelters->toArray(),
+            ])
+            ->goToNextWizardStep()
+            ->assertHasNoFormErrors()
+
+            // Admins
+            ->set('data.admins', null)
+            ->fillForm([
+                'admins' => $admins
+                    ->map->only('name', 'email', 'phone')
+                    ->toArray(),
+            ])
             ->call('create')
             ->assertHasNoFormErrors();
 
         $this->assertDatabaseHas(Organization::class, $organization->only('name'));
+        $this->assertDatabaseCount(Shelter::class, $shelters->count());
+        $this->assertDatabaseCount(User::class, $admins->count() + 1);
     }
 
     #[Test]

@@ -32,7 +32,7 @@ class ShelterFactory extends Factory
             'coordinator' => new PersonData(
                 name: fake()->name(),
                 email: fake()->email(),
-                phone: fake()->phoneNumber(),
+                phone: fake()->e164PhoneNumber(),
             ),
             'notes' => fake()->paragraph(),
         ];

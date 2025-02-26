@@ -33,13 +33,13 @@ class OrganizationFactory extends Factory
             'representative' => new PersonData(
                 name: fake()->name(),
                 email: fake()->email(),
-                phone: fake()->phoneNumber(),
+                phone: fake()->e164PhoneNumber(),
             ),
 
             'contact' => new PersonData(
                 name: fake()->name(),
                 email: fake()->email(),
-                phone: fake()->phoneNumber(),
+                phone: fake()->e164PhoneNumber(),
             ),
             'notes' => fake()->paragraph(),
             'status' => fake()->randomElement(Status::values()),
