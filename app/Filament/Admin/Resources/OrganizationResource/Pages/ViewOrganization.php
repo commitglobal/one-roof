@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace App\Filament\Admin\Resources\OrganizationResource\Pages;
 
 use App\Filament\Admin\Resources\OrganizationResource;
+use App\Filament\Admin\Resources\OrganizationResource\Actions\ActivateOrganizationAction;
+use App\Filament\Admin\Resources\OrganizationResource\Actions\DeactivateOrganizationAction;
 use App\Filament\Concerns\UsesBreadcrumbFromTitle;
-use Filament\Actions;
 use Filament\Resources\Pages\ViewRecord;
 
 class ViewOrganization extends ViewRecord
@@ -18,7 +19,8 @@ class ViewOrganization extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            // Actions\EditAction::make(),
+            ActivateOrganizationAction::make(),
+            DeactivateOrganizationAction::make(),
         ];
     }
 

@@ -52,4 +52,18 @@ trait HasStatus
     {
         return Status::isValue($this->status, Status::PENDING);
     }
+
+    public function activate(): bool
+    {
+        return $this->update([
+            'status' => Status::ACTIVE,
+        ]);
+    }
+
+    public function deactivate(): self
+    {
+        return $this->update([
+            'status' => Status::INACTIVE,
+        ]);
+    }
 }

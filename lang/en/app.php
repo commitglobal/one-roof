@@ -63,6 +63,25 @@ return [
             'shelters' => 'Shelters',
             'admins' => 'Admins',
         ],
+
+        'actions' => [
+            'activate' => [
+                'button' => 'Activate',
+                'confirm' => [
+                    'description' => 'Are you sure you want to activate this organization?',
+                    'title' => 'Activate organization',
+                    'success' => 'Organization activated successfully.',
+                ],
+            ],
+            'deactivate' => [
+                'button' => 'Deactivate',
+                'confirm' => [
+                    'description' => 'Are you sure you want to deactivate this organization?',
+                    'title' => 'Deactivate organization',
+                    'success' => 'Organization deactivated successfully.',
+                ],
+            ],
+        ],
     ],
 
     'status' => [

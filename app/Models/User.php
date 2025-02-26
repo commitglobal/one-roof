@@ -10,12 +10,14 @@ use App\Concerns\BelongsToOrganization;
 use App\Concerns\HasStatus;
 use App\Concerns\MustSetInitialPassword;
 use Database\Factories\UserFactory;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable implements HasLocalePreference
+class User extends Authenticatable implements FilamentUser, HasLocalePreference
 {
     use BelongsToOrganization;
     /** @use HasFactory<UserFactory> */
@@ -74,6 +76,20 @@ class User extends Authenticatable implements HasLocalePreference
                 });
             }
         });
+    }
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        if ($panel->getId() === 'admin') {
+            // TODO: implement admin panel access logic
+            return true;
+        }
+
+        if ($panel->getId() === 'shelters') {
+            // TODO: implement shelters panel access logic
+        }
+
+        return false;
     }
 
     public function preferredLocale(): string
