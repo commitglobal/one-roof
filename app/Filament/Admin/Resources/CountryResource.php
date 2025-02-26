@@ -46,6 +46,7 @@ class CountryResource extends Resource
                 TextInput::make('id')
                     ->label(__('app.field.id'))
                     ->unique(ignoreRecord: true)
+                    ->maxLength(2)
                     ->required(),
 
                 TextInput::make('name')

@@ -7,6 +7,8 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Location;
+use App\Models\Organization;
+use App\Models\Shelter;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Mail;
@@ -26,6 +28,20 @@ class DatabaseSeeder extends Seeder
 
         Location::factory()
             ->count(50)
+            ->create();
+
+        Organization::factory()
+            ->count(10)
+            ->has(
+                Shelter::factory()
+                    ->count(5),
+                'shelters'
+            )
+            ->has(
+                User::factory()
+                    ->count(3),
+                'admins'
+            )
             ->create();
     }
 }
