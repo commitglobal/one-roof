@@ -11,6 +11,8 @@ use Database\Factories\OrganizationFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -71,5 +73,15 @@ class Organization extends Model implements HasMedia
     public function location(): BelongsTo
     {
         return $this->belongsTo(Location::class);
+    }
+
+    public function shelters(): HasMany
+    {
+        return $this->hasMany(Shelter::class);
+    }
+
+    public function admins(): MorphToMany
+    {
+        return $this->morphedByMany(User::class, 'model', 'model_has_organizations');
     }
 }

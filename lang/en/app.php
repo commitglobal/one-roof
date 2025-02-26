@@ -11,6 +11,8 @@ return [
 
     'field' => [
         'address' => 'Address',
+        'admins' => 'Administrators',
+        'capacity' => 'Capacity',
         'contact_person' => 'Contact person',
         'country' => 'Country',
         'email' => 'Email',
@@ -25,6 +27,8 @@ return [
         'notes' => 'Observations',
         'organization_type' => 'Organization type',
         'phone' => 'Phone',
+        'shelter_coordinator' => 'Shelter coordinator',
+        'shelters' => 'Shelters',
         'status' => 'Status',
     ],
 

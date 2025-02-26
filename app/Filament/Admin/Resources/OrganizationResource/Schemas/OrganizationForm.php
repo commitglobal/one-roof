@@ -6,9 +6,9 @@ namespace App\Filament\Admin\Resources\OrganizationResource\Schemas;
 
 use App\Enums\OrganizationType;
 use Filament\Forms\Components\Fieldset;
-use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 
 class OrganizationForm
@@ -45,29 +45,36 @@ class OrganizationForm
 
             TextInput::make('address')
                 ->label(__('app.field.address'))
+                ->required()
                 ->columnSpanFull(),
 
             Select::make('type')
                 ->label(__('app.field.organization_type'))
                 ->options(OrganizationType::options())
-                ->enum(OrganizationType::class),
+                ->enum(OrganizationType::class)
+                ->nullable(),
 
             TextInput::make('identifier')
-                ->label(__('app.field.identifier')),
+                ->label(__('app.field.identifier'))
+                ->nullable(),
 
             Fieldset::make(__('app.field.legal_representative'))
                 ->columnSpan(1)
                 ->columns(1)
                 ->schema([
                     TextInput::make('representative.name')
-                        ->label(__('app.field.name')),
+                        ->label(__('app.field.name'))
+                        ->requiredWith(['representative.email', 'representative.phone']),
 
                     TextInput::make('representative.email')
                         ->label(__('app.field.email'))
-                        ->email(),
+                        ->email()
+                        ->requiredWith(['representative.name', 'representative.phone']),
 
                     TextInput::make('representative.phone')
-                        ->label(__('app.field.phone')),
+                        ->label(__('app.field.phone'))
+                        ->tel()
+                        ->requiredWith(['representative.name', 'representative.email']),
                 ]),
 
             Fieldset::make(__('app.field.contact_person'))
@@ -85,6 +92,7 @@ class OrganizationForm
 
                     TextInput::make('contact.phone')
                         ->label(__('app.field.phone'))
+                        ->tel()
                         ->required(),
                 ]),
 
@@ -105,8 +113,9 @@ class OrganizationForm
                 ->image()
                 ->columnSpanFull(),
 
-            RichEditor::make('notes')
+            Textarea::make('notes')
                 ->label(__('app.field.notes'))
+                ->rows(5)
                 ->columnSpanFull(),
         ];
     }

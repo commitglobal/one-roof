@@ -18,7 +18,17 @@ class ViewOrganization extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\EditAction::make(),
+            // Actions\EditAction::make(),
         ];
+    }
+
+    public function hasCombinedRelationManagerTabsWithContent(): bool
+    {
+        return true;
+    }
+
+    public function getContentTabLabel(): ?string
+    {
+        return __('app.organization.steps.details');
     }
 }

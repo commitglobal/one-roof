@@ -6,12 +6,15 @@ namespace App\Filament\Admin\Resources;
 
 use App\Enums\Status;
 use App\Filament\Admin\Resources\OrganizationResource\Pages;
+use App\Filament\Admin\Resources\OrganizationResource\RelationManagers\AdminsRelationManager;
+use App\Filament\Admin\Resources\OrganizationResource\RelationManagers\SheltersRelationManager;
 use App\Filament\Admin\Resources\OrganizationResource\Schemas\OrganizationForm;
 use App\Filament\Admin\Resources\OrganizationResource\Schemas\OrganizationInfolist;
 use App\Models\Organization;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Infolists;
+use Filament\Infolists\Components\Actions\Action;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -24,6 +27,8 @@ class OrganizationResource extends Resource
     protected static ?string $model = Organization::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
+
+    protected static ?string $recordTitleAttribute = 'name';
 
     protected static bool $isScopedToTenant = false;
 
@@ -48,6 +53,15 @@ class OrganizationResource extends Resource
             ->schema([
                 Infolists\Components\Section::make()
                     ->columns(2)
+                    ->heading(__('app.organization.steps.details'))
+                    ->headerActions([
+                        Action::make('edit')
+                            ->label(__('filament-actions::edit.single.label'))
+                            ->url(fn ($record) => static::getUrl('edit', ['record' => $record]))
+                            ->icon('heroicon-o-pencil-square')
+                            ->color('gray')
+                            ->outlined(),
+                    ])
                     ->schema(OrganizationInfolist::getSchema()),
             ]);
     }
@@ -101,7 +115,8 @@ class OrganizationResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            SheltersRelationManager::class,
+            AdminsRelationManager::class,
         ];
     }
 

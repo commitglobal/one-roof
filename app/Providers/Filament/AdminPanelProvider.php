@@ -41,6 +41,7 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Green,
             ])
+            ->sidebarCollapsibleOnDesktop()
             ->maxContentWidth(MaxWidth::Full)
             ->discoverResources(
                 in: app_path('Filament/Admin/Resources'),
@@ -79,6 +80,7 @@ class AdminPanelProvider extends PanelProvider
                     __('app.navigation.configurations'),
                 ]);
             })
+            ->readOnlyRelationManagersOnResourceViewPagesByDefault(false)
             ->widgets([
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
