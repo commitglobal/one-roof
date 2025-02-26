@@ -6,17 +6,18 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Concerns\BelongsToOrganization;
 use App\Concerns\HasStatus;
 use App\Concerns\MustSetInitialPassword;
 use Database\Factories\UserFactory;
 use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable implements HasLocalePreference
 {
+    use BelongsToOrganization;
     /** @use HasFactory<UserFactory> */
     use HasFactory;
     use HasStatus;
@@ -60,9 +61,19 @@ class User extends Authenticatable implements HasLocalePreference
         ];
     }
 
-    public function organizations(): MorphToMany
+    public static function booted(): void
     {
-        return $this->morphToMany(Organization::class, 'model', 'model_has_organizations', 'model_id');
+        static::created(function (self $user): void {
+            $user->loadMissing('organization.shelters');
+
+            if (filled($user->organization)) {
+                $user->organization->shelters->each(function (Shelter $shelter) use ($user) {
+                    $shelter->users()->attach([
+                        $user->id => ['role' => 'admin'],
+                    ]);
+                });
+            }
+        });
     }
 
     public function preferredLocale(): string
