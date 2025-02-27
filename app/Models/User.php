@@ -8,6 +8,7 @@ namespace App\Models;
 
 use App\Concerns\BelongsToOrganization;
 use App\Concerns\HasStatus;
+use App\Concerns\HasUlid;
 use App\Concerns\MustSetInitialPassword;
 use Database\Factories\UserFactory;
 use Filament\Models\Contracts\FilamentUser;
@@ -23,6 +24,7 @@ class User extends Authenticatable implements FilamentUser, HasLocalePreference
     /** @use HasFactory<UserFactory> */
     use HasFactory;
     use HasStatus;
+    use HasUlid;
     use MustSetInitialPassword;
     use Notifiable;
 

@@ -31,7 +31,7 @@ trait MustSetInitialPassword
 
     public function hasSetPassword(): bool
     {
-        return ! \is_null($this->password_set_at);
+        return filled($this->password_set_at);
     }
 
     public function setPassword(#[SensitiveParameter] string $password): bool

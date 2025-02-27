@@ -19,4 +19,9 @@ return [
     'password' => 'The provided password is incorrect.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 
+    'link_already_used' => 'This link has already been used.',
+    'invalid_signature' => 'This link doesn\'t have a valid signature.',
+    'invalid_user' => 'This is not a valid user.',
+    'set_password' => 'Set password',
+
 ];

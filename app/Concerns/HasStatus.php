@@ -60,7 +60,7 @@ trait HasStatus
         ]);
     }
 
-    public function deactivate(): self
+    public function deactivate(): bool
     {
         return $this->update([
             'status' => Status::INACTIVE,
