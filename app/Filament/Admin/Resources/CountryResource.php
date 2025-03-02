@@ -24,6 +24,8 @@ class CountryResource extends Resource
 
     protected static bool $isScopedToTenant = false;
 
+    protected static ?int $navigationSort = 10;
+
     public static function getNavigationGroup(): ?string
     {
         return __('app.navigation.configurations');
@@ -46,6 +48,7 @@ class CountryResource extends Resource
                 TextInput::make('id')
                     ->label(__('app.field.id'))
                     ->unique(ignoreRecord: true)
+                    ->maxLength(2)
                     ->required(),
 
                 TextInput::make('name')
