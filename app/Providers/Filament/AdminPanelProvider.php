@@ -57,6 +57,7 @@ class AdminPanelProvider extends PanelProvider
                 SpatieLaravelTranslatablePlugin::make()
                     // TODO: decide on source for locale data
                     ->defaultLocales(['en', 'es']),
+
             ])
             ->pages([
                 Dashboard::class,

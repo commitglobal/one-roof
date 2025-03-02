@@ -24,6 +24,8 @@ class CountryResource extends Resource
 
     protected static bool $isScopedToTenant = false;
 
+    protected static ?int $navigationSort = 10;
+
     public static function getNavigationGroup(): ?string
     {
         return __('app.navigation.configurations');

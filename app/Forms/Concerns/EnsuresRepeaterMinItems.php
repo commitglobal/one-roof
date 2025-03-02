@@ -44,7 +44,11 @@ trait EnsuresRepeaterMinItems
     {
         $count = collect($this->getState())->count();
 
-        $minItems = $this->getMinItems() ?? 1;
+        $minItems = $this->getMinItems();
+
+        if ($minItems === null) {
+            return;
+        }
 
         while ($count < $minItems) {
             $this->createItem();

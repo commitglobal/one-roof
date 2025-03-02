@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use Filament\Forms;
+use Filament\Forms\Components\Tabs;
 use Filament\Infolists;
 use Filament\Support\Enums\Alignment;
 use Filament\Tables;
@@ -64,6 +65,37 @@ class FilamentServiceProvider extends ServiceProvider
         Forms\Components\Repeater::configureUsing(function (Forms\Components\Repeater $repeater) {
             return $repeater->addActionAlignment(Alignment::Left);
         });
+
+        Forms\Components\Field::macro('translatable', function (?array $localeSpecificRules = null) {
+            return Tabs::make('translations')
+                ->contained(false)
+                ->tabs(
+                    collect(filament('spatie-laravel-translatable')->getDefaultLocales())
+                        ->map(function ($label, $key) use ($localeSpecificRules) {
+                            $locale = \is_string($key) ? $key : $label;
+
+                            $clone = $this
+                                ->getClone()
+                                ->name("{$this->getName()}.{$locale}")
+                                ->label($this->getLabel())
+                                ->statePath("{$this->getStatePath(false)}.{$locale}");
+
+                            if ($locale !== app()->getFallbackLocale()) {
+                                $clone->required(false)
+                                    ->nullable();
+                            }
+
+                            if ($rules = data_get($localeSpecificRules, $locale)) {
+                                $clone->rules($rules);
+                            }
+
+                            return Tabs\Tab::make($locale)
+                                ->label(\is_string($key) ? $label : strtoupper($locale))
+                                ->schema([$clone]);
+                        })
+                        ->toArray()
+                );
+        });
     }
 
     protected function configureInfolistComponents(): void
@@ -75,6 +107,10 @@ class FilamentServiceProvider extends ServiceProvider
 
     protected function configureTableComponents(): void
     {
+        Tables\Table::configureUsing(function (Tables\Table $table) {
+            return $table->defaultsort('id', 'desc');
+        });
+
         Tables\Columns\Column::macro('shrink', function () {
             return $this->extraHeaderAttributes(['class' => 'w-1']);
         });
