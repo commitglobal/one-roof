@@ -4,25 +4,30 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-
 use App\Concerns\BelongsToOrganization;
+use App\Concerns\HasRole;
 use App\Concerns\HasStatus;
 use App\Concerns\HasUlid;
 use App\Concerns\MustSetInitialPassword;
+use App\Enums\User\Role;
 use Database\Factories\UserFactory;
 use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasTenants;
 use Filament\Panel;
 use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Collection;
 
-class User extends Authenticatable implements FilamentUser, HasLocalePreference
+class User extends Authenticatable implements FilamentUser, HasTenants, HasLocalePreference
 {
     use BelongsToOrganization;
     /** @use HasFactory<UserFactory> */
     use HasFactory;
+    use HasRole;
     use HasStatus;
     use HasUlid;
     use MustSetInitialPassword;
@@ -60,9 +65,16 @@ class User extends Authenticatable implements FilamentUser, HasLocalePreference
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function shelters(): BelongsToMany
+    {
+        return $this->belongsToMany(Shelter::class, Membership::class)
+            ->withPivot('role')
+            ->withTimestamps()
+            ->as('membership');
     }
 
     public static function booted(): void
@@ -73,7 +85,7 @@ class User extends Authenticatable implements FilamentUser, HasLocalePreference
             if (filled($user->organization)) {
                 $user->organization->shelters->each(function (Shelter $shelter) use ($user) {
                     $shelter->users()->attach([
-                        $user->id => ['role' => 'admin'],
+                        $user->id => ['role' => Role::SHELTER_ADMIN],
                     ]);
                 });
             }
@@ -82,16 +94,30 @@ class User extends Authenticatable implements FilamentUser, HasLocalePreference
 
     public function canAccessPanel(Panel $panel): bool
     {
+        // return true;
         if ($panel->getId() === 'admin') {
-            // TODO: implement admin panel access logic
+            return $this->hasElevatedPrivileges();
+        }
+
+        if ($panel->getId() === 'shelter') {
             return true;
         }
 
-        if ($panel->getId() === 'shelters') {
-            // TODO: implement shelters panel access logic
+        return false;
+    }
+
+    public function getTenants(Panel $panel): Collection
+    {
+        if ($panel->getId() === 'shelter') {
+            return $this->shelters;
         }
 
-        return false;
+        return collect();
+    }
+
+    public function canAccessTenant(Model $tenant): bool
+    {
+        return $this->shelters->contains($tenant);
     }
 
     public function preferredLocale(): string

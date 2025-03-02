@@ -163,6 +163,20 @@ return [
         ],
     ],
 
+    'user' => [
+        'label' => [
+            'singular' => 'user',
+            'plural' => 'users',
+        ],
+
+        'role' => [
+            'super_admin' => 'Super admin',
+            'super_user' => 'Super user',
+            'shelter_admin' => 'Shelter admin',
+            'shelter_user' => 'Shelter user',
+        ],
+    ],
+
     'status' => [
         'active' => 'Active',
         'inactive' => 'Inactive',

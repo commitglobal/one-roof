@@ -23,13 +23,13 @@ return new class extends Migration
 
             $table->string('phone')->nullable();
 
-            $table->timestamp('email_verified_at')->nullable();
-
             $table->string('password');
 
             $table->timestamp('password_set_at')->nullable();
 
             $table->string('locale', 2)->nullable();
+
+            $table->string('role')->nullable();
 
             $table->rememberToken();
 

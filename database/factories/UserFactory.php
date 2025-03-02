@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
+use App\Enums\Status;
+use App\Enums\User\Role;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -29,8 +31,9 @@ class UserFactory extends Factory
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'phone' => fake()->e164PhoneNumber(),
-            'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
+            'status' => fake()->randomElement([Status::ACTIVE, Status::INACTIVE]),
+            'password_set_at' => now(),
             'remember_token' => Str::random(10),
         ];
     }
@@ -38,10 +41,11 @@ class UserFactory extends Factory
     /**
      * Indicate that the model's email address should be unverified.
      */
-    public function unverified(): static
+    public function pending(): static
     {
         return $this->state(fn (array $attributes) => [
-            'email_verified_at' => null,
+            'password_set_at' => null,
+            'status' => Status::PENDING,
         ]);
     }
 
@@ -51,7 +55,37 @@ class UserFactory extends Factory
     public function superAdmin(): static
     {
         return $this->state(fn (array $attributes) => [
-            //
+            'role' => Role::SUPER_ADMIN,
+        ]);
+    }
+
+    /**
+     * Indicate that the model should have super user role.
+     */
+    public function superUser(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'role' => Role::SUPER_USER,
+        ]);
+    }
+
+    /**
+     * Indicate that the model should have shelter admin role.
+     */
+    public function shelterAdmin(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            // 'role' => Role::SHELTER_ADMIN,
+        ]);
+    }
+
+    /**
+     * Indicate that the model should have shelter user role.
+     */
+    public function shelterUser(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            // 'role' => Role::SHELTER_USER,
         ]);
     }
 }

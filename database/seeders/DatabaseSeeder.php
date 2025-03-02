@@ -9,7 +9,6 @@ namespace Database\Seeders;
 use App\Models\Form;
 use App\Models\Location;
 use App\Models\Organization;
-use App\Models\Shelter;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Mail;
@@ -23,8 +22,12 @@ class DatabaseSeeder extends Seeder
     {
         Mail::fake();
 
-        User::factory(['email' => 'admin@example.com'])
+        User::factory(['email' => 'superadmin@example.com'])
             ->superAdmin()
+            ->create();
+
+        User::factory(['email' => 'superuser@example.com'])
+            ->superUser()
             ->create();
 
         $this->forms();
@@ -35,16 +38,6 @@ class DatabaseSeeder extends Seeder
 
         Organization::factory()
             ->count(10)
-            ->has(
-                Shelter::factory()
-                    ->count(5),
-                'shelters'
-            )
-            ->has(
-                User::factory()
-                    ->count(3),
-                'admins'
-            )
             ->create();
     }
 

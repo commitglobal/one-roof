@@ -9,7 +9,11 @@ use App\Enums\OrganizationType;
 use App\Enums\Status;
 use App\Models\Country;
 use App\Models\Location;
+use App\Models\Organization;
+use App\Models\Shelter;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Organization>
@@ -44,5 +48,25 @@ class OrganizationFactory extends Factory
             'notes' => fake()->paragraph(),
             'status' => fake()->randomElement(Status::values()),
         ];
+    }
+
+    public function configure(): static
+    {
+        return $this->afterCreating(function (Organization $organization) {
+            Shelter::factory()
+                ->count(3)
+                ->for($organization)
+                ->create();
+
+            User::factory()
+                ->count(3)
+                ->sequence(fn (Sequence $sequence) => [
+                    'email' => \sprintf('user-%d-%d@example.com', $organization->id, $sequence->index + 1),
+                ])
+                ->for($organization)
+                ->create();
+
+            // $organization->admins()->save(User::factory()->superAdmin()->make());
+        });
     }
 }

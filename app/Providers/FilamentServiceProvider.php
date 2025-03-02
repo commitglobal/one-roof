@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use Filament\Actions\CreateAction;
+use Filament\Actions\MountableAction;
 use Filament\Forms;
 use Filament\Forms\Components\Tabs;
 use Filament\Infolists;
+use Filament\Pages\Page;
 use Filament\Support\Enums\Alignment;
 use Filament\Tables;
 use Illuminate\Support\ServiceProvider;
@@ -33,6 +36,7 @@ class FilamentServiceProvider extends ServiceProvider
         $this->configureFormComponents();
         $this->configureInfolistComponents();
         $this->configureTableComponents();
+        $this->configureActions();
     }
 
     /**
@@ -40,7 +44,7 @@ class FilamentServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Page::alignFormActionsEnd();
     }
 
     protected function setDateTimeDisplayFormats(): void
@@ -113,6 +117,18 @@ class FilamentServiceProvider extends ServiceProvider
 
         Tables\Columns\Column::macro('shrink', function () {
             return $this->extraHeaderAttributes(['class' => 'w-1']);
+        });
+    }
+
+    protected function configureActions(): void
+    {
+        MountableAction::configureUsing(function (MountableAction $action) {
+            $action->modalFooterActionsAlignment(Alignment::End);
+        });
+
+        CreateAction::configureUsing(function (CreateAction $action) {
+            $action->createAnother(false);
+            // ->modalSubmitActionLabel($action->getModalHeading());
         });
     }
 }
