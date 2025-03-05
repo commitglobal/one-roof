@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use Filament\Actions\CreateAction;
 use Filament\Actions\MountableAction;
+use Filament\Facades\Filament;
 use Filament\Forms;
 use Filament\Forms\Components\Tabs;
 use Filament\Infolists;
@@ -45,6 +45,11 @@ class FilamentServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Page::alignFormActionsEnd();
+
+        Filament::registerNavigationGroups([
+            __('app.navigation.activity'),
+            __('app.navigation.configurations'),
+        ]);
     }
 
     protected function setDateTimeDisplayFormats(): void
@@ -124,11 +129,10 @@ class FilamentServiceProvider extends ServiceProvider
     {
         MountableAction::configureUsing(function (MountableAction $action) {
             $action->modalFooterActionsAlignment(Alignment::End);
-        });
 
-        CreateAction::configureUsing(function (CreateAction $action) {
-            $action->createAnother(false);
-            // ->modalSubmitActionLabel($action->getModalHeading());
+            if (method_exists($action, 'createAnother')) {
+                $action->createAnother(false);
+            }
         });
     }
 }

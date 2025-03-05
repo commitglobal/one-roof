@@ -7,7 +7,7 @@ namespace Database\Factories;
 use App\Enums\Form\Status;
 use App\Enums\Form\Type;
 use App\Models\Form;
-use App\Models\FormSection;
+use App\Models\Form\Section;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -61,7 +61,8 @@ class FormFactory extends Factory
     public function withSections(int $count = 1): static
     {
         return $this->afterCreating(function (Form $form) use ($count) {
-            FormSection::factory()
+            Section::factory()
+                ->withFields()
                 ->count($count)
                 ->for($form)
                 ->create();

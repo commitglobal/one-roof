@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Filament\Admin\Resources\FormResource\Actions;
 
 use App\Models\Form;
-use App\Models\Organization;
 use Filament\Actions\Action;
 
 class MarkAsDraftAction extends Action
@@ -36,7 +35,7 @@ class MarkAsDraftAction extends Action
 
         $this->modalWidth('md');
 
-        $this->action(function (Organization $record) {
+        $this->action(function (Form $record) {
             $record->markAsDraft();
 
             $this->success();

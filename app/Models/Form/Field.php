@@ -2,23 +2,26 @@
 
 declare(strict_types=1);
 
-namespace App\Models;
+namespace App\Models\Form;
 
-use App\Enums\Form\Field;
-use Database\Factories\FormFieldFactory;
+use App\Enums\Form\FieldType;
+use Database\Factories\Form\FieldFactory;
 use Filament\Forms\Components\Field as Component;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Str;
 use Spatie\Translatable\HasTranslations;
 
-class FormField extends Model
+class Field extends Model
 {
-    /** @use HasFactory<FormFieldFactory> */
+    /** @use HasFactory<FieldFactory> */
     use HasFactory;
     use HasTranslations;
 
-    protected static string $factory = FormFieldFactory::class;
+    protected $table = 'form_fields';
+
+    protected static string $factory = FieldFactory::class;
 
     protected $fillable = [
         'section_id',
@@ -41,7 +44,7 @@ class FormField extends Model
     protected function casts(): array
     {
         return [
-            'type' => Field::class,
+            'type' => FieldType::class,
             'options' => 'collection',
             'required' => 'boolean',
             'min' => 'integer',
@@ -52,7 +55,7 @@ class FormField extends Model
 
     public function section(): BelongsTo
     {
-        return $this->belongsTo(FormSection::class, 'section_id');
+        return $this->belongsTo(Section::class);
     }
 
     public function render(): Component
@@ -62,6 +65,32 @@ class FormField extends Model
             ->label($this->label)
             ->helperText($this->help)
             ->required($this->required);
+
+        switch ($this->type) {
+            case FieldType::CHECKBOX:
+            case FieldType::RADIO:
+            case FieldType::SELECT:
+                $component
+                    ->options(
+                        Str::of($this->options)
+                            ->split('/\r\n|\r|\n/')
+                            ->filter()
+                    );
+                break;
+
+            case FieldType::NUMBER:
+                $component
+                    ->minValue($this->min ?: null)
+                    ->maxValue($this->max ?: null);
+                break;
+
+            case FieldType::TEXT:
+            case FieldType::TEXTAREA:
+                $component
+                    ->minLength($this->min ?: null)
+                    ->maxLength($this->max ?: null);
+                break;
+        }
 
         return $component;
     }

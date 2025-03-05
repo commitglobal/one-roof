@@ -3,7 +3,9 @@
 declare(strict_types=1);
 
 use App\Models\Form;
-use App\Models\FormSection;
+use App\Models\Form\Field;
+use App\Models\Form\Response;
+use App\Models\Form\Section;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -38,7 +40,7 @@ return new class extends Migration
         Schema::create('form_fields', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignIdFor(FormSection::class, 'section_id')
+            $table->foreignIdFor(Section::class)
                 ->constrained()
                 ->cascadeOnDelete();
 
@@ -52,6 +54,42 @@ return new class extends Migration
             $table->tinyInteger('order')->unsigned();
 
             $table->timestamps();
+        });
+
+        Schema::create('form_responses', function (Blueprint $table) {
+            $table->id();
+
+            $table->foreignIdFor(Form::class)
+                ->constrained()
+                ->cascadeOnDelete();
+
+            $table->nullableMorphs('model');
+
+            $table->timestamps();
+        });
+
+        Schema::create('form_field_responses', function (Blueprint $table) {
+            $table->id();
+
+            $table->foreignIdFor(Response::class)
+                ->constrained()
+                ->cascadeOnDelete();
+
+            $table->foreignIdFor(Field::class)
+                ->constrained()
+                ->cascadeOnDelete();
+
+            $table->json('value')->nullable();
+        });
+
+        Schema::create('model_has_forms', function (Blueprint $table) {
+            $table->id();
+
+            $table->morphs('model');
+
+            $table->foreignIdFor(Form::class)
+                ->constrained()
+                ->cascadeOnDelete();
         });
     }
 };

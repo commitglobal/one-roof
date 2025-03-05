@@ -8,7 +8,6 @@ use App\Filament\Admin\Pages\Auth\Login;
 use App\Filament\Admin\Pages\Auth\Welcome;
 use App\Http\Middleware\EnsureUserIsActive;
 use App\Http\Middleware\SetLocale;
-use Filament\Facades\Filament;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -51,8 +50,11 @@ class AdminPanelProvider extends PanelProvider
             )
             ->plugins([
                 SpatieLaravelTranslatablePlugin::make()
-                    // TODO: decide on source for locale data
-                    ->defaultLocales(['en', 'es']),
+                    ->defaultLocales(
+                        active_locales()
+                            ->pluck('code')
+                            ->all()
+                    ),
             ])
             ->pages([
                 Dashboard::class,
@@ -64,12 +66,6 @@ class AdminPanelProvider extends PanelProvider
                 in: app_path('Filament/Admin/Widgets'),
                 for: 'App\\Filament\\Admin\\Widgets',
             )
-            ->bootUsing(function () {
-                Filament::registerNavigationGroups([
-                    __('app.navigation.activity'),
-                    __('app.navigation.configurations'),
-                ]);
-            })
             ->readOnlyRelationManagersOnResourceViewPagesByDefault(false)
             ->widgets([
                 Widgets\AccountWidget::class,

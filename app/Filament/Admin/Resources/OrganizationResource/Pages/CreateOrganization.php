@@ -21,11 +21,6 @@ class CreateOrganization extends CreateRecord
 
     protected static string $resource = OrganizationResource::class;
 
-    protected function hasSkippableSteps(): bool
-    {
-        return false;
-    }
-
     public function getSteps(): array
     {
         return [

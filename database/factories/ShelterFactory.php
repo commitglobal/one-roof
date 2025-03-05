@@ -5,9 +5,12 @@ declare(strict_types=1);
 namespace Database\Factories;
 
 use App\Data\PersonData;
+use App\Models\Beneficiary;
 use App\Models\Country;
 use App\Models\Location;
 use App\Models\Organization;
+use App\Models\Shelter;
+use App\Models\Stay;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -36,5 +39,21 @@ class ShelterFactory extends Factory
             ),
             'notes' => fake()->paragraph(),
         ];
+    }
+
+    public function configure(): static
+    {
+        $beneficiaries = Beneficiary::pluck('id')
+            ->map(fn (int $id) => [
+                'beneficiary_id' => $id,
+            ]);
+
+        return $this->afterCreating(function (Shelter $shelter) use ($beneficiaries) {
+            Stay::factory()
+                ->count($beneficiaries->count())
+                ->sequence(...$beneficiaries)
+                ->for($shelter)
+                ->create();
+        });
     }
 }

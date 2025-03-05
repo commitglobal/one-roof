@@ -14,7 +14,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Support\Contracts\HasLabel;
 
-enum Field: string implements HasLabel
+enum FieldType: string implements HasLabel
 {
     use Arrayable;
     use Comparable;

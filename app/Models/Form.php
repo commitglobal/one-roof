@@ -6,7 +6,9 @@ namespace App\Models;
 
 use App\Enums\Form\Status;
 use App\Enums\Form\Type;
+use App\Models\Form\Section;
 use Database\Factories\FormFactory;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -42,14 +44,16 @@ class Form extends Model
 
     public function sections(): HasMany
     {
-        return $this->hasMany(FormSection::class)
+        return $this->hasMany(Section::class)
             ->orderBy('order', 'asc');
     }
 
     public static function booted(): void
     {
         static::creating(function (self $form): void {
-            $form->status = Status::DRAFT;
+            if (blank($form->status)) {
+                $form->status = Status::DRAFT;
+            }
         });
 
         // When a form is saved as published, mark all other
@@ -105,5 +109,32 @@ class Form extends Model
         return $this->update([
             'status' => Status::OBSOLETE,
         ]);
+    }
+
+    public function scopeLatestPublished(Builder $query, Type $type): Builder
+    {
+        return $query
+            ->where('type', $type)
+            ->where('status', Status::PUBLISHED)
+            ->latest();
+    }
+
+    /**
+     * TODO: add versioning support.
+     */
+    public static function render(Type $type): array
+    {
+        $form = static::query()
+            ->latestPublished($type)
+            ->with('sections.fields')
+            ->first();
+
+        if (blank($form)) {
+            return [];
+        }
+
+        return $form
+            ->sections->map->render()
+            ->all();
     }
 }

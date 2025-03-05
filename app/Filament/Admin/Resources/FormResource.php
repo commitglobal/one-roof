@@ -6,6 +6,7 @@ namespace App\Filament\Admin\Resources;
 
 use App\Enums\Form\Status;
 use App\Enums\Form\Type;
+use App\Filament\Admin\Resources\FormResource\Actions\Tables\PublishAction;
 use App\Filament\Admin\Resources\FormResource\Pages;
 use App\Filament\Admin\Resources\FormResource\Schemas\FormSchema;
 use App\Forms\Components\Repeater;
@@ -144,6 +145,8 @@ class FormResource extends Resource
                     Tables\Actions\ViewAction::make(),
 
                     Tables\Actions\EditAction::make(),
+
+                    PublishAction::make(),
 
                     Tables\Actions\ReplicateAction::make(),
 

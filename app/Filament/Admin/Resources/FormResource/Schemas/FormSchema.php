@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Admin\Resources\FormResource\Schemas;
 
-use App\Enums\Form\Field;
+use App\Enums\Form\FieldType;
 use App\Forms\Components\Repeater;
 use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Group;
@@ -46,7 +46,7 @@ class FormSchema
                 )
                 ->itemLabel(
                     fn (array $state) => collect([
-                        Field::tryFrom((string) data_get($state, 'type'))?->getLabel(),
+                        FieldType::tryFrom((string) data_get($state, 'type'))?->getLabel(),
                         data_get($state, 'label.' . app()->getLocale()),
                     ])
                         ->filter()
@@ -77,8 +77,8 @@ class FormSchema
 
             Select::make('type')
                 ->label(__('app.field.type'))
-                ->options(Field::options())
-                ->enum(Field::class)
+                ->options(FieldType::options())
+                ->enum(FieldType::class)
                 ->live()
                 ->required(),
 
@@ -88,17 +88,18 @@ class FormSchema
                 ->nullable()
                 ->rows(5)
                 ->visible(
-                    fn (Get $get) => \in_array(Field::tryFrom((string) $get('type')), [
-                        Field::CHECKBOX,
-                        Field::RADIO,
-                        Field::SELECT,
+                    fn (Get $get) => \in_array(FieldType::tryFrom((string) $get('type')), [
+                        FieldType::CHECKBOX,
+                        FieldType::RADIO,
+                        FieldType::SELECT,
                     ])
-                ),
+                )
+                ->translatable(),
 
             Group::make()
                 ->visible(
-                    fn (Get $get) => \in_array(Field::tryFrom((string) $get('type')), [
-                        Field::NUMBER,
+                    fn (Get $get) => \in_array(FieldType::tryFrom((string) $get('type')), [
+                        FieldType::NUMBER,
                     ])
                 )
                 ->schema([
@@ -119,9 +120,9 @@ class FormSchema
 
             Group::make()
                 ->visible(
-                    fn (Get $get) => \in_array(Field::tryFrom((string) $get('type')), [
-                        Field::TEXT,
-                        Field::TEXTAREA,
+                    fn (Get $get) => \in_array(FieldType::tryFrom((string) $get('type')), [
+                        FieldType::TEXT,
+                        FieldType::TEXTAREA,
                     ])
                 )
                 ->schema([

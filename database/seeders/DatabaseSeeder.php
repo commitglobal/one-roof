@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Beneficiary;
 use App\Models\Form;
 use App\Models\Location;
 use App\Models\Organization;
@@ -33,6 +34,10 @@ class DatabaseSeeder extends Seeder
         $this->forms();
 
         Location::factory()
+            ->count(50)
+            ->create();
+
+        Beneficiary::factory()
             ->count(50)
             ->create();
 

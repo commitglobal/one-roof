@@ -2,23 +2,26 @@
 
 declare(strict_types=1);
 
-namespace App\Models;
+namespace App\Models\Form;
 
-use Database\Factories\FormSectionFactory;
-use Filament\Forms\Components\Section;
+use App\Models\Form;
+use Database\Factories\Form\SectionFactory;
+use Filament\Forms\Components\Section as Component;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Translatable\HasTranslations;
 
-class FormSection extends Model
+class Section extends Model
 {
-    /** @use HasFactory<FormSectionFactory> */
+    /** @use HasFactory<SectionFactory> */
     use HasFactory;
     use HasTranslations;
 
-    protected static string $factory = FormSectionFactory::class;
+    protected $table = 'form_sections';
+
+    protected static string $factory = SectionFactory::class;
 
     protected $fillable = [
         'name',
@@ -45,14 +48,15 @@ class FormSection extends Model
 
     public function fields(): HasMany
     {
-        return $this->hasMany(FormField::class, 'section_id')
+        return $this->hasMany(Field::class)
             ->orderBy('order', 'asc');
     }
 
-    public function render(): Section
+    public function render(): Component
     {
-        return Section::make($this->name)
+        return Component::make($this->name)
             ->description($this->description)
+            ->compact()
             ->schema(
                 $this->fields
                     ->map->render()

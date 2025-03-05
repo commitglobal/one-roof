@@ -20,7 +20,7 @@ class ViewForm extends ViewRecord
     {
         return [
             Actions\DeleteAction::make(),
-            Actions\LocaleSwitcher::make(),
+            // Actions\LocaleSwitcher::make(),
         ];
     }
 }

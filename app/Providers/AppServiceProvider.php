@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Models\Language;
 use Filament\Support\Facades\FilamentView;
 use Filament\View\PanelsRenderHook;
 use Illuminate\Database\Eloquent\Model;
@@ -30,6 +31,8 @@ class AppServiceProvider extends ServiceProvider
                 ]),
             );
         });
+
+        $this->app->singleton('languages', fn () => Language::all()->keyBy('code'));
     }
 
     /**
@@ -42,7 +45,7 @@ class AppServiceProvider extends ServiceProvider
         tap($this->app->isLocal(), function (bool $shouldBeEnabled) {
             Model::preventLazyLoading($shouldBeEnabled);
             Model::preventAccessingMissingAttributes($shouldBeEnabled);
-            Model::preventSilentlyDiscardingAttributes($shouldBeEnabled);
+            // Model::preventSilentlyDiscardingAttributes($shouldBeEnabled);
 
             if ($shouldBeEnabled && env('APP_DEBUG_QUERY', false)) {
                 DB::listen(function ($query) {
@@ -74,11 +77,15 @@ class AppServiceProvider extends ServiceProvider
     protected function enforceMorphMap(): void
     {
         Relation::enforceMorphMap([
+            'beneficiary' => \App\Models\Beneficiary::class,
             'country' => \App\Models\Country::class,
+            'document' => \App\Models\Document::class,
+            'form' => \App\Models\Form::class,
             'location' => \App\Models\Location::class,
             'media' => \App\Models\Media::class,
             'organization' => \App\Models\Organization::class,
             'shelter' => \App\Models\Shelter::class,
+            'stay' => \App\Models\Stay::class,
             'user' => \App\Models\User::class,
         ]);
     }
