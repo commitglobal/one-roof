@@ -9,6 +9,7 @@ use Filament\Support\Facades\FilamentView;
 use Filament\View\PanelsRenderHook;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
@@ -32,7 +33,19 @@ class AppServiceProvider extends ServiceProvider
             );
         });
 
-        $this->app->singleton('languages', fn () => Language::all()->keyBy('code'));
+        $this->app->singleton('languages', function () {
+            try {
+                return Language::all()->keyBy('code');
+            } catch (QueryException $th) {
+                logger()->warning('Failed to fetch languages from database');
+
+                return collect([
+                    Language::make([
+                        'code' => 'en',
+                    ]),
+                ])->keyBy('code');
+            }
+        });
     }
 
     /**
