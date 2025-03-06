@@ -252,29 +252,55 @@ return [
         'none' => 'None',
     ],
 
-    'document_type' => [
-        'passport' => 'Passport',
-        'national_id_card' => 'National ID card',
-        'birth_certificate' => 'Birth certificate',
-        'drivers_license' => 'Driver’s license',
-        'refugee_certificate' => 'Refugee or asylum seeker certificate',
-        'residence_permit' => 'Residence permit',
-        'work_permit' => 'Work permit',
-        'travel_documents' => 'Travel documents for displaced persons',
-        'court_orders' => 'Court orders (e.g., guardianship or custody papers)',
-        'vaccination_records' => 'Vaccination records',
-        'medical_history' => 'Medical history or health reports',
-        'disability_certification' => 'Disability certification',
-        'prescriptions' => 'Prescriptions for ongoing medical treatment',
-        'marriage_certificate' => 'Marriage certificate',
-        'death_certificate' => 'Death certificate of a family member',
-        'proof_of_guardianship' => 'Proof of guardianship for minors',
-        'proof_of_income' => 'Proof of income',
-        'social_security_documents' => 'Social security or welfare assistance documents',
-        'bank_account_details' => 'Bank account details',
-        'previous_address' => 'Previous address or proof of residence',
-        'relocation_approval' => 'Relocation or resettlement approval letters',
-        'referral_letters' => 'Referral letters from other shelters or organizations',
-        'other' => 'Other',
+    'documents' => [
+        'label' => [
+            'singular' => 'document',
+            'plural' => 'documents',
+        ],
+
+        'actions' => [
+            'delete' => 'Delete document',
+            'edit' => 'Edit details',
+            'download' => 'Download',
+        ],
+
+        'type' => [
+            'passport' => 'Passport',
+            'national_id_card' => 'National ID card',
+            'birth_certificate' => 'Birth certificate',
+            'drivers_license' => 'Driver’s license',
+            'refugee_certificate' => 'Refugee or asylum seeker certificate',
+            'residence_permit' => 'Residence permit',
+            'work_permit' => 'Work permit',
+            'travel_documents' => 'Travel documents for displaced persons',
+            'court_orders' => 'Court orders (e.g., guardianship or custody papers)',
+            'vaccination_records' => 'Vaccination records',
+            'medical_history' => 'Medical history or health reports',
+            'disability_certification' => 'Disability certification',
+            'prescriptions' => 'Prescriptions for ongoing medical treatment',
+            'marriage_certificate' => 'Marriage certificate',
+            'death_certificate' => 'Death certificate of a family member',
+            'proof_of_guardianship' => 'Proof of guardianship for minors',
+            'proof_of_income' => 'Proof of income',
+            'social_security_documents' => 'Social security or welfare assistance documents',
+            'bank_account_details' => 'Bank account details',
+            'previous_address' => 'Previous address or proof of residence',
+            'relocation_approval' => 'Relocation or resettlement approval letters',
+            'referral_letters' => 'Referral letters from other shelters or organizations',
+            'other' => 'Other',
+        ],
+
+        'empty_state' => [
+            'no_file' => [
+                'header' => 'No document uploaded',
+                'description' => 'Upload a document to view it here.',
+            ],
+            'no_preview' => [
+                'header' => 'This document type does not allow previews',
+                'description' => 'Download the document to view it.',
+            ],
+
+        ],
     ],
+
 ];

@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace App\Filament\Shelter\Resources\BeneficiaryResource\Schemas;
 
-use Filament\Infolists\Components\SpatieMediaLibraryImageEntry;
+use App\Infolists\Components\DocumentPreview;
+use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
 
 class DocumentInfolist
@@ -12,19 +13,24 @@ class DocumentInfolist
     public static function getSchema(): array
     {
         return [
+            Section::make()
+                ->columns(2)
+                ->schema([
+                    TextEntry::make('created_at')
+                        ->label(__('app.field.created_at'))
+                        ->dateTime(),
 
-            TextEntry::make('type')
-                ->label(__('app.field.document_type')),
+                    TextEntry::make('type')
+                        ->label(__('app.field.document_type')),
 
-            TextEntry::make('name')
-                ->label(__('app.field.document_name')),
+                    TextEntry::make('notes')
+                        ->label(__('app.field.notes'))
+                        ->columnSpanFull(),
+                ]),
 
-            TextEntry::make('notes')
-                ->label(__('app.field.notes')),
-
-            SpatieMediaLibraryImageEntry::make('file')
-                ->label(__('app.field.document')),
-
+            DocumentPreview::make('file')
+                ->hiddenLabel()
+                ->columnSpanFull(),
         ];
     }
 }

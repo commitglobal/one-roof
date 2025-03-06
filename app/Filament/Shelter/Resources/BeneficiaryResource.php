@@ -141,6 +141,7 @@ class BeneficiaryResource extends Resource
             'create' => Pages\CreateBeneficiary::route('/create'),
             'view' => Pages\ViewBeneficiary::route('/{record}'),
             'edit' => Pages\EditBeneficiary::route('/{record}/edit'),
+            'document' => Pages\ViewDocument::route('/{record}/document/{document}'),
         ];
     }
 }

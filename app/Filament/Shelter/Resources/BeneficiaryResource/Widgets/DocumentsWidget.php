@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace App\Filament\Shelter\Resources\BeneficiaryResource\Widgets;
 
+use App\Filament\Shelter\Resources\BeneficiaryResource;
 use App\Filament\Shelter\Resources\BeneficiaryResource\Schemas\DocumentForm;
-use App\Filament\Shelter\Resources\BeneficiaryResource\Schemas\DocumentInfolist;
 use App\Models\Beneficiary;
+use App\Models\Document;
 use Filament\Tables\Actions\CreateAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
@@ -58,7 +59,10 @@ class DocumentsWidget extends BaseWidget
             ])
             ->actions([
                 ViewAction::make()
-                    ->infolist(DocumentInfolist::getSchema()),
+                    ->url(fn (Document $record) => BeneficiaryResource::getUrl('document', [
+                        'record' => $this->record,
+                        'document' => $record,
+                    ])),
             ]);
     }
 }
