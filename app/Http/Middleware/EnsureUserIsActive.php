@@ -17,7 +17,7 @@ class EnsureUserIsActive
      */
     public function handle(Request $request, Closure $next): Response
     {
-        debug('TODO: Check if the user is active.');
+        // TODO: Check if the user is active.
 
         return $next($request);
     }
