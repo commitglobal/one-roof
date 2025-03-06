@@ -8,6 +8,7 @@ use App\Enums\Gender;
 use App\Enums\IDType;
 use App\Models\Form\Response;
 use Database\Factories\BeneficiaryFactory;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -98,5 +99,20 @@ class Beneficiary extends Model implements HasMedia
     public function residenceCountry(): BelongsTo
     {
         return $this->belongsTo(Country::class, 'residence_country_id');
+    }
+
+    public function scopeWhereCurrentlyInShelter(Builder $query, ?Shelter $shelter = null): Builder
+    {
+        return $query->whereHas('stays', function (Builder $query) use ($shelter) {
+            return $query
+                ->whereDate('start_date', '<=', today())
+                ->whereDate('end_date', '>=', today())
+                ->when($shelter, fn (Builder $query) => $query->where('shelter_id', $shelter->id));
+        });
+    }
+
+    public function scopeWhereInShelter(Builder $query, Shelter $shelter): Builder
+    {
+        return $query->whereRelation('stays', 'shelter_id', $shelter->id);
     }
 }

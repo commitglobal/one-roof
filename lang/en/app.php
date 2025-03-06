@@ -303,4 +303,12 @@ return [
         ],
     ],
 
+    'stats' => [
+        'overview' => [
+            'organizations' => 'Total organizations',
+            'shelters' => 'Total shelters',
+            'beneficiaries' => 'Total hosted beneficiaries',
+            'beneficiaries_in_shelter' => 'Total beneficiaries in the shelter',
+        ],
+    ],
 ];

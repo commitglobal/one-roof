@@ -68,8 +68,8 @@ class AdminPanelProvider extends PanelProvider
             )
             ->readOnlyRelationManagersOnResourceViewPagesByDefault(false)
             ->widgets([
-                Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
+                // Widgets\AccountWidget::class,
+                // Widgets\FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
