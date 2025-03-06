@@ -7,18 +7,18 @@ namespace App\Filament\Shelter\Resources\BeneficiaryResource\Schemas;
 use App\Enums\Gender;
 use App\Enums\IDType;
 use App\Models\Country;
+use Cache;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Illuminate\Support\Collection;
 
 class BeneficiaryForm
 {
     public static function getSchema(): array
     {
-        $countries = Country::pluck('name', 'id');
-
         return [
             TextInput::make('name')
                 ->label(__('app.field.name'))
@@ -37,7 +37,7 @@ class BeneficiaryForm
 
             Select::make('nationality_id')
                 ->label(__('app.field.nationality'))
-                ->options($countries)
+                ->options(fn () => static::getCountries())
                 ->searchable()
                 ->required(),
 
@@ -51,7 +51,7 @@ class BeneficiaryForm
 
             Select::make('residence_country_id')
                 ->label(__('app.field.residence_country'))
-                ->options($countries)
+                ->options(fn () => static::getCountries())
                 ->searchable(),
 
             TextInput::make('phone')
@@ -74,5 +74,11 @@ class BeneficiaryForm
                 ->rows(5)
                 ->columnSpanFull(),
         ];
+    }
+
+    protected static function getCountries(): Collection
+    {
+        return Cache::driver('array')
+            ->rememberForever('countries', fn () => Country::pluck('name', 'id'));
     }
 }

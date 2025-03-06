@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Shelter\Resources;
 
 use App\Filament\Shelter\Resources\BeneficiaryResource\Pages;
+use App\Filament\Shelter\Resources\BeneficiaryResource\Schemas\BeneficiaryDynamicInfolist;
 use App\Filament\Shelter\Resources\BeneficiaryResource\Schemas\BeneficiaryForm;
 use App\Filament\Shelter\Resources\BeneficiaryResource\Schemas\BeneficiaryInfolist;
 use App\Models\Beneficiary;
@@ -71,6 +72,8 @@ class BeneficiaryResource extends Resource
                             ->outlined(),
                     ])
                     ->schema(BeneficiaryInfolist::getSchema()),
+
+                ...BeneficiaryDynamicInfolist::getSchema(),
             ]);
     }
 

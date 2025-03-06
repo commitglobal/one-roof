@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -80,6 +81,13 @@ class Beneficiary extends Model implements HasMedia
         return $this->morphMany(Response::class, 'model')
             ->with('fields')
             ->latest();
+    }
+
+    public function latestPersonal(): MorphOne
+    {
+        return $this->morphOne(Response::class, 'model')
+            ->with('fields')
+            ->latestOfMany();
     }
 
     public function nationality(): BelongsTo

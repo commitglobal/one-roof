@@ -12,7 +12,6 @@ class BeneficiaryInfolist
     public static function getSchema(): array
     {
         return [
-
             TextEntry::make('name')
                 ->label(__('app.field.name')),
 

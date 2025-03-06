@@ -75,6 +75,7 @@ class Field extends Model
                         Str::of($this->options)
                             ->split('/\r\n|\r|\n/')
                             ->filter()
+                            ->mapWithKeys(fn (string $option) => [$option => $option])
                     );
                 break;
 
