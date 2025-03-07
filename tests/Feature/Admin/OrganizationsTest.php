@@ -79,7 +79,6 @@ class OrganizationsTest extends TestCase
             ->make();
 
         $admins = User::factory()
-
             ->count(2)
             ->make();
 

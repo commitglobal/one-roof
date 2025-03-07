@@ -65,8 +65,6 @@ class OrganizationFactory extends Factory
                 ])
                 ->for($organization)
                 ->create();
-
-            // $organization->admins()->save(User::factory()->superAdmin()->make());
         });
     }
 }
