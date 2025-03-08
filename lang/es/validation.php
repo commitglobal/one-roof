@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 return [
     'accepted' => 'El campo :attribute debe ser aceptado.',
     'accepted_if' => 'El campo :attribute debe ser aceptado cuando :other sea :value.',
@@ -121,8 +118,6 @@ return [
     'present_with_all' => 'El campo :attribute debe estar presente cuando :values estén presentes.',
     'prohibited' => 'El campo :attribute está prohibido.',
     'prohibited_if' => 'El campo :attribute está prohibido cuando :other es :value.',
-    'prohibited_if_accepted' => 'El campo :attribute está prohibido cuando se acepta :other.',
-    'prohibited_if_declined' => 'El campo :attribute está prohibido cuando se rechaza :other.',
     'prohibited_unless' => 'El campo :attribute está prohibido a menos que :other sea :values.',
     'prohibits' => 'El campo :attribute prohibe que :other esté presente.',
     'regex' => 'El formato del campo :attribute no es válido.',
