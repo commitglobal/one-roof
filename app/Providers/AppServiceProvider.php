@@ -96,6 +96,7 @@ class AppServiceProvider extends ServiceProvider
             'form' => \App\Models\Form::class,
             'location' => \App\Models\Location::class,
             'media' => \App\Models\Media::class,
+            'membership' => \App\Models\Membership::class,
             'organization' => \App\Models\Organization::class,
             'request' => \App\Models\Request::class,
             'shelter' => \App\Models\Shelter::class,

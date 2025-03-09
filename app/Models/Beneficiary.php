@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Concerns\LogsActivity;
 use App\Enums\Gender;
 use App\Enums\IDType;
 use App\Models\Form\Response;
@@ -25,6 +26,7 @@ class Beneficiary extends Model implements HasMedia
     /** @use HasFactory<BeneficiaryFactory> */
     use HasFactory;
     use InteractsWithMedia;
+    use LogsActivity;
 
     protected static string $factory = BeneficiaryFactory::class;
 

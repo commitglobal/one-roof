@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Concerns\BelongsToShelter;
+use App\Concerns\LogsActivity;
 use Database\Factories\StayFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -16,6 +17,7 @@ class Stay extends Model
     use BelongsToShelter;
     /** @use HasFactory<StayFactory> */
     use HasFactory;
+    use LogsActivity;
 
     protected static string $factory = StayFactory::class;
 

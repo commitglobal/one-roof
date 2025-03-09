@@ -8,6 +8,7 @@ use App\Concerns\BelongsToOrganization;
 use App\Concerns\HasRole;
 use App\Concerns\HasStatus;
 use App\Concerns\HasUlid;
+use App\Concerns\LogsActivity;
 use App\Concerns\MustSetInitialPassword;
 use App\Enums\User\Role;
 use Database\Factories\UserFactory;
@@ -21,15 +22,18 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
+use Spatie\Activitylog\Traits\CausesActivity;
 
 class User extends Authenticatable implements FilamentUser, HasTenants, HasLocalePreference
 {
     use BelongsToOrganization;
+    use CausesActivity;
     /** @use HasFactory<UserFactory> */
     use HasFactory;
     use HasRole;
     use HasStatus;
     use HasUlid;
+    use LogsActivity;
     use MustSetInitialPassword;
     use Notifiable;
 

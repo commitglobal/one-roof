@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Concerns\LogsActivity;
 use App\Enums\Form\Status;
 use App\Enums\Form\Type;
 use App\Models\Form\Section;
@@ -19,6 +20,7 @@ class Form extends Model
     /** @use HasFactory<FormFactory> */
     use HasFactory;
     use HasTranslations;
+    use LogsActivity;
 
     protected static string $factory = FormFactory::class;
 

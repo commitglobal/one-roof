@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Concerns\LogsActivity;
 use App\Enums\DocumentType;
 use Database\Factories\DocumentFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -17,6 +18,7 @@ class Document extends Model implements HasMedia
     /** @use HasFactory<DocumentFactory> */
     use HasFactory;
     use InteractsWithMedia;
+    use LogsActivity;
 
     protected static string $factory = DocumentFactory::class;
 

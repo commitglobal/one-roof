@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Concerns\HasRequestStatus;
+use App\Concerns\LogsActivity;
 use App\Data\GroupMemberData;
 use App\Data\PersonData;
 use App\Enums\Gender;
@@ -21,6 +22,7 @@ class Request extends Model
     /** @use HasFactory<RequestFactory> */
     use HasFactory;
     use HasRequestStatus;
+    use LogsActivity;
 
     protected static string $factory = RequestFactory::class;
 

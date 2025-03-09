@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Concerns\BelongsToOrganization;
+use App\Concerns\LogsActivity;
 use App\Data\PersonData;
 use Database\Factories\ShelterFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -18,6 +19,7 @@ class Shelter extends Model
     use BelongsToOrganization;
     /** @use HasFactory<ShelterFactory> */
     use HasFactory;
+    use LogsActivity;
 
     protected static string $factory = ShelterFactory::class;
 

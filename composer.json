@@ -23,6 +23,7 @@
         "league/flysystem-read-only": "^3.28",
         "maatwebsite/excel": "^3.1",
         "sentry/sentry-laravel": "^4.13",
+        "spatie/laravel-activitylog": "^4.10",
         "spatie/laravel-data": "^4.13"
     },
     "require-dev": {

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Concerns\HasStatus;
+use App\Concerns\LogsActivity;
 use App\Data\PersonData;
 use App\Enums\OrganizationType;
 use Database\Factories\OrganizationFactory;
@@ -22,6 +23,7 @@ class Organization extends Model implements HasMedia
     use HasFactory;
     use HasStatus;
     use InteractsWithMedia;
+    use LogsActivity;
 
     protected static string $factory = OrganizationFactory::class;
 
