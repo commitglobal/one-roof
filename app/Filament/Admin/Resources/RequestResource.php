@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Filament\Admin\Resources;
 
-use App\Filament\Admin\Resources\OrganizationResource\Schemas\RequestInfolist;
 use App\Filament\Admin\Resources\RequestResource\Pages;
+use App\Filament\Admin\Resources\RequestResource\Schemas\RequestInfolist;
 use App\Models\Request;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;

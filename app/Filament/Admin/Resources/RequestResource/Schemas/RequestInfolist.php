@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Filament\Admin\Resources\OrganizationResource\Schemas;
+namespace App\Filament\Admin\Resources\RequestResource\Schemas;
 
 use App\Infolists\Components\TableRepeatableEntry;
 use App\Models\Request;
