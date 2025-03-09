@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Filament\Admin\Resources\OrganizationResource\Actions;
+namespace App\Filament\Admin\Resources\RequestResource\Actions;
 
 use App\Models\Request;
 use Filament\Actions\Action;
