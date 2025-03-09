@@ -23,8 +23,6 @@ class LocationResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-map-pin';
 
-    protected static bool $isScopedToTenant = false;
-
     protected static ?int $navigationSort = 11;
 
     public static function getNavigationGroup(): ?string

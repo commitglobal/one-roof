@@ -10,6 +10,7 @@ use App\Models\Beneficiary;
 use App\Models\Form;
 use App\Models\Location;
 use App\Models\Organization;
+use App\Models\Request;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Mail;
@@ -43,6 +44,10 @@ class DatabaseSeeder extends Seeder
 
         Organization::factory()
             ->count(10)
+            ->create();
+
+        Request::factory()
+            ->count(50)
             ->create();
     }
 

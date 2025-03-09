@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use Filament\Actions\ActionGroup;
 use Filament\Actions\MountableAction;
 use Filament\Facades\Filament;
 use Filament\Forms;
@@ -11,6 +12,7 @@ use Filament\Forms\Components\Tabs;
 use Filament\Infolists;
 use Filament\Pages\Page;
 use Filament\Support\Enums\Alignment;
+use Filament\Support\Enums\IconPosition;
 use Filament\Tables;
 use Illuminate\Support\ServiceProvider;
 
@@ -134,5 +136,15 @@ class FilamentServiceProvider extends ServiceProvider
                 $action->createAnother(false);
             }
         });
+
+        ActionGroup::configureUsing(function (ActionGroup $group) {
+            return $group
+                ->label(__('app.more_actions'))
+                ->iconPosition(IconPosition::After)
+                ->icon('heroicon-o-chevron-down')
+                ->color('gray')
+                ->outlined()
+                ->button();
+        }, isImportant: true);
     }
 }

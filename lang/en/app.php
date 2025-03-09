@@ -12,9 +12,13 @@ return [
     'yes' => 'Yes',
     'no' => 'No',
 
+    'more_actions' => 'More actions',
+
     'field' => [
         'address' => 'Address',
         'admins' => 'Administrators',
+        'age' => 'Age',
+        'beneficiary' => 'Beneficiary',
         'capacity' => 'Capacity',
         'children_count' => 'Number of children',
         'children_notes' => 'Observations about children',
@@ -62,6 +66,7 @@ return [
         'organization_type' => 'Organization type',
         'phone' => 'Phone',
         'photo' => 'Photo',
+        'requester' => 'Requester',
         'required' => 'Required',
         'residence_country' => 'Residence country',
         'section_name' => 'Section name',
@@ -74,6 +79,10 @@ return [
         'type' => 'Type',
         'updated_at' => 'Updated at',
         'upload_document' => 'Upload document',
+        'special_needs' => 'Special needs',
+        'special_needs_notes' => 'Details about special needs',
+        'departure_country' => 'Departure country',
+        'group' => 'Group',
     ],
 
     'placeholder' => [
@@ -310,5 +319,88 @@ return [
             'beneficiaries' => 'Total hosted beneficiaries',
             'beneficiaries_in_shelter' => 'Total beneficiaries in the shelter',
         ],
+    ],
+
+    'request' => [
+        'label' => [
+            'singular' => 'request',
+            'plural' => 'requests',
+        ],
+
+        'status' => [
+            'new' => 'New',
+            'referred' => 'Referred',
+            'pending' => 'Pending',
+            'accepted' => 'Accepted',
+            'rejected' => 'Rejected',
+            'obsolete' => 'Obsolete',
+            'duplicate' => 'Duplicate',
+        ],
+
+        'actions' => [
+            'add' => 'Add request',
+            'accept' => 'Accept request',
+
+            'refer' => [
+                'button' => 'Refer request',
+                'confirm' => [
+                    'description' => 'Are you sure you want to refer this request?',
+                    'title' => 'Refer request',
+                    'success' => 'Request referred successfully.',
+                ],
+            ],
+
+            'reject' => [
+                'button' => 'Reject request',
+                'confirm' => [
+                    'description' => 'Are you sure you want to reject this request?',
+                    'title' => 'Reject request',
+                    'success' => 'Request rejected successfully.',
+                ],
+            ],
+
+            'pending' => [
+                'button' => 'Mark as pending',
+                'confirm' => [
+                    'description' => 'Are you sure you want to mark this request as pending?',
+                    'title' => 'Mark as pending',
+                    'success' => 'Request marked as pending successfully.',
+                ],
+            ],
+
+            'obsolete' => [
+                'button' => 'Mark as obsolete',
+                'confirm' => [
+                    'description' => 'Are you sure you want to mark this request as obsolete?',
+                    'title' => 'Mark as obsolete',
+                    'success' => 'Request marked as obsolete successfully.',
+                ],
+            ],
+
+            'duplicate' => [
+                'button' => 'Mark as duplicate',
+                'confirm' => [
+                    'description' => 'Are you sure you want to mark this request as duplicate?',
+                    'title' => 'Mark as duplicate',
+                    'success' => 'Request marked as duplicate successfully.',
+                ],
+            ],
+
+            'delete' => [
+                'button' => 'Delete request',
+                'confirm' => [
+                    'description' => 'Are you sure you want to delete this request?',
+                    'title' => 'Delete request',
+                    'success' => 'Request deleted successfully.',
+                ],
+            ],
+        ],
+    ],
+
+    'special_needs' => [
+        'disabilities' => 'Disabilities',
+        'chronic_illness' => 'Chronic illness',
+        'paliative_care' => 'Paliative care needs',
+        'other' => 'Other',
     ],
 ];

@@ -22,8 +22,6 @@ class CountryResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-globe-europe-africa';
 
-    protected static bool $isScopedToTenant = false;
-
     protected static ?int $navigationSort = 10;
 
     public static function getNavigationGroup(): ?string

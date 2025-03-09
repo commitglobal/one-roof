@@ -35,8 +35,6 @@ class FormResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    protected static bool $isScopedToTenant = false;
-
     protected static ?int $navigationSort = 1;
 
     public static function getNavigationGroup(): ?string

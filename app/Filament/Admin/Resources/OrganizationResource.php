@@ -30,11 +30,19 @@ class OrganizationResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    protected static bool $isScopedToTenant = false;
-
     public static function getNavigationGroup(): ?string
     {
         return __('app.navigation.activity');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('app.organization.label.singular');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('app.organization.label.plural');
     }
 
     public static function form(Form $form): Form

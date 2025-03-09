@@ -41,6 +41,11 @@ class Stay extends Model
         return $this->belongsTo(Beneficiary::class);
     }
 
+    public function request(): BelongsTo
+    {
+        return $this->belongsTo(Request::class);
+    }
+
     public function hasChildren(): Attribute
     {
         return Attribute::make(

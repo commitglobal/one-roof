@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Models\Beneficiary;
+use App\Models\Request;
 use App\Models\Shelter;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -30,7 +31,10 @@ return new class extends Migration
             $table->text('children_notes')->nullable();
 
             // TODO: Group
-            // TODO: Request
+            $table->foreignIdFor(Request::class)
+                ->nullable()
+                ->constrained()
+                ->nullOnDelete();
 
             $table->text('notes')->nullable();
 
