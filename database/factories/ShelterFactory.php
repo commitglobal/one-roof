@@ -9,6 +9,7 @@ use App\Models\Beneficiary;
 use App\Models\Country;
 use App\Models\Location;
 use App\Models\Organization;
+use App\Models\Request;
 use App\Models\Shelter;
 use App\Models\Stay;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -52,6 +53,11 @@ class ShelterFactory extends Factory
             Stay::factory()
                 ->count($beneficiaries->count())
                 ->sequence(...$beneficiaries)
+                ->for($shelter)
+                ->create();
+
+            Request::factory()
+                ->count(25)
                 ->for($shelter)
                 ->create();
         });

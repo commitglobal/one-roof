@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Concerns;
 
 use App\Enums\RequestStatus;
-use App\Models\Shelter;
 use Illuminate\Database\Eloquent\Builder;
 
 trait HasRequestStatus
@@ -96,18 +95,18 @@ trait HasRequestStatus
         return RequestStatus::isValue($this->status, RequestStatus::DUPLICATE);
     }
 
-    public function accept(Shelter $shelter): bool
+    public function accept(): bool
     {
         return $this->update([
             'status' => RequestStatus::ACCEPTED,
-            'shelter_id' => $shelter->id,
         ]);
     }
 
-    public function reject(): bool
+    public function reject(?string $reason = null): bool
     {
         return $this->update([
             'status' => RequestStatus::REJECTED,
+            'reason_rejected' => $reason,
         ]);
     }
 

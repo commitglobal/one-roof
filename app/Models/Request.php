@@ -40,6 +40,7 @@ class Request extends Model
         'special_needs',
         'special_needs_notes',
         'notes',
+        'reason_rejected',
     ];
 
     protected function casts(): array
@@ -65,5 +66,10 @@ class Request extends Model
     public function nationality(): BelongsTo
     {
         return $this->belongsTo(Country::class, 'nationality_id');
+    }
+
+    public function shelter(): BelongsTo
+    {
+        return $this->belongsTo(Shelter::class);
     }
 }

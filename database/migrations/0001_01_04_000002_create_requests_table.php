@@ -18,7 +18,6 @@ return new class extends Migration
 
             $table->json('requester')->nullable();
             $table->json('beneficiary')->nullable();
-            // $table->smallInteger('group_size')->unsigned();
 
             $table->smallInteger('group_size')->unsigned()
                 ->virtualAs('JSON_LENGTH(`group`) + 1');
@@ -52,6 +51,7 @@ return new class extends Migration
             $table->json('special_needs')->nullable();
             $table->text('special_needs_notes')->nullable();
             $table->text('notes')->nullable();
+            $table->text('reason_rejected')->nullable();
 
             $table->timestamps();
         });

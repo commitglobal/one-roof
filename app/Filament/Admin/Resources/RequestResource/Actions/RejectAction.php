@@ -6,6 +6,7 @@ namespace App\Filament\Admin\Resources\RequestResource\Actions;
 
 use App\Models\Request;
 use Filament\Actions\Action;
+use Filament\Forms\Components\Textarea;
 
 class RejectAction extends Action
 {
@@ -28,8 +29,18 @@ class RejectAction extends Action
 
         $this->modalWidth('md');
 
-        $this->action(function (Request $record) {
-            $record->reject();
+        $this->color('danger');
+
+        $this->form([
+            Textarea::make('reason_rejected')
+                ->label(__('app.field.notes'))
+                ->rows(5)
+                ->required(),
+        ]);
+
+        $this->action(function (Request $record, array $data) {
+            $record->reject(data_get($data, 'reason_rejected'));
+
             $this->success();
         });
 

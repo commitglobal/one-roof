@@ -29,6 +29,7 @@ return [
         'create_beneficiary_search' => 'Search for an existing beneficiary',
         'created_at' => 'Created at',
         'date_of_birth' => 'Date of birth',
+        'departure_country' => 'Departure country',
         'description' => 'Description',
         'document_name' => 'Document name',
         'document_type' => 'Document type',
@@ -39,6 +40,8 @@ return [
         'fields' => 'Fields',
         'form_type' => 'Form type',
         'gender' => 'Gender',
+        'group_size' => 'No.',
+        'group' => 'Group',
         'has_children' => 'Accompanied by children',
         'help' => 'Help text',
         'id_number' => 'ID number',
@@ -66,6 +69,7 @@ return [
         'organization_type' => 'Organization type',
         'phone' => 'Phone',
         'photo' => 'Photo',
+        'reason_rejected' => 'Reason rejected',
         'requester' => 'Requester',
         'required' => 'Required',
         'residence_country' => 'Residence country',
@@ -74,15 +78,13 @@ return [
         'shelter_coordinator' => 'Shelter coordinator',
         'shelter' => 'Shelter',
         'shelters' => 'Shelters',
+        'special_needs_notes' => 'Details about special needs',
+        'special_needs' => 'Special needs',
         'start_date' => 'Start date',
         'status' => 'Status',
         'type' => 'Type',
         'updated_at' => 'Updated at',
         'upload_document' => 'Upload document',
-        'special_needs' => 'Special needs',
-        'special_needs_notes' => 'Details about special needs',
-        'departure_country' => 'Departure country',
-        'group' => 'Group',
     ],
 
     'placeholder' => [
@@ -340,6 +342,15 @@ return [
         'actions' => [
             'add' => 'Add request',
             'accept' => 'Accept request',
+
+            'accept' => [
+                'button' => 'Accept request',
+                'confirm' => [
+                    'description' => 'Are you sure you want to accept this request?',
+                    'title' => 'Accept request',
+                    'success' => 'Request accepted successfully.',
+                ],
+            ],
 
             'refer' => [
                 'button' => 'Refer request',

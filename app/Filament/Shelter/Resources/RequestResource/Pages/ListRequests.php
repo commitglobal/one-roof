@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Filament\Admin\Resources\RequestResource\Pages;
+namespace App\Filament\Shelter\Resources\RequestResource\Pages;
 
-use App\Filament\Admin\Resources\RequestResource;
 use App\Filament\Concerns\DisablesBreadcrumbs;
+use App\Filament\Shelter\Resources\RequestResource;
 use Filament\Resources\Pages\ListRecords;
 
 class ListRequests extends ListRecords

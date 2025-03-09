@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Filament\Admin\Resources;
+namespace App\Filament\Shelter\Resources;
 
-use App\Filament\Admin\Resources\OrganizationResource\Schemas\RequestInfolist;
-use App\Filament\Admin\Resources\RequestResource\Pages;
+use App\Filament\Shelter\Resources\RequestResource\Pages;
+use App\Filament\Shelter\Resources\RequestResource\Schemas\RequestInfolist;
 use App\Models\Request;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
@@ -55,10 +55,6 @@ class RequestResource extends Resource
                     ->dateTime()
                     ->sortable(),
 
-                TextColumn::make('shelter.name')
-                    ->label(__('app.field.shelter'))
-                    ->sortable(),
-
                 TextColumn::make('start_date')
                     ->label(__('app.field.start_date'))
                     ->date()
@@ -79,7 +75,6 @@ class RequestResource extends Resource
                 TextColumn::make('status')
                     ->label(__('app.field.status'))
                     ->badge(),
-
             ])
             ->filters([
                 //
@@ -100,7 +95,6 @@ class RequestResource extends Resource
     {
         return [
             'index' => Pages\ListRequests::route('/'),
-            // 'create' => Pages\CreateRequest::route('/create'),
             'view' => Pages\ViewRequest::route('/{record}'),
         ];
     }

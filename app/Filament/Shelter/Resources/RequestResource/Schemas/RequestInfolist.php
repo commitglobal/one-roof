@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Filament\Admin\Resources\OrganizationResource\Schemas;
+namespace App\Filament\Shelter\Resources\RequestResource\Schemas;
 
 use App\Infolists\Components\TableRepeatableEntry;
 use App\Models\Request;
@@ -37,9 +37,6 @@ class RequestInfolist
                     TextEntry::make('end_date')
                         ->label(__('app.field.end_date'))
                         ->date(),
-
-                    TextEntry::make('shelter.name')
-                        ->label(__('app.field.shelter')),
 
                     TextEntry::make('reason_rejected')
                         ->label(__('app.field.reason_rejected'))
