@@ -3,7 +3,7 @@ resource "aws_db_instance" "main" {
   db_name             = local.db_name
   instance_class      = "db.t4g.small"
   publicly_accessible = false
-  multi_az            = true
+  multi_az            = false
   deletion_protection = true
   monitoring_interval = 60
 

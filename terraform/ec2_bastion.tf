@@ -21,7 +21,7 @@ resource "aws_key_pair" "bastion" {
 
 resource "aws_instance" "bastion" {
   ami                         = data.aws_ami.bastion.id
-  instance_type               = "t4g.nano"
+  instance_type               = "t3a.nano"
   associate_public_ip_address = true
   source_dest_check           = false
 
