@@ -23,8 +23,6 @@ class LanguageResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $recordTitleAttribute = 'name';
-
     protected static ?int $navigationSort = 30;
 
     public static function getNavigationGroup(): ?string

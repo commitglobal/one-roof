@@ -13,6 +13,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Validation\Rules\Password;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -54,6 +55,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->enforceMorphMap();
+        $this->setPasswordDefaults();
 
         tap($this->app->isLocal(), function (bool $shouldBeEnabled) {
             Model::preventLazyLoading($shouldBeEnabled);
@@ -103,5 +105,17 @@ class AppServiceProvider extends ServiceProvider
             'stay' => \App\Models\Stay::class,
             'user' => \App\Models\User::class,
         ]);
+    }
+
+    protected function setPasswordDefaults(): void
+    {
+        $defaults = Password::min(8)
+            ->uncompromised();
+
+        Password::defaults(fn () => $defaults);
+
+        // FilamentBreezy::setPasswordRules([
+        //     static::passwordDefaults(),
+        // ]);
     }
 }

@@ -7,6 +7,7 @@ namespace App\Notifications;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\URL;
 
 class WelcomeAdminNotification extends Notification
 {
@@ -33,7 +34,10 @@ class WelcomeAdminNotification extends Notification
             ->line(__('email.welcome.admin.line_1'))
             ->line(__('email.welcome.admin.line_2'))
             ->line(__('email.welcome.admin.line_3'))
-            ->action(__('email.welcome.admin.action'), '#') // TODO: Add URL
+            ->action(
+                __('email.welcome.admin.action'),
+                URL::signedRoute('auth.welcome', ['user' => $notifiable])
+            ) // TODO: Add URL
             ->line(__('email.welcome.admin.line_4'));
     }
 }

@@ -24,4 +24,9 @@ return [
     'invalid_user' => 'This is not a valid user.',
     'set_password' => 'Set password',
 
+    'suspended' => [
+        'title' => 'Your account is suspended',
+        'body' => 'For more information, please contact an admin.',
+    ],
+
 ];

@@ -7,6 +7,7 @@ namespace App\Notifications;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\URL;
 
 class WelcomeOrganizationNotification extends Notification
 {
@@ -33,7 +34,10 @@ class WelcomeOrganizationNotification extends Notification
             ->line(__('email.welcome.organization.line_1', ['organization' => $notifiable->organization->name]))
             ->line(__('email.welcome.organization.line_2'))
             ->line(__('email.welcome.organization.line_3'))
-            ->action(__('email.welcome.organization.action'), '#') // TODO: Add URL
+            ->action(
+                __('email.welcome.organization.action'),
+                URL::signedRoute('auth.welcome', ['user' => $notifiable])
+            ) // TODO: Add URL
             ->line(__('email.welcome.organization.line_4'));
     }
 }

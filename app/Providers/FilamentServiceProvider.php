@@ -11,8 +11,11 @@ use Filament\Forms;
 use Filament\Forms\Components\Tabs;
 use Filament\Infolists;
 use Filament\Pages\Page;
+use Filament\Resources\Pages\CreateRecord;
+use Filament\Support\Colors\Color;
 use Filament\Support\Enums\Alignment;
 use Filament\Support\Enums\IconPosition;
+use Filament\Support\Facades\FilamentColor;
 use Filament\Tables;
 use Illuminate\Support\ServiceProvider;
 
@@ -39,6 +42,7 @@ class FilamentServiceProvider extends ServiceProvider
         $this->configureInfolistComponents();
         $this->configureTableComponents();
         $this->configureActions();
+        $this->configurePages();
     }
 
     /**
@@ -46,11 +50,13 @@ class FilamentServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Page::alignFormActionsEnd();
-
         Filament::registerNavigationGroups([
             __('app.navigation.activity'),
             __('app.navigation.configurations'),
+        ]);
+
+        FilamentColor::register([
+            'primary' => Color::Green,
         ]);
     }
 
@@ -146,5 +152,12 @@ class FilamentServiceProvider extends ServiceProvider
                 ->outlined()
                 ->button();
         }, isImportant: true);
+    }
+
+    protected function configurePages(): void
+    {
+        Page::alignFormActionsEnd();
+
+        CreateRecord::disableCreateAnother();
     }
 }

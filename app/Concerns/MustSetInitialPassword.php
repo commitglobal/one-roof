@@ -42,8 +42,5 @@ trait MustSetInitialPassword
         ]);
     }
 
-    public function sendWelcomeNotification(): void
-    {
-        // TODO: $this->notiy( ... );
-    }
+    abstract public function sendWelcomeNotification(): void;
 }

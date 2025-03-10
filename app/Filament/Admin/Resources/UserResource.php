@@ -4,8 +4,12 @@ declare(strict_types=1);
 
 namespace App\Filament\Admin\Resources;
 
+use App\Enums\User\Role;
 use App\Filament\Admin\Resources\UserResource\Pages;
 use App\Models\User;
+use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -43,7 +47,27 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Section::make()
+                    ->columns()
+                    ->schema([
+                        TextInput::make('name')
+                            ->label(__('app.field.name'))
+                            ->required(),
+
+                        TextInput::make('email')
+                            ->label(__('app.field.email'))
+                            ->unique(ignoreRecord: true)
+                            ->email()
+                            ->required(),
+
+                        TextInput::make('phone')
+                            ->label(__('app.field.phone'))
+                            ->tel()
+                            ->required(),
+
+                        Hidden::make('role')
+                            ->default(Role::SUPER_ADMIN),
+                    ]),
             ]);
     }
 

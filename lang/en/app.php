@@ -66,6 +66,7 @@ return [
         'not_applicable' => 'Not applicable',
         'notes' => 'Observations',
         'options' => 'Options',
+        'organization' => 'Organization',
         'organization_type' => 'Organization type',
         'phone' => 'Phone',
         'photo' => 'Photo',

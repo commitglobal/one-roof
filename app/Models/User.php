@@ -11,6 +11,8 @@ use App\Concerns\HasUlid;
 use App\Concerns\LogsActivity;
 use App\Concerns\MustSetInitialPassword;
 use App\Enums\User\Role;
+use App\Notifications\WelcomeAdminNotification;
+use App\Notifications\WelcomeOrganizationNotification;
 use Database\Factories\UserFactory;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasTenants;
@@ -127,5 +129,16 @@ class User extends Authenticatable implements FilamentUser, HasTenants, HasLocal
     public function preferredLocale(): string
     {
         return $this->locale ?? app()->getLocale();
+    }
+
+    public function sendWelcomeNotification(): void
+    {
+        if ($this->isSuperAdmin()) {
+            $this->notify(new WelcomeAdminNotification);
+        }
+
+        if (filled($this->organization_id)) {
+            $this->notify(new WelcomeOrganizationNotification);
+        }
     }
 }
