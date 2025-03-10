@@ -5,6 +5,10 @@ locals {
     tag  = "0.1.0"
   }
 
+  availability_zone = data.aws_availability_zones.current.names[0]
+
+  db_name = "one_roof"
+
   domains = [
     var.domain_name,
     # "www.${var.domain_name}",

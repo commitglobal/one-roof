@@ -1,6 +1,6 @@
 resource "aws_db_instance" "main" {
   identifier          = local.namespace
-  db_name             = "rezultatevot"
+  db_name             = local.db_name
   instance_class      = "db.t4g.small"
   publicly_accessible = false
   multi_az            = true
@@ -9,7 +9,7 @@ resource "aws_db_instance" "main" {
 
   availability_zone = local.availability_zone
 
-  username = "rezultatevot"
+  username = local.db_name
   password = random_password.database.result
   port     = 3306
 

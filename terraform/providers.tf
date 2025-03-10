@@ -1,5 +1,5 @@
 terraform {
-  required_version = "~> 1.9"
+  required_version = "~> 1.10"
 
   required_providers {
     aws = {
@@ -12,9 +12,9 @@ terraform {
     organization = "commitglobal"
 
     workspaces {
-      tags = [
-        "rezultatevot"
-      ]
+      tags = {
+        app = "untecho.mx",
+      }
     }
   }
 }
@@ -24,7 +24,7 @@ provider "aws" {
 
   default_tags {
     tags = {
-      app = "rezultatevot"
+      app = "untecho.mx"
       env = var.env
     }
   }
@@ -37,7 +37,7 @@ provider "aws" {
 
   default_tags {
     tags = {
-      app = "rezultatevot"
+      app = "untecho.mx"
       env = var.env
     }
   }
