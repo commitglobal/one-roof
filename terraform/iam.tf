@@ -19,8 +19,10 @@ data "aws_iam_policy_document" "ecs_task" {
     ]
 
     resources = [
-      module.s3_public.arn,
-      "${module.s3_public.arn}/*"
+      #   module.s3_public.arn,
+      #   "${module.s3_public.arn}/*",
+      module.s3_private.arn,
+      "${module.s3_private.arn}/*"
     ]
   }
 }

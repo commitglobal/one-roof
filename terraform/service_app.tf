@@ -186,17 +186,17 @@ module "s3_private" {
   policy = data.aws_iam_policy_document.s3_cloudfront_private.json
 }
 
-resource "aws_s3_bucket_cors_configuration" "s3_public" {
-  bucket = module.s3_public.bucket
+# resource "aws_s3_bucket_cors_configuration" "s3_public" {
+#   bucket = module.s3_public.bucket
 
-  cors_rule {
-    allowed_headers = ["*"]
-    allowed_methods = ["GET", "PUT", "POST"]
-    allowed_origins = ["https://www.${var.domain_name}"]
-    expose_headers  = ["ETag"]
-    max_age_seconds = 86400
-  }
-}
+#   cors_rule {
+#     allowed_headers = ["*"]
+#     allowed_methods = ["GET", "PUT", "POST"]
+#     allowed_origins = ["https://www.${var.domain_name}"]
+#     expose_headers  = ["ETag"]
+#     max_age_seconds = 86400
+#   }
+# }
 
 resource "aws_secretsmanager_secret" "app_key" {
   name = "${local.namespace}-secret_key-${random_string.secrets_suffix.result}"

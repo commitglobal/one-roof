@@ -22,11 +22,11 @@ resource "aws_cloudfront_distribution" "main" {
     }
   }
 
-  origin {
-    domain_name              = module.s3_public.bucket_regional_domain_name
-    origin_access_control_id = aws_cloudfront_origin_access_control.s3.id
-    origin_id                = module.s3_public.id
-  }
+  #   origin {
+  #     domain_name              = module.s3_public.bucket_regional_domain_name
+  #     origin_access_control_id = aws_cloudfront_origin_access_control.s3.id
+  #     origin_id                = module.s3_public.id
+  #   }
 
   default_cache_behavior {
     allowed_methods        = ["GET", "HEAD", "OPTIONS", "PUT", "POST", "PATCH", "DELETE"]
