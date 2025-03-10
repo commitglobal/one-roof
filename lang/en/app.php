@@ -11,7 +11,7 @@ return [
 
     'yes' => 'Yes',
     'no' => 'No',
-
+    'submit' => 'Submit',
     'more_actions' => 'More actions',
 
     'field' => [
@@ -71,6 +71,9 @@ return [
         'phone' => 'Phone',
         'photo' => 'Photo',
         'reason_rejected' => 'Reason rejected',
+        'request_group' => 'Request for a group',
+        'request_shelter' => 'Where do you seek accommodation?',
+        'request_somebody_else' => 'Request for somebody else',
         'requester' => 'Requester',
         'required' => 'Required',
         'residence_country' => 'Residence country',
@@ -83,6 +86,7 @@ return [
         'special_needs' => 'Special needs',
         'start_date' => 'Start date',
         'status' => 'Status',
+        'stay' => 'Stay',
         'type' => 'Type',
         'updated_at' => 'Updated at',
         'upload_document' => 'Upload document',

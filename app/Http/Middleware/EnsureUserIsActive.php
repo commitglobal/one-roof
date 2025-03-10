@@ -21,7 +21,10 @@ class EnsureUserIsActive
     {
         $user = Filament::auth()->user();
 
-        if (! $user->isActive() || ! $user->organization?->isActive()) {
+        if (
+            ! $user->isActive() ||
+            (filled($user->organization) && ! $user->organization?->isActive())
+        ) {
             Filament::auth()->logout();
 
             $request->session()->invalidate();
