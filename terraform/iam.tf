@@ -25,6 +25,28 @@ data "aws_iam_policy_document" "ecs_task" {
       "${module.s3_private.arn}/*"
     ]
   }
+
+  statement {
+    actions = [
+      "SES:SendEmail",
+      "SES:SendRawEmail"
+    ]
+
+    resources = compact([
+      try(data.aws_sesv2_email_identity.main[0].arn, null),
+      try(data.aws_sesv2_configuration_set.main[0].arn, null),
+    ])
+  }
+
+  statement {
+    actions = [
+      "ses:GetAccount",
+    ]
+
+    resources = [
+      "*"
+    ]
+  }
 }
 
 data "aws_iam_policy_document" "ecs_task_assume" {
