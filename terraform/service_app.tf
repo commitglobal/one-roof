@@ -186,8 +186,8 @@ module "s3_private" {
   policy = data.aws_iam_policy_document.s3_cloudfront_private.json
 }
 
-resource "aws_s3_bucket_cors_configuration" "s3_public" {
-  bucket = module.s3_public.bucket
+resource "aws_s3_bucket_cors_configuration" "s3_private" {
+  bucket = module.s3_private.bucket
 
   cors_rule {
     allowed_headers = ["*"]
