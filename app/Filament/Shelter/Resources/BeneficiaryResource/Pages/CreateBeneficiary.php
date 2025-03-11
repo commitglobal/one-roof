@@ -88,11 +88,16 @@ class CreateBeneficiary extends CreateRecord
 
     protected function saveCustomFormData(Beneficiary $beneficiary, array $data): void
     {
+        $form = Form::query()
+            ->latestPublished(Type::PERSONAL)
+            ->first(['id']);
+
+        if (blank($form)) {
+            return;
+        }
+
         $personal = $beneficiary->personal()->create([
-            'form_id' => Form::query()
-                ->latestPublished(Type::PERSONAL)
-                ->first(['id'])
-                ->id,
+            'form_id' => $form->id,
         ]);
 
         $personal->fields()->createMany(
