@@ -28,8 +28,8 @@ data "aws_iam_policy_document" "ecs_task" {
 
   statement {
     actions = [
-      "SES:SendEmail",
-      "SES:SendRawEmail"
+      "ses:SendEmail",
+      "ses:SendRawEmail"
     ]
 
     resources = compact([

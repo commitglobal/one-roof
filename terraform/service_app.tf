@@ -83,7 +83,10 @@ module "ecs_app" {
       name  = "MAIL_MAILER"
       value = "ses"
     },
-
+    {
+      name  = "MAIL_FROM_ADDRESS"
+      value = "no-reply@${var.ses_domain}"
+    },
     {
       name  = "FILESYSTEM_DISK"
       value = "s3"
