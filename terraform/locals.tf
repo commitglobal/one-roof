@@ -2,7 +2,7 @@ locals {
   namespace = "one-roof-${var.env}"
   image = {
     repo = "commitglobal/one-roof",
-    tag  = "0.2.1"
+    tag  = "0.2.2"
   }
 
   availability_zone = data.aws_availability_zones.current.names[0]
@@ -11,7 +11,6 @@ locals {
 
   domains = [
     var.domain_name,
-    # "www.${var.domain_name}",
   ]
 
   networking = {
