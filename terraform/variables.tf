@@ -50,3 +50,21 @@ variable "google_analytics_tracking_id" {
   type    = string
   default = null
 }
+
+variable "ses_region" {
+  description = "SES Region"
+  type        = string
+  default     = null
+}
+
+variable "ses_domain" {
+  description = "Domain for AWS SES"
+  type        = string
+  default     = null
+}
+
+variable "ses_configuration_set" {
+  description = "Configuration set name attached to `ses_domain`"
+  type        = string
+  default     = null
+}

@@ -42,3 +42,15 @@ provider "aws" {
     }
   }
 }
+
+provider "aws" {
+  alias  = "ses"
+  region = try(var.ses_region, var.region)
+
+  default_tags {
+    tags = {
+      app = "untecho.mx"
+      env = var.env
+    }
+  }
+}

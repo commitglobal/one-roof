@@ -76,6 +76,15 @@ module "ecs_app" {
       value = var.region
     },
     {
+      name  = "AWS_SES_REGION"
+      value = var.ses_region
+    },
+    {
+      name  = "MAIL_MAILER"
+      value = "ses"
+    },
+
+    {
       name  = "FILESYSTEM_DISK"
       value = "s3"
     },
