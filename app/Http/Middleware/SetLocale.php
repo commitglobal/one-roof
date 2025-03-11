@@ -20,15 +20,15 @@ class SetLocale
     public function handle(Request $request, Closure $next): Response
     {
         if (Auth::guest()) {
-            $this->setLocaleForGuest();
+            $this->setLocaleForGuest($request);
         } else {
-            $this->setLocaleForUser();
+            $this->setLocaleForUser($request);
         }
 
         return $next($request);
     }
 
-    protected function setLocaleForUser(): void
+    protected function setLocaleForUser(Request $request): void
     {
         $locale = Auth::user()->preferredLocale();
 
@@ -39,8 +39,14 @@ class SetLocale
         App::setLocale($locale);
     }
 
-    protected function setLocaleForGuest(): void
+    protected function setLocaleForGuest(Request $request): void
     {
-        //
+        $locale = $request->query('lang');
+
+        if (blank($locale) || active_locales()->doesntContain($locale)) {
+            return;
+        }
+
+        App::setLocale($locale);
     }
 }

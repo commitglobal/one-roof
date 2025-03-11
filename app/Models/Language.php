@@ -37,4 +37,9 @@ class Language extends Model
     {
         return locale_get_display_name($this->code, $this->code) ?: null;
     }
+
+    public function isCurrent(): bool
+    {
+        return app()->getLocale() === $this->code;
+    }
 }

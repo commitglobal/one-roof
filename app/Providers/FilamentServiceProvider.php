@@ -16,7 +16,9 @@ use Filament\Support\Colors\Color;
 use Filament\Support\Enums\Alignment;
 use Filament\Support\Enums\IconPosition;
 use Filament\Support\Facades\FilamentColor;
+use Filament\Support\Facades\FilamentView;
 use Filament\Tables;
+use Filament\View\PanelsRenderHook;
 use Illuminate\Support\ServiceProvider;
 
 class FilamentServiceProvider extends ServiceProvider
@@ -43,6 +45,7 @@ class FilamentServiceProvider extends ServiceProvider
         $this->configureTableComponents();
         $this->configureActions();
         $this->configurePages();
+        $this->renderHooks();
     }
 
     /**
@@ -159,5 +162,22 @@ class FilamentServiceProvider extends ServiceProvider
         Page::alignFormActionsEnd();
 
         CreateRecord::disableCreateAnother();
+    }
+
+    protected function renderHooks(): void
+    {
+        FilamentView::registerRenderHook(
+            PanelsRenderHook::FOOTER,
+            fn () => view('filament.version', [
+                'version' => config()->get('app.version'),
+            ]),
+        );
+
+        FilamentView::registerRenderHook(
+            PanelsRenderHook::USER_MENU_PROFILE_AFTER,
+            fn () => view('components.locale-switcher.panel', [
+                'locales' => active_locales(),
+            ]),
+        );
     }
 }

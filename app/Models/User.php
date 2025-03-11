@@ -51,6 +51,7 @@ class User extends Authenticatable implements FilamentUser, HasTenants, HasLocal
         'email',
         'phone',
         'password',
+        'locale',
     ];
 
     /**

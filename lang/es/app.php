@@ -256,8 +256,11 @@ return [
     ],
     'language' => [
         'label' => [
-            'plural' => 'lenguas',
-            'singular' => 'lengua',
+            'plural' => 'idiomas',
+            'singular' => 'idioma',
+        ],
+        'actions' => [
+            'select' => 'Seleccione idioma',
         ],
     ],
     'status' => [

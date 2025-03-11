@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Models\Language;
-use Filament\Support\Facades\FilamentView;
-use Filament\View\PanelsRenderHook;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\QueryException;
@@ -25,13 +23,6 @@ class AppServiceProvider extends ServiceProvider
         tap($this->getAppVersion(), function (string $version) {
             Config::set('app.version', $version);
             Config::set('sentry.release', $version);
-
-            FilamentView::registerRenderHook(
-                PanelsRenderHook::FOOTER,
-                fn () => view('filament.version', [
-                    'version' => $version,
-                ]),
-            );
         });
 
         $this->app->singleton('languages', function () {

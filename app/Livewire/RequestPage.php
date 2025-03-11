@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Livewire;
 
+use App\Concerns\HasTranslatablePage;
+use App\Contracts\TranslatablePage;
 use App\Enums\Gender;
 use App\Enums\SpecialNeed;
 use App\Forms\Components\TableRepeater;
@@ -30,10 +32,11 @@ use Filament\Support\Enums\MaxWidth;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 
-class RequestPage extends SimplePage
+class RequestPage extends SimplePage implements TranslatablePage
 {
     use InteractsWithFormActions;
     use WithRateLimiting;
+    use HasTranslatablePage;
 
     protected static string $layout = 'components.layout.public';
 
@@ -44,6 +47,11 @@ class RequestPage extends SimplePage
     protected static string $view = 'livewire.request-page';
 
     public ?array $data = [];
+
+    public function getTitle(): string
+    {
+        return __('app.form.type.request');
+    }
 
     public function getMaxWidth(): MaxWidth
     {
@@ -78,6 +86,9 @@ class RequestPage extends SimplePage
 
     public function form(Form $form): Form
     {
+        $shelters = Shelter::query()
+            ->get(['id', 'name', 'address']);
+
         return $form
             ->schema([
                 Section::make()
@@ -156,20 +167,15 @@ class RequestPage extends SimplePage
                     ]),
 
                 Section::make(__('app.field.request_shelter'))
-                    ->schema(function () {
-                        $shelters = Shelter::query()
-                            ->get(['id', 'name', 'address']);
-
-                        return [
-                            Radio::make('shelter_id')
-                                ->label(__('app.field.request_shelter'))
-                                ->columns(2)
-                                ->hiddenLabel()
-                                ->options($shelters->mapWithKeys(fn (Shelter $shelter) => [$shelter->id => $shelter->name]))
-                                ->descriptions($shelters->mapWithKeys(fn (Shelter $shelter) => [$shelter->id => $shelter->address]))
-                                ->required(),
-                        ];
-                    }),
+                    ->schema([
+                        Radio::make('shelter_id')
+                            ->label(__('app.field.request_shelter'))
+                            ->columns(2)
+                            ->hiddenLabel()
+                            ->options($shelters->mapWithKeys(fn (Shelter $shelter) => [$shelter->id => $shelter->name]))
+                            ->descriptions($shelters->mapWithKeys(fn (Shelter $shelter) => [$shelter->id => $shelter->address]))
+                            ->required(),
+                    ]),
 
                 Section::make(__('app.field.group'))
                     ->visible(fn (Get $get) => $get('for_group'))

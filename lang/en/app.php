@@ -244,6 +244,10 @@ return [
             'singular' => 'language',
             'plural' => 'languages',
         ],
+
+        'actions' => [
+            'select' => 'Select language',
+        ],
     ],
 
     'status' => [
@@ -342,6 +346,11 @@ return [
             'rejected' => 'Rejected',
             'obsolete' => 'Obsolete',
             'duplicate' => 'Duplicate',
+        ],
+
+        'sent' => [
+            'title' => 'Request submitted successfully.',
+            'message' => 'Your request has been submitted successfully.',
         ],
 
         'actions' => [
