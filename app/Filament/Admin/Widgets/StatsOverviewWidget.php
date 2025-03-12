@@ -9,9 +9,12 @@ use App\Models\Organization;
 use App\Models\Shelter;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
+use Illuminate\Support\Number;
 
 class StatsOverviewWidget extends BaseWidget
 {
+    protected static ?int $sort = 0;
+
     protected static ?string $pollingInterval = null;
 
     protected function getStats(): array
@@ -19,17 +22,17 @@ class StatsOverviewWidget extends BaseWidget
         return [
             Stat::make(
                 __('app.stats.overview.organizations'),
-                Organization::count()
+                Number::format(Organization::count())
             ),
 
             Stat::make(
                 __('app.stats.overview.shelters'),
-                Shelter::count()
+                Number::format(Shelter::count())
             ),
 
             Stat::make(
                 __('app.stats.overview.beneficiaries'),
-                Beneficiary::count()
+                Number::format(Beneficiary::count())
             ),
         ];
     }

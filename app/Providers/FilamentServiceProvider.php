@@ -133,7 +133,9 @@ class FilamentServiceProvider extends ServiceProvider
     protected function configureTableComponents(): void
     {
         Tables\Table::configureUsing(function (Tables\Table $table) {
-            return $table->defaultsort('id', 'desc');
+            return $table
+                ->paginationPageOptions([5, 10, 25, 50])
+                ->defaultSort('id', 'desc');
         });
 
         Tables\Columns\Column::macro('shrink', function () {

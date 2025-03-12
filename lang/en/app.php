@@ -325,10 +325,11 @@ return [
 
     'stats' => [
         'overview' => [
+            'available_places' => 'Total available places',
+            'beneficiaries_in_shelter' => 'Total beneficiaries in the shelter',
+            'beneficiaries' => 'Total hosted beneficiaries',
             'organizations' => 'Total organizations',
             'shelters' => 'Total shelters',
-            'beneficiaries' => 'Total hosted beneficiaries',
-            'beneficiaries_in_shelter' => 'Total beneficiaries in the shelter',
         ],
     ],
 
