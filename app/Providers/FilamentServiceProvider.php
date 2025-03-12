@@ -86,6 +86,11 @@ class FilamentServiceProvider extends ServiceProvider
             return $repeater->addActionAlignment(Alignment::Left);
         });
 
+        Forms\Components\TextInput::configureUsing(function (Forms\Components\TextInput $input) {
+            // Disable restrictive phone format
+            return $input->telRegex('.*');
+        });
+
         Forms\Components\Field::macro('translatable', function (?array $localeSpecificRules = null) {
             return Tabs::make('translations')
                 ->contained(false)
