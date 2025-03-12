@@ -145,7 +145,7 @@ class FormResource extends Resource
                     Tables\Actions\EditAction::make(),
 
                     PublishAction::make(),
-
+                    // TODO: ignore status field
                     Tables\Actions\ReplicateAction::make(),
 
                     Tables\Actions\DeleteAction::make(),
