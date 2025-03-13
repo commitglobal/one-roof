@@ -21,7 +21,8 @@ class SheltersForm
                 ->hiddenLabel()
                 ->relationship('shelters')
                 ->minItems(1)
-                ->schema(static::getIndividualSchema()),
+                ->schema(static::getIndividualSchema())
+                ->addActionLabel(__('app.organization.steps.shelters.add')),
         ];
     }
 
