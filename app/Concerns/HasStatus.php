@@ -19,7 +19,7 @@ trait HasStatus
     public static function bootHasStatus(): void
     {
         static::creating(function (self $model) {
-            if (empty($model->status)) {
+            if (blank($model->status)) {
                 $model->status = Status::PENDING;
             }
         });
