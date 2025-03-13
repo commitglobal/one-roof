@@ -7,6 +7,7 @@ namespace App\Models;
 use App\Concerns\BelongsToOrganization;
 use App\Concerns\LogsActivity;
 use App\Data\PersonData;
+use App\Models\Shelter\Variable;
 use Database\Factories\ShelterFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -67,5 +68,10 @@ class Shelter extends Model
     public function stays(): HasMany
     {
         return $this->hasMany(Stay::class);
+    }
+
+    public function variables(): BelongsToMany
+    {
+        return $this->belongsToMany(Variable::class, 'shelter_shelter_variable');
     }
 }
