@@ -43,10 +43,11 @@ class UserFactory extends Factory
      */
     public function pending(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn(array $attributes) => [
             'password_set_at' => null,
             'status' => Status::PENDING,
         ]);
+
     }
 
     /**
@@ -54,8 +55,9 @@ class UserFactory extends Factory
      */
     public function superAdmin(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn(array $attributes) => [
             'role' => Role::SUPER_ADMIN,
+            'status' => Status::ACTIVE,
         ]);
     }
 
@@ -64,8 +66,9 @@ class UserFactory extends Factory
      */
     public function superUser(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn(array $attributes) => [
             'role' => Role::SUPER_USER,
+            'status' => Status::ACTIVE,
         ]);
     }
 
@@ -74,7 +77,7 @@ class UserFactory extends Factory
      */
     public function shelterAdmin(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn(array $attributes) => [
             // 'role' => Role::SHELTER_ADMIN,
         ]);
     }
@@ -84,7 +87,7 @@ class UserFactory extends Factory
      */
     public function shelterUser(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn(array $attributes) => [
             // 'role' => Role::SHELTER_USER,
         ]);
     }
