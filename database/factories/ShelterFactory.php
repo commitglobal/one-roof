@@ -57,7 +57,7 @@ class ShelterFactory extends Factory
                 ->create();
 
             Request::factory()
-                ->count(25)
+                ->count(10)
                 ->for($shelter)
                 ->create();
         });

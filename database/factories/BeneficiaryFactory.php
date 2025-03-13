@@ -41,7 +41,7 @@ class BeneficiaryFactory extends Factory
     {
         return $this->afterCreating(function (Beneficiary $beneficiary) {
             Document::factory()
-                ->count(fake()->randomNumber(2))
+                ->count(3)
                 ->for($beneficiary)
                 ->create();
         });

@@ -6,8 +6,6 @@ namespace App\Filament\Admin\Resources;
 
 use App\Enums\Status;
 use App\Filament\Admin\Resources\OrganizationResource\Pages;
-use App\Filament\Admin\Resources\OrganizationResource\RelationManagers\AdminsRelationManager;
-use App\Filament\Admin\Resources\OrganizationResource\RelationManagers\SheltersRelationManager;
 use App\Filament\Admin\Resources\OrganizationResource\Schemas\OrganizationForm;
 use App\Filament\Admin\Resources\OrganizationResource\Schemas\OrganizationInfolist;
 use App\Models\Organization;
@@ -118,14 +116,6 @@ class OrganizationResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
-    }
-
-    public static function getRelations(): array
-    {
-        return [
-            SheltersRelationManager::class,
-            AdminsRelationManager::class,
-        ];
     }
 
     public static function getPages(): array

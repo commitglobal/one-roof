@@ -32,20 +32,24 @@ class UserFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'phone' => fake()->e164PhoneNumber(),
             'password' => static::$password ??= Hash::make('password'),
-            'status' => fake()->randomElement([Status::ACTIVE, Status::INACTIVE]),
+            'status' => Status::ACTIVE,
             'password_set_at' => now(),
             'remember_token' => Str::random(10),
         ];
     }
 
-    /**
-     * Indicate that the model's email address should be unverified.
-     */
     public function pending(): static
     {
         return $this->state(fn (array $attributes) => [
             'password_set_at' => null,
             'status' => Status::PENDING,
+        ]);
+    }
+
+    public function inactive(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'status' => Status::INACTIVE,
         ]);
     }
 
@@ -56,7 +60,6 @@ class UserFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'role' => Role::SUPER_ADMIN,
-            'status' => Status::ACTIVE,
         ]);
     }
 
@@ -67,7 +70,6 @@ class UserFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'role' => Role::SUPER_USER,
-            'status' => Status::ACTIVE,
         ]);
     }
 

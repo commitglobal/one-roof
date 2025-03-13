@@ -46,7 +46,7 @@ class OrganizationFactory extends Factory
                 phone: fake()->e164PhoneNumber(),
             ),
             'notes' => fake()->paragraph(),
-            'status' => fake()->randomElement(Status::values()),
+            'status' => Status::ACTIVE,
         ];
     }
 

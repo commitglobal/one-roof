@@ -23,7 +23,7 @@ class LocationResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-map-pin';
 
-    protected static ?int $navigationSort = 11;
+    protected static ?int $navigationSort = 21;
 
     public static function getNavigationGroup(): ?string
     {
@@ -58,6 +58,7 @@ class LocationResource extends Resource
             ->columns([
                 TextColumn::make('id')
                     ->label(__('app.field.id'))
+                    ->prefix('#')
                     ->sortable()
                     ->shrink(),
 
