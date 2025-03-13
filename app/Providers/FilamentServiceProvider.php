@@ -88,7 +88,7 @@ class FilamentServiceProvider extends ServiceProvider
 
         Forms\Components\TextInput::configureUsing(function (Forms\Components\TextInput $input) {
             // Disable restrictive phone format
-            $input->telRegex('/^.+$/');
+            return $input->telRegex('/^.+$/');
         });
 
         Forms\Components\Field::macro('translatable', function (?array $localeSpecificRules = null) {
