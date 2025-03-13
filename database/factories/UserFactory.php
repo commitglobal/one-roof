@@ -56,6 +56,7 @@ class UserFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'role' => Role::SUPER_ADMIN,
+            'status' => Status::ACTIVE,
         ]);
     }
 
@@ -66,6 +67,7 @@ class UserFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'role' => Role::SUPER_USER,
+            'status' => Status::ACTIVE,
         ]);
     }
 
