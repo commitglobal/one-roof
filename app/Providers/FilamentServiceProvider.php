@@ -88,7 +88,7 @@ class FilamentServiceProvider extends ServiceProvider
 
         Forms\Components\TextInput::configureUsing(function (Forms\Components\TextInput $input) {
             // Disable restrictive phone format
-            return $input->telRegex('.*');
+            $input->telRegex('/^.+$/');
         });
 
         Forms\Components\Field::macro('translatable', function (?array $localeSpecificRules = null) {
@@ -175,14 +175,14 @@ class FilamentServiceProvider extends ServiceProvider
     {
         FilamentView::registerRenderHook(
             PanelsRenderHook::FOOTER,
-            fn () => view('filament.version', [
+            fn() => view('filament.version', [
                 'version' => config()->get('app.version'),
             ]),
         );
 
         FilamentView::registerRenderHook(
             PanelsRenderHook::USER_MENU_PROFILE_AFTER,
-            fn () => view('components.locale-switcher.panel', [
+            fn() => view('components.locale-switcher.panel', [
                 'locales' => active_locales(),
             ]),
         );
