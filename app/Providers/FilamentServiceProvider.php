@@ -175,14 +175,14 @@ class FilamentServiceProvider extends ServiceProvider
     {
         FilamentView::registerRenderHook(
             PanelsRenderHook::FOOTER,
-            fn() => view('filament.version', [
+            fn () => view('filament.version', [
                 'version' => config()->get('app.version'),
             ]),
         );
 
         FilamentView::registerRenderHook(
             PanelsRenderHook::USER_MENU_PROFILE_AFTER,
-            fn() => view('components.locale-switcher.panel', [
+            fn () => view('components.locale-switcher.panel', [
                 'locales' => active_locales(),
             ]),
         );
