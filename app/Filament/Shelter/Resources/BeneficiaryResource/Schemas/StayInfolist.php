@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Filament\Shelter\Resources\BeneficiaryResource\Schemas;
 
 use App\Models\Stay;
-use Filament\Infolists\Components\Grid;
 use Filament\Infolists\Components\Group;
+use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
 
 class StayInfolist
@@ -14,7 +14,20 @@ class StayInfolist
     public static function getSchema(): array
     {
         return [
-            Grid::make()
+            Section::make()
+                ->columns()
+                ->schema([
+                    TextEntry::make('id')
+                        ->label(__('app.field.id'))
+                        ->prefix('#'),
+                    TextEntry::make('created_at')
+                        ->label(__('app.field.created_at'))
+                        ->dateTime(),
+
+                ]),
+
+            Section::make(__('app.stay.details'))
+                ->columns()
                 ->schema([
                     TextEntry::make('start_date')
                         ->label(__('app.field.start_date'))

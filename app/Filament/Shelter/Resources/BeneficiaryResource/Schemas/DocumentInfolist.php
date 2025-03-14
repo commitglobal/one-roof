@@ -14,7 +14,7 @@ class DocumentInfolist
     {
         return [
             Section::make()
-                ->columns(2)
+                ->columns()
                 ->schema([
                     TextEntry::make('created_at')
                         ->label(__('app.field.created_at'))

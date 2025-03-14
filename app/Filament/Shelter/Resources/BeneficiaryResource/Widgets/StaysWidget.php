@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace App\Filament\Shelter\Resources\BeneficiaryResource\Widgets;
 
+use App\Filament\Shelter\Resources\BeneficiaryResource;
 use App\Filament\Shelter\Resources\BeneficiaryResource\Schemas\StayForm;
-use App\Filament\Shelter\Resources\BeneficiaryResource\Schemas\StayInfolist;
 use App\Models\Beneficiary;
+use App\Models\Stay;
 use Filament\Tables\Actions\CreateAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
@@ -53,7 +54,10 @@ class StaysWidget extends BaseWidget
             ])
             ->actions([
                 ViewAction::make()
-                    ->infolist(StayInfolist::getSchema()),
+                    ->url(fn (Stay $record) => BeneficiaryResource::getUrl('stay', [
+                        'record' => $this->record,
+                        'stay' => $record,
+                    ])),
             ]);
     }
 }

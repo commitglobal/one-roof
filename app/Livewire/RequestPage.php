@@ -92,7 +92,7 @@ class RequestPage extends SimplePage implements TranslatablePage
         return $form
             ->schema([
                 Section::make()
-                    ->columns(2)
+                    ->columns()
                     ->schema([
                         Checkbox::make('somebody_else')
                             ->label(__('app.field.request_somebody_else'))
@@ -170,7 +170,7 @@ class RequestPage extends SimplePage implements TranslatablePage
                     ->schema([
                         Radio::make('shelter_id')
                             ->label(__('app.field.request_shelter'))
-                            ->columns(2)
+                            ->columns()
                             ->hiddenLabel()
                             ->options($shelters->mapWithKeys(fn (Shelter $shelter) => [$shelter->id => $shelter->name]))
                             ->descriptions($shelters->mapWithKeys(fn (Shelter $shelter) => [$shelter->id => $shelter->address]))
@@ -212,7 +212,7 @@ class RequestPage extends SimplePage implements TranslatablePage
                     ]),
 
                 Section::make(__('app.field.stay'))
-                    ->columns(2)
+                    ->columns()
                     ->schema([
                         DatePicker::make('start_date')
                             ->label(__('app.field.start_date'))

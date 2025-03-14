@@ -122,6 +122,14 @@ return [
         ],
     ],
 
+    'stay' => [
+        'label' => [
+            'singular' => 'stay',
+            'plural' => 'stays',
+        ],
+
+        'details' => 'Stay details',
+    ],
     'country' => [
         'label' => [
             'singular' => 'country',

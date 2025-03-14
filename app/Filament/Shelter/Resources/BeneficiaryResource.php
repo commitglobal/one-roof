@@ -107,8 +107,8 @@ class BeneficiaryResource extends Resource
                     ->label(__('app.field.latest_stay'))
                     ->formatStateUsing(fn (Stay $state) => \sprintf(
                         '%s – %s',
-                        $state->start_date->format('d.m.Y'),
-                        $state->end_date->format('d.m.Y'),
+                        $state->start_date->toFormattedDate(),
+                        $state->end_date->toFormattedDate(),
                     )),
             ])
             ->filters([
@@ -141,6 +141,7 @@ class BeneficiaryResource extends Resource
             'create' => Pages\CreateBeneficiary::route('/create'),
             'view' => Pages\ViewBeneficiary::route('/{record}'),
             'edit' => Pages\EditBeneficiary::route('/{record}/edit'),
+            'stay' => Pages\ViewStay::route('/{record}/stay/{stay}'),
             'document' => Pages\ViewDocument::route('/{record}/document/{document}'),
         ];
     }
