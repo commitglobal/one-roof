@@ -11,6 +11,7 @@ use App\Models\Location;
 use App\Models\Organization;
 use App\Models\Request;
 use App\Models\Shelter;
+use App\Models\ShelterVariable;
 use App\Models\Stay;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -60,6 +61,13 @@ class ShelterFactory extends Factory
                 ->count(10)
                 ->for($shelter)
                 ->create();
+
+            $shelter->shelterVariables()->sync(
+                ShelterVariable::query()
+                    ->inRandomOrder()
+                    ->limit(3)
+                    ->pluck('id')
+            );
         });
     }
 }
