@@ -7,6 +7,7 @@ return [
     'navigation' => [
         'activity' => 'Activity',
         'configurations' => 'Configurations',
+        'shelter_configuration' => 'Shelter configuration',
     ],
 
     'yes' => 'Yes',
@@ -15,6 +16,7 @@ return [
     'more_actions' => 'More actions',
 
     'field' => [
+        'active' => 'Active',
         'address' => 'Address',
         'admins' => 'Administrators',
         'age' => 'Age',
@@ -66,8 +68,9 @@ return [
         'not_applicable' => 'Not applicable',
         'notes' => 'Observations',
         'options' => 'Options',
-        'organization' => 'Organization',
+        'order' => 'Order',
         'organization_type' => 'Organization type',
+        'organization' => 'Organization',
         'phone' => 'Phone',
         'photo' => 'Photo',
         'reason_rejected' => 'Reason rejected',
@@ -90,6 +93,9 @@ return [
         'type' => 'Type',
         'updated_at' => 'Updated at',
         'upload_document' => 'Upload document',
+        'usage' => 'Usage',
+        'variable_name' => 'Variable name',
+        'variables' => 'Variables',
     ],
 
     'placeholder' => [
@@ -223,6 +229,15 @@ return [
                 ],
             ],
         ],
+    ],
+
+    'shelter' => [
+        'label' => [
+            'singular' => 'shelter',
+            'plural' => 'shelters',
+        ],
+
+        'profile' => 'Profile',
     ],
 
     'user' => [
@@ -428,5 +443,41 @@ return [
         'chronic_illness' => 'Chronic illness',
         'paliative_care' => 'Paliative care needs',
         'other' => 'Other',
+    ],
+
+    'attribute' => [
+        'label' => [
+            'singular' => 'attribute',
+            'plural' => 'attributes',
+        ],
+
+        'type' => [
+            'attribute' => 'Attributes',
+            'facility' => 'Facilities',
+            'service' => 'Services',
+        ],
+
+        'actions' => [
+            'add' => 'Add attribute',
+            'edit' => 'Edit attribute',
+            'delete' => 'Delete attribute',
+
+            'activate' => [
+                'button' => 'Activate',
+                'confirm' => [
+                    'description' => 'Are you sure you want to activate this attribute?',
+                    'title' => 'Activate attribute',
+                    'success' => 'Attribute activated successfully.',
+                ],
+            ],
+            'deactivate' => [
+                'button' => 'Deactivate',
+                'confirm' => [
+                    'description' => 'Are you sure you want to deactivate this attribute?',
+                    'title' => 'Deactivate attribute',
+                    'success' => 'Attribute deactivated successfully.',
+                ],
+            ],
+        ],
     ],
 ];

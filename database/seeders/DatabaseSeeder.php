@@ -11,6 +11,7 @@ use App\Models\Form;
 use App\Models\Location;
 use App\Models\Organization;
 use App\Models\Request;
+use App\Models\ShelterAttribute;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Mail;
@@ -36,6 +37,15 @@ class DatabaseSeeder extends Seeder
 
         Location::factory()
             ->count(50)
+            ->create();
+
+        ShelterAttribute::factory()
+            ->count(5)
+            ->create();
+
+        ShelterAttribute::factory()
+            ->count(2)
+            ->disabled()
             ->create();
 
         Beneficiary::factory()

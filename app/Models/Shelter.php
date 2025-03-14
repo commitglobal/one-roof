@@ -68,4 +68,9 @@ class Shelter extends Model
     {
         return $this->hasMany(Stay::class);
     }
+
+    public function shelterVariables(): BelongsToMany
+    {
+        return $this->belongsToMany(ShelterVariable::class);
+    }
 }
