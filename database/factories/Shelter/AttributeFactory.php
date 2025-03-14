@@ -39,6 +39,9 @@ class AttributeFactory extends Factory
     {
         return $this->afterCreating(function (Attribute $attribute) {
             Variable::factory()
+                ->state([
+                    'is_enabled' => $attribute->is_enabled,
+                ])
                 ->count(3)
                 ->for($attribute, 'attribute')
                 ->create();

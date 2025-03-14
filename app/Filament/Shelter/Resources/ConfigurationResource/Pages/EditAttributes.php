@@ -25,6 +25,7 @@ class EditAttributes extends EditRecord
     public function form(Form $form): Form
     {
         $schema = Attribute::query()
+            ->with('variables')
             ->whereAttribute()
             ->get()
             ->map(
@@ -34,6 +35,9 @@ class EditAttributes extends EditRecord
                         'variables',
                         'name',
                         fn (Builder $query) => $query->where('attribute_id', $attribute->getKey())
+                    )
+                    ->disableOptionWhen(
+                        fn (array $state, int $value) => ! ($attribute->is_enabled && $attribute->variables->find($value)->is_enabled) && ! \in_array($value, $state)
                     )
             )
             ->all();

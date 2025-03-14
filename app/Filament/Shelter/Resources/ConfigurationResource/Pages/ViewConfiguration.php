@@ -41,7 +41,8 @@ class ViewConfiguration extends ViewRecord
                         Tabs\Tab::make(__('app.shelter.profile'))
                             ->schema(static::getProfileTab()),
                         Tabs\Tab::make(Str::ucfirst(__('app.attribute.label.plural')))
-                            ->schema(static::getAttributesTab()),
+                            ->schema(static::getAttributesTab())
+                            ->visible(Attribute::query()->exists()),
                     ]),
             ]);
     }

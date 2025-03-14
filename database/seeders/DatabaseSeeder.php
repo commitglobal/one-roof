@@ -43,6 +43,11 @@ class DatabaseSeeder extends Seeder
             ->count(5)
             ->create();
 
+        Attribute::factory()
+            ->count(2)
+            ->disabled()
+            ->create();
+
         Beneficiary::factory()
             ->count(50)
             ->create();
