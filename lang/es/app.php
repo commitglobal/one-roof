@@ -181,6 +181,7 @@ return [
             'shelters' => 'Total de refugios',
             'beneficiaries' => 'Total de beneficiarios acogidos',
             'beneficiaries_in_shelter' => 'Total de beneficiarios en el refugio',
+            'available_places' => 'Total de plazas disponibles',
         ],
     ],
     'placeholder' => [
@@ -355,6 +356,10 @@ return [
                     'success' => 'La solicitud se ha eliminado correctamente.',
                 ],
             ],
+        ],
+        'sent' => [
+            'title' => 'La solicitud se ha enviado correctamente.',
+            'message' => 'Su solicitud se ha enviado correctamente.',
         ],
     ],
     'submit' => 'Enviar',
