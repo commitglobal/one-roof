@@ -12,7 +12,7 @@ use Filament\Resources\Components\Tab;
 use Filament\Resources\Pages\ListRecords;
 use Illuminate\Database\Eloquent\Builder;
 
-class ListAttributes extends ListRecords
+class ListShelterAttributes extends ListRecords
 {
     use DisablesBreadcrumbs;
 

@@ -7,7 +7,7 @@ namespace App\Filament\Shelter\Resources\ConfigurationResource\Pages;
 use App\Filament\Concerns\DisablesBreadcrumbs;
 use App\Filament\Shelter\Resources\ConfigurationResource;
 use App\Filament\Shelter\Resources\ConfigurationResource\Concerns\HasConfigurationMount;
-use App\Models\Shelter\Attribute;
+use App\Models\ShelterAttribute;
 use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Form;
@@ -24,20 +24,20 @@ class EditAttributes extends EditRecord
 
     public function form(Form $form): Form
     {
-        $schema = Attribute::query()
-            ->with('variables')
+        $schema = ShelterAttribute::query()
+            ->with('shelterVariables')
             ->whereAttribute()
             ->get()
             ->map(
-                fn (Attribute $attribute, int $index) => CheckboxList::make("$index.$attribute->name")
+                fn (ShelterAttribute $attribute, int $index) => CheckboxList::make("$index.$attribute->name")
                     ->label($attribute->name)
                     ->relationship(
-                        'variables',
+                        'shelterVariables',
                         'name',
-                        fn (Builder $query) => $query->where('attribute_id', $attribute->getKey())
+                        fn (Builder $query) => $query->where('shelter_attribute_id', $attribute->getKey())
                     )
                     ->disableOptionWhen(
-                        fn (array $state, int $value) => ! ($attribute->is_enabled && $attribute->variables->find($value)->is_enabled) && ! \in_array($value, $state)
+                        fn (array $state, int $value) => ! ($attribute->is_enabled && $attribute->shelterVariables->find($value)->is_enabled) && ! \in_array($value, $state)
                     )
             )
             ->all();

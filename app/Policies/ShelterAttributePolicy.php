@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Policies\Shelter;
+namespace App\Policies;
 
-use App\Models\Shelter\Attribute;
+use App\Models\ShelterAttribute;
 use App\Models\User;
 
-class AttributePolicy
+class ShelterAttributePolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -20,7 +20,7 @@ class AttributePolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Attribute $attribute): bool
+    public function view(User $user, ShelterAttribute $shelterAttribute): bool
     {
         return true;
     }
@@ -36,7 +36,7 @@ class AttributePolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Attribute $attribute): bool
+    public function update(User $user, ShelterAttribute $shelterAttribute): bool
     {
         return $user->isSuperAdmin();
     }
@@ -44,7 +44,7 @@ class AttributePolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Attribute $attribute): bool
+    public function delete(User $user, ShelterAttribute $shelterAttribute): bool
     {
         return $user->isSuperAdmin();
     }
@@ -52,16 +52,16 @@ class AttributePolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Attribute $attribute): bool
+    public function restore(User $user, ShelterAttribute $shelterAttribute): bool
     {
-        return $this->delete($user, $attribute);
+        return $this->delete($user, $shelterAttribute);
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Attribute $attribute): bool
+    public function forceDelete(User $user, ShelterAttribute $shelterAttribute): bool
     {
-        return $this->delete($user, $attribute);
+        return $this->delete($user, $shelterAttribute);
     }
 }

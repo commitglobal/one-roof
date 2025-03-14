@@ -2,25 +2,22 @@
 
 declare(strict_types=1);
 
-namespace App\Models\Shelter;
+namespace App\Models;
 
-use App\Models\Shelter;
-use Database\Factories\Shelter\VariableFactory;
+use Database\Factories\ShelterVariableFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\Translatable\HasTranslations;
 
-class Variable extends Model
+class ShelterVariable extends Model
 {
-    /** @use HasFactory<VariableFactory> */
+    /** @use HasFactory<ShelterVariableFactory> */
     use HasFactory;
     use HasTranslations;
 
-    protected static string $factory = VariableFactory::class;
-
-    public $table = 'shelter_variables';
+    protected static string $factory = ShelterVariableFactory::class;
 
     protected $fillable = [
         'name',
@@ -42,11 +39,11 @@ class Variable extends Model
 
     public function shelters(): BelongsToMany
     {
-        return $this->belongsToMany(Shelter::class, 'shelter_shelter_variable');
+        return $this->belongsToMany(Shelter::class);
     }
 
-    public function attribute(): BelongsTo
+    public function shelterAttribute(): BelongsTo
     {
-        return $this->belongsTo(Attribute::class);
+        return $this->belongsTo(ShelterAttribute::class);
     }
 }

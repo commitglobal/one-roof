@@ -6,7 +6,7 @@ namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\ShelterAttributeResource\Pages;
 use App\Forms\Components\TableRepeater;
-use App\Models\Shelter\Attribute;
+use App\Models\ShelterAttribute;
 use Awcodes\TableRepeater\Header;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
@@ -20,13 +20,15 @@ use Filament\Tables\Table;
 
 class ShelterAttributeResource extends Resource
 {
-    protected static ?string $model = Attribute::class;
+    protected static ?string $model = ShelterAttribute::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-pencil-square';
 
     protected static ?string $recordTitleAttribute = 'name';
 
     protected static ?int $navigationSort = 10;
+
+    protected static ?string $slug = 'attributes';
 
     public static function getNavigationGroup(): ?string
     {
@@ -56,14 +58,12 @@ class ShelterAttributeResource extends Resource
 
                         TableRepeater::make('variables')
                             ->label(__('app.field.variables'))
-                            ->relationship('variables')
+                            ->relationship('shelterVariables')
                             ->deletable(function () {
                                 // TODO: implement based on usage
                                 return false;
                             })
                             ->orderColumn('order')
-                            // ->reorderable()
-
                             ->headers([
                                 Header::make('name')
                                     ->label(__('app.field.name'))
@@ -102,9 +102,14 @@ class ShelterAttributeResource extends Resource
                     ->searchable()
                     ->sortable(),
 
-                TextColumn::make('variables_count')
+                TextColumn::make('shelter_variables_count')
                     ->label(__('app.field.variables'))
-                    ->counts('variables'),
+                    ->counts('shelterVariables'),
+
+                // TextColumn::make('shelters_count')
+                //     ->label(__('app.field.usage'))
+                //     ->counts('shelters')
+                //     ->sortable(),
 
                 IconColumn::make('is_enabled')
                     ->label(__('app.field.active'))
@@ -121,10 +126,10 @@ class ShelterAttributeResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListAttributes::route('/'),
-            'create' => Pages\CreateAttribute::route('/create'),
-            'view' => Pages\ViewAttribute::route('/{record}'),
-            'edit' => Pages\EditAttribute::route('/{record}/edit'),
+            'index' => Pages\ListShelterAttributes::route('/'),
+            'create' => Pages\CreateShelterAttribute::route('/create'),
+            'view' => Pages\ViewShelterAttribute::route('/{record}'),
+            'edit' => Pages\EditShelterAttribute::route('/{record}/edit'),
         ];
     }
 }

@@ -93,6 +93,7 @@ return [
         'type' => 'Type',
         'updated_at' => 'Updated at',
         'upload_document' => 'Upload document',
+        'usage' => 'Usage',
         'variable_name' => 'Variable name',
         'variables' => 'Variables',
     ],
@@ -460,6 +461,23 @@ return [
             'add' => 'Add attribute',
             'edit' => 'Edit attribute',
             'delete' => 'Delete attribute',
+
+            'activate' => [
+                'button' => 'Activate',
+                'confirm' => [
+                    'description' => 'Are you sure you want to activate this attribute?',
+                    'title' => 'Activate attribute',
+                    'success' => 'Attribute activated successfully.',
+                ],
+            ],
+            'deactivate' => [
+                'button' => 'Deactivate',
+                'confirm' => [
+                    'description' => 'Are you sure you want to deactivate this attribute?',
+                    'title' => 'Deactivate attribute',
+                    'success' => 'Attribute deactivated successfully.',
+                ],
+            ],
         ],
     ],
 ];

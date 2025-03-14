@@ -9,9 +9,9 @@ use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class VariablesRelationManager extends RelationManager
+class ShelterVariablesRelationManager extends RelationManager
 {
-    protected static string $relationship = 'variables';
+    protected static string $relationship = 'shelterVariables';
 
     public function table(Table $table): Table
     {
@@ -31,6 +31,11 @@ class VariablesRelationManager extends RelationManager
 
                 TextColumn::make('name')
                     ->label(__('app.field.variable_name'))
+                    ->sortable(),
+
+                TextColumn::make('shelters_count')
+                    ->label(__('app.field.usage'))
+                    ->counts('shelters')
                     ->sortable(),
 
                 IconColumn::make('is_enabled')

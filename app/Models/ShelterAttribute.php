@@ -2,25 +2,25 @@
 
 declare(strict_types=1);
 
-namespace App\Models\Shelter;
+namespace App\Models;
 
+use App\Concerns\HasAttributeStatus;
 use App\Enums\AttributeType;
-use Database\Factories\Shelter\AttributeFactory;
+use Database\Factories\ShelterAttributeFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Translatable\HasTranslations;
 
-class Attribute extends Model
+class ShelterAttribute extends Model
 {
-    /** @use HasFactory<AttributeFactory> */
+    use HasAttributeStatus;
+    /** @use HasFactory<ShelterAttributeFactory> */
     use HasFactory;
     use HasTranslations;
 
-    protected static string $factory = AttributeFactory::class;
-
-    public $table = 'shelter_attributes';
+    protected static string $factory = ShelterAttributeFactory::class;
 
     protected $fillable = [
         'name',
@@ -40,9 +40,18 @@ class Attribute extends Model
         ];
     }
 
-    public function variables(): HasMany
+    public static function booted(): void
     {
-        return $this->hasMany(Variable::class);
+        static::creating(function (self $shelterAttribute) {
+            if (blank($shelterAttribute->type)) {
+                $shelterAttribute->type = AttributeType::ATTRIBUTE;
+            }
+        });
+    }
+
+    public function shelterVariables(): HasMany
+    {
+        return $this->hasMany(ShelterVariable::class);
     }
 
     public function scopeWhereAttribute(Builder $query): Builder

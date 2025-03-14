@@ -6,21 +6,11 @@ namespace App\Filament\Admin\Resources\ShelterAttributeResource\Pages;
 
 use App\Filament\Admin\Resources\ShelterAttributeResource;
 use App\Filament\Concerns\UsesBreadcrumbFromTitle;
-use App\Filament\Concerns\UsesRecordTitle;
-use Filament\Actions;
-use Filament\Resources\Pages\EditRecord;
+use Filament\Resources\Pages\CreateRecord;
 
-class EditAttribute extends EditRecord
+class CreateShelterAttribute extends CreateRecord
 {
     use UsesBreadcrumbFromTitle;
-    use UsesRecordTitle;
 
     protected static string $resource = ShelterAttributeResource::class;
-
-    protected function getHeaderActions(): array
-    {
-        return [
-            Actions\DeleteAction::make(),
-        ];
-    }
 }

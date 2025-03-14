@@ -3,8 +3,8 @@
 declare(strict_types=1);
 
 use App\Models\Shelter;
-use App\Models\Shelter\Attribute;
-use App\Models\Shelter\Variable;
+use App\Models\ShelterAttribute;
+use App\Models\ShelterVariable;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -24,7 +24,7 @@ return new class extends Migration
         Schema::create('shelter_variables', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignIdFor(Attribute::class)
+            $table->foreignIdFor(ShelterAttribute::class)
                 ->constrained()
                 ->cascadeOnDelete();
 
@@ -42,11 +42,11 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnDelete();
 
-            $table->foreignIdFor(Variable::class)
+            $table->foreignIdFor(ShelterVariable::class)
                 ->constrained()
                 ->cascadeOnDelete();
 
-            $table->primary(['shelter_id', 'variable_id']);
+            $table->primary(['shelter_id', 'shelter_variable_id']);
         });
     }
 };

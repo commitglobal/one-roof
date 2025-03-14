@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Database\Factories\Shelter;
+namespace Database\Factories;
 
 use App\Enums\AttributeType;
-use App\Models\Shelter\Attribute;
-use App\Models\Shelter\Variable;
+use App\Models\ShelterAttribute;
+use App\Models\ShelterVariable;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Attribute>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ShelterAttribute>
  */
-class AttributeFactory extends Factory
+class ShelterAttributeFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -37,13 +37,13 @@ class AttributeFactory extends Factory
 
     public function configure(): static
     {
-        return $this->afterCreating(function (Attribute $attribute) {
-            Variable::factory()
+        return $this->afterCreating(function (ShelterAttribute $shelterAttribute) {
+            ShelterVariable::factory()
                 ->state([
-                    'is_enabled' => $attribute->is_enabled,
+                    'is_enabled' => $shelterAttribute->is_enabled,
                 ])
                 ->count(3)
-                ->for($attribute, 'attribute')
+                ->for($shelterAttribute)
                 ->create();
         });
     }

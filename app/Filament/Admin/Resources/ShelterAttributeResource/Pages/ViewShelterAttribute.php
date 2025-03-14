@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace App\Filament\Admin\Resources\ShelterAttributeResource\Pages;
 
 use App\Filament\Admin\Resources\ShelterAttributeResource;
-use App\Filament\Admin\Resources\ShelterAttributeResource\RelationManagers\VariablesRelationManager;
+use App\Filament\Admin\Resources\ShelterAttributeResource\RelationManagers\ShelterVariablesRelationManager;
 use App\Filament\Concerns\UsesBreadcrumbFromTitle;
 use App\Filament\Concerns\UsesRecordTitle;
 use Filament\Actions;
 use Filament\Resources\Pages\ViewRecord;
 
-class ViewAttribute extends ViewRecord
+class ViewShelterAttribute extends ViewRecord
 {
     use UsesBreadcrumbFromTitle;
     use UsesRecordTitle;
@@ -36,7 +36,7 @@ class ViewAttribute extends ViewRecord
     public function getRelationManagers(): array
     {
         return [
-            VariablesRelationManager::class,
+            ShelterVariablesRelationManager::class,
         ];
     }
 }

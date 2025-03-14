@@ -11,7 +11,7 @@ use App\Models\Form;
 use App\Models\Location;
 use App\Models\Organization;
 use App\Models\Request;
-use App\Models\Shelter\Attribute;
+use App\Models\ShelterAttribute;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Mail;
@@ -39,11 +39,11 @@ class DatabaseSeeder extends Seeder
             ->count(50)
             ->create();
 
-        Attribute::factory()
+        ShelterAttribute::factory()
             ->count(5)
             ->create();
 
-        Attribute::factory()
+        ShelterAttribute::factory()
             ->count(2)
             ->disabled()
             ->create();

@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Database\Factories\Shelter;
+namespace Database\Factories;
 
-use App\Models\Shelter\Attribute;
+use App\Models\ShelterVariable;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Attribute>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ShelterVariable>
  */
-class VariableFactory extends Factory
+class ShelterVariableFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -23,7 +23,7 @@ class VariableFactory extends Factory
             'name' => fake()->word(),
             'is_enabled' => true,
             'order' => fake()->numberBetween(1, 10),
-            'attribute_id' => Attribute::factory(),
+            'shelter_attribute_id' => ShelterVariable::factory(),
         ];
     }
 

@@ -7,7 +7,7 @@ namespace App\Filament\Shelter\Resources\ConfigurationResource\Pages;
 use App\Filament\Concerns\DisablesBreadcrumbs;
 use App\Filament\Shelter\Resources\ConfigurationResource;
 use App\Filament\Shelter\Resources\ConfigurationResource\Concerns\HasConfigurationMount;
-use App\Models\Shelter\Attribute;
+use App\Models\ShelterAttribute;
 use Filament\Infolists\Components\Actions\Action;
 use Filament\Infolists\Components\Fieldset;
 use Filament\Infolists\Components\Section;
@@ -42,7 +42,7 @@ class ViewConfiguration extends ViewRecord
                             ->schema(static::getProfileTab()),
                         Tabs\Tab::make(Str::ucfirst(__('app.attribute.label.plural')))
                             ->schema(static::getAttributesTab())
-                            ->visible(Attribute::query()->exists()),
+                            ->visible(ShelterAttribute::query()->exists()),
                     ]),
             ]);
     }
@@ -95,15 +95,15 @@ class ViewConfiguration extends ViewRecord
 
     protected function getAttributesTab(): array
     {
-        $variables = $this->getRecord()->variables;
+        $variables = $this->getRecord()->shelterVariables;
 
-        $schema = Attribute::query()
+        $schema = ShelterAttribute::query()
             ->whereAttribute()
             ->get()
             ->map(
-                fn (Attribute $attribute, int $index) => TextEntry::make($attribute->name)
+                fn (ShelterAttribute $attribute, int $index) => TextEntry::make($attribute->name)
                     ->listWithLineBreaks()
-                    ->state($variables->where('attribute_id', $attribute->getKey())->pluck('name'))
+                    ->state($variables->where('shelter_attribute_id', $attribute->getKey())->pluck('name'))
             )
             ->all();
 
