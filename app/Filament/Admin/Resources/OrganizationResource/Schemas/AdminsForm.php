@@ -32,7 +32,8 @@ class AdminsForm
                         ->label(__('app.field.phone'))
                         ->markAsRequired(),
                 ])
-                ->schema(static::getIndividualSchema()),
+                ->schema(static::getIndividualSchema())
+                ->addActionLabel(__('app.organization.steps.admins.add')),
         ];
     }
 

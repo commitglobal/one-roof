@@ -56,7 +56,6 @@ return [
         'legal_name' => 'Legal name',
         'legal_representative' => 'Legal representative',
         'location' => 'Location',
-        'location' => 'Location',
         'logo' => 'Logo',
         'max_length' => 'Maximum length',
         'max_value' => 'Maximum value',
@@ -207,8 +206,14 @@ return [
 
         'steps' => [
             'details' => 'Organization details',
-            'shelters' => 'Shelters',
-            'admins' => 'Admins',
+            'shelters' => [
+                'title'=> 'Shelters',
+                'add'=> 'Add another shelter',
+            ],
+            'admins' => [
+                'title'=> 'Admins',
+                'add'=> 'Add another administrator',
+            ],
         ],
 
         'actions' => [
@@ -371,8 +376,6 @@ return [
 
         'actions' => [
             'add' => 'Add request',
-            'accept' => 'Accept request',
-
             'accept' => [
                 'button' => 'Accept request',
                 'confirm' => [

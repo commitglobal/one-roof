@@ -28,10 +28,10 @@ class CreateOrganization extends CreateRecord
                 ->columns(2)
                 ->schema(OrganizationForm::getSchema()),
 
-            Step::make(__('app.organization.steps.shelters'))
+            Step::make(__('app.organization.steps.shelters.title'))
                 ->schema(SheltersForm::getSchema()),
 
-            Step::make(__('app.organization.steps.admins'))
+            Step::make(__('app.organization.steps.admins.title'))
                 ->schema(AdminsForm::getSchema()),
         ];
     }

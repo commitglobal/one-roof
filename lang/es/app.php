@@ -232,8 +232,14 @@ return [
         ],
         'steps' => [
             'details' => 'Detalles de la organización',
-            'admins' => 'Administradores',
-            'shelters' => 'Refugios',
+            'shelters' => [
+                'title'=> 'Refugios',
+                'add'=> 'Añade otro refugio'
+            ],
+            'admins' => [
+                'title'=> 'Administradores',
+                'add'=> 'Agregar otro administrador'
+            ],
         ],
         'actions' => [
             'activate' => [
@@ -322,7 +328,6 @@ return [
                 ],
             ],
             'add' => 'Agregar solicitud',
-            'accept' => 'Aceptar solicitud',
             'refer' => [
                 'button' => 'Solicitud de remisión',
                 'confirm' => [
