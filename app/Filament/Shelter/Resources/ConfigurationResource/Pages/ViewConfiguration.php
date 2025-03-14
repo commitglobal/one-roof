@@ -7,6 +7,7 @@ namespace App\Filament\Shelter\Resources\ConfigurationResource\Pages;
 use App\Filament\Concerns\DisablesBreadcrumbs;
 use App\Filament\Shelter\Resources\ConfigurationResource;
 use App\Filament\Shelter\Resources\ConfigurationResource\Concerns\HasConfigurationMount;
+use App\Models\Shelter\Attribute;
 use Filament\Infolists\Components\Actions\Action;
 use Filament\Infolists\Components\Fieldset;
 use Filament\Infolists\Components\Section;
@@ -14,7 +15,6 @@ use Filament\Infolists\Components\Tabs;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Pages\ViewRecord;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 class ViewConfiguration extends ViewRecord
@@ -94,14 +94,15 @@ class ViewConfiguration extends ViewRecord
 
     protected function getAttributesTab(): array
     {
-        $schema = $this->getRecord()
-            ->loadMissing('variables.attribute')
-            ->variables
-            ->groupBy('attribute.name')
+        $variables = $this->getRecord()->variables;
+
+        $schema = Attribute::query()
+            ->whereAttribute()
+            ->get()
             ->map(
-                fn (Collection $variables, string $name) => TextEntry::make($name)
+                fn (Attribute $attribute, int $index) => TextEntry::make($attribute->name)
                     ->listWithLineBreaks()
-                    ->default($variables->pluck('name'))
+                    ->state($variables->where('attribute_id', $attribute->getKey())->pluck('name'))
             )
             ->all();
 
@@ -115,7 +116,7 @@ class ViewConfiguration extends ViewRecord
                         ->color('gray')
                         ->outlined(),
                 ])
-                ->columns()
+                ->columns(3)
                 ->schema($schema),
         ];
     }
