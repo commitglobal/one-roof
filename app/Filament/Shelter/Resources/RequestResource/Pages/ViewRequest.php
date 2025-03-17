@@ -9,14 +9,17 @@ use App\Filament\Admin\Resources\RequestResource\Actions\MarkAsObsoleteAction;
 use App\Filament\Admin\Resources\RequestResource\Actions\MarkAsPendingAction;
 use App\Filament\Admin\Resources\RequestResource\Actions\RejectAction;
 use App\Filament\Concerns\UsesBreadcrumbFromTitle;
+use App\Filament\Concerns\UsesRecordTitle;
 use App\Filament\Shelter\Resources\RequestResource;
 use App\Filament\Shelter\Resources\RequestResource\Actions\AcceptAction;
+use App\Filament\Shelter\Resources\RequestResource\Actions\ReferAction;
 use Filament\Actions\ActionGroup;
 use Filament\Resources\Pages\ViewRecord;
 
 class ViewRequest extends ViewRecord
 {
-    use UsesBreadcrumbFromTitle;
+    // use UsesBreadcrumbFromTitle;
+    use UsesRecordTitle;
 
     protected static string $resource = RequestResource::class;
 
@@ -24,6 +27,7 @@ class ViewRequest extends ViewRecord
     {
         return [
             AcceptAction::make(),
+            ReferAction::make(),
 
             // TODO: figure out if we need different implementations for the shelter panel
             ActionGroup::make([

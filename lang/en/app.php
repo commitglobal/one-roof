@@ -393,9 +393,9 @@ return [
             'refer' => [
                 'button' => 'Refer request',
                 'confirm' => [
-                    'description' => 'Are you sure you want to refer this request?',
-                    'title' => 'Refer request',
-                    'success' => 'Request referred successfully.',
+                    'description' => 'Are you sure you want to refer this request to the ":shelter" shelter?',
+                    'title' => 'Refer request #:request',
+                    'success' => 'Request referred successfully to the ":shelter" shelter.',
                 ],
             ],
 

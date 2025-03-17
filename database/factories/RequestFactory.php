@@ -10,6 +10,7 @@ use App\Enums\Gender;
 use App\Enums\RequestStatus;
 use App\Enums\SpecialNeed;
 use App\Models\Country;
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Lottery;
 
@@ -26,6 +27,8 @@ class RequestFactory extends Factory
     public function definition(): array
     {
         $requestForOther = fake()->boolean();
+        $startDate = CarbonImmutable::createFromFormat('Y-m-d', fake()->date());
+        $endDate = $startDate->addDays(random_int(1, 30));
 
         return [
             'status' => fake()->randomElement(RequestStatus::values()),
@@ -63,8 +66,8 @@ class RequestFactory extends Factory
 
             'age' => fake()->numberBetween(0, 150),
 
-            'start_date' => fake()->dateTimeBetween('-1 year', '+1 year'),
-            'end_date' => fake()->dateTimeBetween('-1 year', '+1 year'),
+            'start_date' => $startDate,
+            'end_date' => $endDate,
 
             'special_needs' => Lottery::odds(1, 10)
                 ->winner(fn () => fake()->randomElements(SpecialNeed::values(), fake()->numberBetween(1, 3)))
