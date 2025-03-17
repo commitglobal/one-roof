@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Filament\Shelter\Widgets;
 
+use App\Filament\Shelter\Resources\RequestResource;
+use App\Models\Request;
 use Filament\Facades\Filament;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
@@ -57,7 +59,8 @@ class RequestsWidget extends BaseWidget
                 //
             ])
             ->actions([
-                ViewAction::make(),
+                ViewAction::make()
+                    ->url(fn (Request $record) => RequestResource::getUrl('view', ['record' => $record])),
             ])
             ->paginationPageOptions([10]);
     }
