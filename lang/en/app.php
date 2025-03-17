@@ -1,20 +1,14 @@
 <?php
-
-declare(strict_types=1);
-
 return [
-
     'navigation' => [
         'activity' => 'Activity',
         'configurations' => 'Configurations',
         'shelter_configuration' => 'Shelter configuration',
     ],
-
     'yes' => 'Yes',
     'no' => 'No',
     'submit' => 'Submit',
     'more_actions' => 'More actions',
-
     'field' => [
         'active' => 'Active',
         'address' => 'Address',
@@ -97,23 +91,19 @@ return [
         'variable_name' => 'Variable name',
         'variables' => 'Variables',
     ],
-
     'placeholder' => [
-        'create_beneficiary_search' => 'Start typing to search a beneficiary...',
+        'create_beneficiary_search' => 'Start typing to search for a beneficiary...',
     ],
-
     'field_help' => [
         'one_per_line' => 'Add one item per line.',
         'zero_to_disable' => 'To remove the limit, set this field to 0.',
         'create_beneficiary_search' => 'If this beneficiary has previously stayed with you, or if the beneficiary has stayed in a different shelter in the system, search for their name or ID in the field above to retrieve personal data. If this is a new beneficiary, check the box below and move on to the next step.',
     ],
-
     'beneficiary' => [
         'label' => [
             'singular' => 'beneficiary',
             'plural' => 'beneficiaries',
         ],
-
         'steps' => [
             'consent' => 'Consent',
             'identification' => 'Identification',
@@ -121,13 +111,11 @@ return [
             'stay' => 'Stay',
         ],
     ],
-
     'stay' => [
         'label' => [
             'singular' => 'stay',
             'plural' => 'stays',
         ],
-
         'details' => 'Stay details',
     ],
     'country' => [
@@ -136,31 +124,26 @@ return [
             'plural' => 'countries',
         ],
     ],
-
     'location' => [
         'label' => [
             'singular' => 'location',
             'plural' => 'locations',
         ],
     ],
-
     'form' => [
         'label' => [
             'singular' => 'form',
             'plural' => 'forms',
         ],
-
         'type' => [
             'personal' => 'Personal details',
             'request' => 'Request form',
         ],
-
         'status' => [
             'draft' => 'Draft',
             'published' => 'Published',
             'obsolete' => 'Obsolete',
         ],
-
         'actions' => [
             'draft' => [
                 'button' => 'Draft',
@@ -188,7 +171,6 @@ return [
             ],
         ],
     ],
-
     'form_field' => [
         'checkbox' => 'Checkbox',
         'date' => 'Date',
@@ -200,25 +182,21 @@ return [
         'textarea' => 'Textarea',
         'url' => 'URL',
     ],
-
     'organization' => [
         'label' => [
             'singular' => 'organization',
             'plural' => 'organizations',
         ],
-
         'type' => [
             'ingo' => 'INGO',
             'ngo' => 'NGO',
             'public' => 'Public institution',
         ],
-
         'steps' => [
             'details' => 'Organization details',
             'shelters' => 'Shelters',
             'admins' => 'Admins',
         ],
-
         'actions' => [
             'activate' => [
                 'button' => 'Activate',
@@ -238,22 +216,18 @@ return [
             ],
         ],
     ],
-
     'shelter' => [
         'label' => [
             'singular' => 'shelter',
             'plural' => 'shelters',
         ],
-
         'profile' => 'Profile',
     ],
-
     'user' => [
         'label' => [
             'singular' => 'user',
             'plural' => 'users',
         ],
-
         'role' => [
             'super_admin' => 'Super admin',
             'super_user' => 'Super user',
@@ -261,31 +235,26 @@ return [
             'shelter_user' => 'Shelter user',
         ],
     ],
-
     'language' => [
         'label' => [
             'singular' => 'language',
             'plural' => 'languages',
         ],
-
         'actions' => [
             'select' => 'Select language',
         ],
     ],
-
     'status' => [
         'active' => 'Active',
         'inactive' => 'Inactive',
         'pending' => 'Pending',
     ],
-
     'gender' => [
         'male' => 'Male',
         'female' => 'Female',
         'nonbinary' => 'Non-binary',
         'other' => 'Prefer not to say',
     ],
-
     'id_type' => [
         'passport' => 'Passport',
         'national_id_card' => 'National ID Card',
@@ -294,19 +263,16 @@ return [
         'other' => 'Other',
         'none' => 'None',
     ],
-
     'documents' => [
         'label' => [
             'singular' => 'document',
             'plural' => 'documents',
         ],
-
         'actions' => [
             'delete' => 'Delete document',
             'edit' => 'Edit details',
             'download' => 'Download',
         ],
-
         'type' => [
             'passport' => 'Passport',
             'national_id_card' => 'National ID card',
@@ -332,7 +298,6 @@ return [
             'referral_letters' => 'Referral letters from other shelters or organizations',
             'other' => 'Other',
         ],
-
         'empty_state' => [
             'no_file' => [
                 'header' => 'No document uploaded',
@@ -342,10 +307,8 @@ return [
                 'header' => 'This document type does not allow previews',
                 'description' => 'Download the document to view it.',
             ],
-
         ],
     ],
-
     'stats' => [
         'overview' => [
             'available_places' => 'Total available places',
@@ -355,13 +318,11 @@ return [
             'shelters' => 'Total shelters',
         ],
     ],
-
     'request' => [
         'label' => [
             'singular' => 'request',
             'plural' => 'requests',
         ],
-
         'status' => [
             'new' => 'New',
             'referred' => 'Referred',
@@ -371,16 +332,13 @@ return [
             'obsolete' => 'Obsolete',
             'duplicate' => 'Duplicate',
         ],
-
         'sent' => [
             'title' => 'Request submitted successfully.',
             'message' => 'Your request has been submitted successfully.',
         ],
-
         'actions' => [
             'add' => 'Add request',
             'accept' => 'Accept request',
-
             'accept' => [
                 'button' => 'Accept request',
                 'confirm' => [
@@ -389,7 +347,6 @@ return [
                     'success' => 'Request accepted successfully.',
                 ],
             ],
-
             'refer' => [
                 'button' => 'Refer request',
                 'confirm' => [
@@ -398,7 +355,6 @@ return [
                     'success' => 'Request referred successfully to the ":shelter" shelter.',
                 ],
             ],
-
             'reject' => [
                 'button' => 'Reject request',
                 'confirm' => [
@@ -407,7 +363,6 @@ return [
                     'success' => 'Request rejected successfully.',
                 ],
             ],
-
             'pending' => [
                 'button' => 'Mark as pending',
                 'confirm' => [
@@ -416,7 +371,6 @@ return [
                     'success' => 'Request marked as pending successfully.',
                 ],
             ],
-
             'obsolete' => [
                 'button' => 'Mark as obsolete',
                 'confirm' => [
@@ -425,7 +379,6 @@ return [
                     'success' => 'Request marked as obsolete successfully.',
                 ],
             ],
-
             'duplicate' => [
                 'button' => 'Mark as duplicate',
                 'confirm' => [
@@ -434,7 +387,6 @@ return [
                     'success' => 'Request marked as duplicate successfully.',
                 ],
             ],
-
             'delete' => [
                 'button' => 'Delete request',
                 'confirm' => [
@@ -445,31 +397,26 @@ return [
             ],
         ],
     ],
-
     'special_needs' => [
         'disabilities' => 'Disabilities',
         'chronic_illness' => 'Chronic illness',
         'paliative_care' => 'Paliative care needs',
         'other' => 'Other',
     ],
-
     'attribute' => [
         'label' => [
             'singular' => 'attribute',
             'plural' => 'attributes',
         ],
-
         'type' => [
             'attribute' => 'Attributes',
             'facility' => 'Facilities',
             'service' => 'Services',
         ],
-
         'actions' => [
             'add' => 'Add attribute',
             'edit' => 'Edit attribute',
             'delete' => 'Delete attribute',
-
             'activate' => [
                 'button' => 'Activate',
                 'confirm' => [
