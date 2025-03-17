@@ -12,12 +12,16 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class RequestResource extends Resource
 {
     protected static ?string $model = Request::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-inbox';
+
+    protected static ?string $recordTitleAttribute = 'id';
 
     public static function getNavigationGroup(): ?string
     {
@@ -32,6 +36,15 @@ class RequestResource extends Resource
     public static function getPluralModelLabel(): string
     {
         return __('app.request.label.plural');
+    }
+
+    public static function getRecordTitle(?Model $record): string
+    {
+        return \sprintf(
+            '%s #%s',
+            Str::ucfirst(__('app.request.label.singular')),
+            $record->id
+        );
     }
 
     public static function infolist(Infolist $infolist): Infolist
@@ -96,6 +109,7 @@ class RequestResource extends Resource
         return [
             'index' => Pages\ListRequests::route('/'),
             'view' => Pages\ViewRequest::route('/{record}'),
+            'refer' => Pages\ReferRequest::route('/{record}/refer'),
         ];
     }
 }

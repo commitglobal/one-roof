@@ -9,6 +9,7 @@ use App\Concerns\LogsActivity;
 use App\Data\GroupMemberData;
 use App\Data\PersonData;
 use App\Enums\Gender;
+use App\Enums\RequestStatus;
 use App\Enums\SpecialNeed;
 use Database\Factories\RequestFactory;
 use Illuminate\Database\Eloquent\Casts\AsEnumCollection;
@@ -78,5 +79,23 @@ class Request extends Model
     public function shelter(): BelongsTo
     {
         return $this->belongsTo(Shelter::class);
+    }
+
+    public function referToShelter(Shelter $shelter, ?string $notes = null): void
+    {
+        activity()->withoutLogs(
+            fn () => $this->update([
+                'status' => RequestStatus::REFERRED,
+                'shelter_id' => $shelter->id,
+            ])
+        );
+
+        activity()
+            ->performedOn($this)
+            ->withProperties([
+                'shelter' => $shelter->id,
+            ])
+            ->event('referred')
+            ->log($notes ?: 'referred');
     }
 }
