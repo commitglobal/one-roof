@@ -2,12 +2,12 @@
 return [
     'merge' => [
         'single' => [
-            'label' => 'Fusionar',
+            'label' => 'Combinar',
             'modal' => [
-                'heading' => 'Fusionar :label',
+                'heading' => 'Combinar: etiqueta',
                 'actions' => [
                     'merge' => [
-                        'label' => 'Fusionar',
+                        'label' => 'Combinar',
                     ],
                 ],
             ],
@@ -18,12 +18,12 @@ return [
             ],
         ],
         'multiple' => [
-            'label' => 'Fusionar seleccionados',
+            'label' => 'Combinar seleccionados',
             'modal' => [
-                'heading' => 'Fusionar seleccionados :label',
+                'heading' => 'Combinación seleccionada:etiqueta',
                 'actions' => [
                     'merge' => [
-                        'label' => 'Fusionar',
+                        'label' => 'Combinar',
                     ],
                 ],
             ],
