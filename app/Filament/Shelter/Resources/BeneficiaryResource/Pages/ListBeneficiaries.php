@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Filament\Shelter\Resources\BeneficiaryResource\Pages;
 
 use App\Filament\Concerns\DisablesBreadcrumbs;
-use App\Filament\Shelter\Resources\BeneficiariesResource\Widgets\BeneficiariesStatsWidget;
 use App\Filament\Shelter\Resources\BeneficiaryResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
@@ -26,7 +25,7 @@ class ListBeneficiaries extends ListRecords
     protected function getHeaderWidgets(): array
     {
         return [
-            BeneficiariesStatsWidget::class,
+            BeneficiaryResource\Widgets\BeneficiariesStatsWidget::class,
         ];
     }
 }
