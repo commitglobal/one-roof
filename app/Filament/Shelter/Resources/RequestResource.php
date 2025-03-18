@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Shelter\Resources;
 
+use App\Enums\RequestStatus;
 use App\Filament\Shelter\Resources\RequestResource\Pages;
 use App\Filament\Shelter\Resources\RequestResource\Schemas\RequestInfolist;
 use App\Models\Request;
@@ -11,6 +12,8 @@ use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Enums\FiltersLayout;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -90,8 +93,10 @@ class RequestResource extends Resource
                     ->badge(),
             ])
             ->filters([
-                //
-            ])
+                SelectFilter::make('status')
+                    ->label(__('app.field.status'))
+                    ->options(RequestStatus::options()),
+            ], FiltersLayout::AboveContent)
             ->actions([
                 Tables\Actions\ViewAction::make(),
             ]);

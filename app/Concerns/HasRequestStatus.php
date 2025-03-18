@@ -35,6 +35,11 @@ trait HasRequestStatus
         return $query->where('status', RequestStatus::REFERRED);
     }
 
+    public function scopeWhereNewOrReferred(Builder $query): Builder
+    {
+        return $query->whereIn('status', [RequestStatus::NEW, RequestStatus::REFERRED]);
+    }
+
     public function scopeWherePending(Builder $query): Builder
     {
         return $query->where('status', RequestStatus::PENDING);
