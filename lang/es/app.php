@@ -275,8 +275,8 @@ return [
         'pending' => 'Pendiente',
     ],
     'gender' => [
-        'male' => 'Masculino',
-        'female' => 'Mujer',
+        'man' => 'Masculino',
+        'woman' => 'Mujer',
         'nonbinary' => 'No binario',
         'other' => 'Prefiero no decirlo',
     ],
