@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Filament\Shelter\Resources\BeneficiariesResource\Widgets;
+namespace App\Filament\Shelter\Resources\BeneficiaryResource\Widgets;
 
 use App\Models\Stay;
 use Filament\Facades\Filament;
