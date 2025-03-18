@@ -6,7 +6,6 @@ namespace App\Filament\Shelter\Resources\BeneficiaryResource\Pages;
 
 use App\Filament\Concerns\UsesBreadcrumbFromTitle;
 use App\Filament\Shelter\Resources\BeneficiaryResource;
-use App\Filament\Shelter\Resources\BeneficiaryResource\Schemas\StayInfolist;
 use App\Models\Stay;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Pages\ViewRecord;
@@ -23,7 +22,8 @@ class ViewStay extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            //
+            BeneficiaryResource\Actions\ExtendStayAction::make()
+                ->record($this->stay),
         ];
     }
 
@@ -49,6 +49,6 @@ class ViewStay extends ViewRecord
     {
         return $infolist
             ->record($this->stay)
-            ->schema(StayInfolist::getSchema());
+            ->schema(BeneficiaryResource\Schemas\StayInfolist::getSchema());
     }
 }
