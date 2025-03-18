@@ -42,6 +42,7 @@ class Request extends Model
         'special_needs_notes',
         'notes',
         'reason_rejected',
+        'referral_notes',
     ];
 
     protected function casts(): array
@@ -83,19 +84,27 @@ class Request extends Model
 
     public function referToShelter(Shelter $shelter, ?string $notes = null): void
     {
-        activity()->withoutLogs(
-            fn () => $this->update([
-                'status' => RequestStatus::REFERRED,
-                'shelter_id' => $shelter->id,
-            ])
-        );
+        $this->update([
+            'status' => RequestStatus::REFERRED,
+            'shelter_id' => $shelter->id,
+            'referral_notes' => $notes,
+        ]);
+    }
 
-        activity()
-            ->performedOn($this)
-            ->withProperties([
-                'shelter' => $shelter->id,
-            ])
-            ->event('referred')
-            ->log($notes ?: 'referred');
+    public function tapActivity(Activity $activity, string $event): void
+    {
+        if ($event !== 'updated') {
+            return;
+        }
+
+        $attributes = data_get($activity, 'changes.attributes', []);
+        $status = data_get($attributes, 'status', $this->status);
+
+        if (RequestStatus::REFERRED->isNot($status)) {
+            return;
+        }
+
+        $activity->event = 'referred';
+        $activity->description = 'referred';
     }
 }
