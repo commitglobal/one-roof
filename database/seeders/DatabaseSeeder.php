@@ -8,6 +8,7 @@ namespace Database\Seeders;
 
 use App\Models\Beneficiary;
 use App\Models\Form;
+use App\Models\Language;
 use App\Models\Location;
 use App\Models\Organization;
 use App\Models\Request;
@@ -24,6 +25,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         Mail::fake();
+
+        Language::create(['code' => 'es', 'enabled' => true]);
 
         User::factory(['email' => 'superadmin@example.com'])
             ->superAdmin()
