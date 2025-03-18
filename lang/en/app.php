@@ -118,6 +118,16 @@ return [
             'plural' => 'stays',
         ],
         'details' => 'Stay details',
+        'actions' => [
+            'extend' => [
+                'button' => 'Extend stay',
+                'confirm' => [
+                    'description' => 'Extend a beneficiary\'s stay by updating the end date.',
+                    'title' => 'Extend stay #:stay :start_date—:end_date',
+                    'success' => 'Stay extended successfully.',
+                ],
+            ],
+        ],
     ],
     'country' => [
         'label' => [
