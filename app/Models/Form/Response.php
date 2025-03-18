@@ -26,4 +26,11 @@ class Response extends Model
     {
         return $this->hasMany(FieldResponse::class);
     }
+
+    public function render(): array
+    {
+        return $this->form
+            ->sections->map->render()
+            ->all();
+    }
 }

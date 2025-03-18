@@ -53,6 +53,8 @@ class BeneficiaryResource extends Resource
                 Forms\Components\Section::make()
                     ->columns(2)
                     ->schema(BeneficiaryForm::getSchema()),
+
+                ...($form->getRecord()?->latestPersonal?->render() ?? []),
             ]);
     }
 
