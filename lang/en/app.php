@@ -251,8 +251,10 @@ return [
         'pending' => 'Pending',
     ],
     'gender' => [
-        'male' => 'Male',
-        'female' => 'Female',
+        'man' => 'Man',
+        'woman' => 'Woman',
+        'trans_man' => 'Transgender man',
+        'trans_woman' => 'Transgender woman',
         'nonbinary' => 'Non-binary',
         'other' => 'Prefer not to say',
     ],
