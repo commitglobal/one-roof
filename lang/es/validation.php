@@ -37,7 +37,7 @@ return [
     'doesnt_end_with' => 'El campo :attribute no debe finalizar con uno de los siguientes: :values.',
     'doesnt_start_with' => 'El campo :attribute no debe comenzar con uno de los siguientes: :values.',
     'email' => 'El campo :attribute no es un correo válido.',
-    'ends_with' => 'El campo :attribute debe finalizar con uno de los siguientes valores: :values',
+    'ends_with' => 'El campo :attribute debe finalizar con uno de los siguientes valores: :values.',
     'enum' => 'El campo :attribute no está en la lista de valores permitidos.',
     'exists' => 'El campo :attribute no existe.',
     'extensions' => 'El campo :attribute debe tener una de las siguientes extensiones: :values.',
@@ -138,7 +138,7 @@ return [
         'numeric' => 'El tamaño de :attribute debe ser :size.',
         'string' => 'El campo :attribute debe contener :size caracteres.',
     ],
-    'starts_with' => 'El campo :attribute debe comenzar con uno de los siguientes valores: :values',
+    'starts_with' => 'El campo :attribute debe comenzar con uno de los siguientes valores: :values.',
     'string' => 'El campo :attribute debe ser una cadena de caracteres.',
     'timezone' => 'El campo :attribute debe ser una zona horaria válida.',
     'ulid' => 'El campo :attribute debe ser un ULID válido.',
@@ -159,7 +159,7 @@ return [
     | specify a specific custom language line for a given attribute rule.
     |
     */
-            'rule-name' => 'mensaje-personalizado',
+            'rule-name' => 'mensaje personalizado',
         ],
     ],
 ];

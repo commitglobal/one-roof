@@ -48,7 +48,7 @@ return [
         'requester' => 'Solicitante',
         'required' => 'Necesario',
         'section_name' => 'Nombre de la sección',
-        'sections' => 'Secciónes',
+        'sections' => 'Secciones',
         'shelter_coordinator' => 'Coordinadora de refugios',
         'shelter' => 'Refugio',
         'shelters' => 'Refugios',
@@ -68,13 +68,18 @@ return [
         'upload_document' => 'Cargar documento',
         'age' => 'Edad',
         'beneficiary' => 'Beneficiario',
-        'address' => 'Dirrectión',
-        'admins' => 'Administradores',
+        'address' => 'Dirección',
+        'admins' => 'Administrador',
         'special_needs' => 'Necesidades especiales',
         'create_beneficiary_consent' => 'Confirmo que he obtenido el consentimiento de la persona y autorizo la recopilación y el procesamiento de sus datos personales de acuerdo con la Política de privacidad. Los datos se utilizarán únicamente para proporcionar refugio y servicios de apoyo, garantizar la seguridad y cumplir con los requisitos legales.',
         'create_beneficiary_search' => 'Búsqueda de un beneficiario existente',
         'created_at' => 'Creado en',
         'date_of_birth' => 'Fecha de nacimiento',
+        'active' => 'Activo',
+        'order' => 'Orden',
+        'usage' => 'Uso',
+        'variable_name' => 'Nombre de variable',
+        'variables' => 'Variables',
     ],
     'form' => [
         'label' => [
@@ -181,6 +186,7 @@ return [
             'shelters' => 'Total de refugios',
             'beneficiaries' => 'Total de beneficiarios acogidos',
             'beneficiaries_in_shelter' => 'Total de beneficiarios en el refugio',
+            'available_places' => 'Total de plazas disponibles',
         ],
     ],
     'placeholder' => [
@@ -205,7 +211,7 @@ return [
     ],
     'location' => [
         'label' => [
-            'plural' => 'ubicaciónes',
+            'plural' => 'ubicaciones',
             'singular' => 'ubicación',
         ],
     ],
@@ -356,13 +362,18 @@ return [
                 ],
             ],
         ],
+        'sent' => [
+            'title' => 'La solicitud se ha enviado correctamente.',
+            'message' => 'Su solicitud se ha enviado correctamente.',
+        ],
     ],
     'submit' => 'Enviar',
     'navigation' => [
         'activity' => 'Actividad',
         'configurations' => 'Configuraciones',
+        'shelter_configuration' => 'Configuración del refugio',
     ],
-    'yes' => 'Si',
+    'yes' => 'Sí',
     'no' => 'No',
     'more_actions' => 'Más acciones',
     'country' => [
@@ -376,5 +387,51 @@ return [
         'chronic_illness' => 'Enfermedad crónica',
         'paliative_care' => 'Necesidades de cuidados paliativos',
         'other' => 'Otros',
+    ],
+    'shelter' => [
+        'label' => [
+            'singular' => 'albergue',
+            'plural' => 'albergues',
+        ],
+        'profile' => 'Perfil',
+    ],
+    'attribute' => [
+        'actions' => [
+            'deactivate' => [
+                'button' => 'Desactivar',
+                'confirm' => [
+                    'title' => 'Desactivar atributo',
+                    'success' => 'El atributo se ha desactivado correctamente.',
+                    'description' => '¿Está seguro de que desea desactivar este atributo?',
+                ],
+            ],
+            'activate' => [
+                'button' => 'Activar',
+                'confirm' => [
+                    'description' => '¿Está seguro de que desea activar este atributo?',
+                    'title' => 'Activar atributo',
+                    'success' => 'El atributo se activó correctamente.',
+                ],
+            ],
+            'delete' => 'Eliminar atributo',
+            'add' => 'Añadir atributo',
+            'edit' => 'Editar atributo',
+        ],
+        'type' => [
+            'attribute' => 'Atributos',
+            'facility' => 'Instalaciones',
+            'service' => 'Servicios',
+        ],
+        'label' => [
+            'singular' => 'atributo',
+            'plural' => 'atributos',
+        ],
+    ],
+    'stay' => [
+        'label' => [
+            'plural' => 'estancias',
+            'singular' => 'estancia',
+        ],
+        'details' => 'Detalles de la estancia',
     ],
 ];
