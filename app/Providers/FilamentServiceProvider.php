@@ -11,6 +11,7 @@ use Filament\Facades\Filament;
 use Filament\Forms;
 use Filament\Forms\Components\Tabs;
 use Filament\Infolists;
+use Filament\Navigation\NavigationItem;
 use Filament\Pages\Page;
 use Filament\Resources\Pages\CreateRecord;
 use Filament\Support\Colors\Color;
@@ -57,6 +58,14 @@ class FilamentServiceProvider extends ServiceProvider
         Filament::registerNavigationGroups([
             __('app.navigation.activity'),
             __('app.navigation.configurations'),
+        ]);
+
+        Filament::registerNavigationItems([
+            NavigationItem::make(__('app.navigation.manual'))
+                ->icon('heroicon-o-bookmark-square')
+                ->url('https://www.untecho.mx/es/manual', true)
+                ->group(__('app.navigation.configurations'))
+                ->sort(9999),
         ]);
 
         FilamentColor::register([

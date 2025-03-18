@@ -21,7 +21,7 @@ class RequestsWidget extends BaseWidget
     public function table(Table $table): Table
     {
         return $table
-            ->query(fn () => Filament::getTenant()->requests())
+            ->query(fn () => Filament::getTenant()->requests()->whereNewOrReferred())
             ->columns([
                 TextColumn::make('id')
                     ->label(__('app.field.id'))

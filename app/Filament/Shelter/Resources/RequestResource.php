@@ -8,6 +8,7 @@ use App\Enums\RequestStatus;
 use App\Filament\Shelter\Resources\RequestResource\Pages;
 use App\Filament\Shelter\Resources\RequestResource\Schemas\RequestInfolist;
 use App\Models\Request;
+use Filament\Facades\Filament;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -16,6 +17,7 @@ use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 
 class RequestResource extends Resource
@@ -39,6 +41,25 @@ class RequestResource extends Resource
     public static function getPluralModelLabel(): string
     {
         return __('app.request.label.plural');
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        $shelterId = Filament::getTenant()->getKey();
+
+        return Cache::remember(
+            "shelter_{$shelterId}_requests_count",
+            now()->addMinutes(5),
+            fn () => (string) static::getModel()::query()
+                ->whereNewOrReferred()
+                ->where('shelter_id', $shelterId)
+                ->count()
+        );
+    }
+
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return 'warning';
     }
 
     public static function getRecordTitle(?Model $record): string

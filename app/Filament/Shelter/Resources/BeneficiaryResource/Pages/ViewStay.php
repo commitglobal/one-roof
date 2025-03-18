@@ -23,7 +23,7 @@ class ViewStay extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-
+            //
         ];
     }
 

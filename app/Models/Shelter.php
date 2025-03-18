@@ -8,6 +8,7 @@ use App\Concerns\BelongsToOrganization;
 use App\Concerns\LogsActivity;
 use App\Data\PersonData;
 use Database\Factories\ShelterFactory;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -72,5 +73,14 @@ class Shelter extends Model
     public function shelterVariables(): BelongsToMany
     {
         return $this->belongsToMany(ShelterVariable::class);
+    }
+
+    public function availableCapacity(): Attribute
+    {
+        return Attribute::make(
+            fn (mixed $value, array $attributes) => $attributes['capacity'] - $this->stays()
+                ->whereDate('end_date', '>', today())
+                ->count(),
+        );
     }
 }

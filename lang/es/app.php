@@ -372,6 +372,7 @@ return [
         'activity' => 'Actividad',
         'configurations' => 'Configuraciones',
         'shelter_configuration' => 'Configuración del refugio',
+        'manual' => 'Manual',
     ],
     'yes' => 'Sí',
     'no' => 'No',

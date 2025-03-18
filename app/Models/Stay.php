@@ -7,6 +7,7 @@ namespace App\Models;
 use App\Concerns\BelongsToShelter;
 use App\Concerns\LogsActivity;
 use Database\Factories\StayFactory;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -46,6 +47,18 @@ class Stay extends Model
     public function request(): BelongsTo
     {
         return $this->belongsTo(Request::class);
+    }
+
+    public function scopeWhereCurrent(Builder $query): Builder
+    {
+        return $query
+            ->whereDate('start_date', '<=', today())
+            ->whereDate('end_date', '>=', today());
+    }
+
+    public function scopeWhereInShelter(Builder $query, Shelter $shelter): Builder
+    {
+        return $query->where('shelter_id', $shelter->id);
     }
 
     public function hasChildren(): Attribute

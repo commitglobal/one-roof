@@ -4,6 +4,7 @@ return [
         'activity' => 'Activity',
         'configurations' => 'Configurations',
         'shelter_configuration' => 'Shelter configuration',
+        'manual' => 'Manual',
     ],
     'yes' => 'Yes',
     'no' => 'No',
