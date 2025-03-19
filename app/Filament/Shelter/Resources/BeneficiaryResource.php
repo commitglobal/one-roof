@@ -6,6 +6,7 @@ namespace App\Filament\Shelter\Resources;
 
 use App\Enums\Gender;
 use App\Filament\Shelter\Resources\BeneficiaryResource\Pages;
+use App\Filament\Shelter\Resources\BeneficiaryResource\Schemas\BeneficiaryDynamicForm;
 use App\Filament\Shelter\Resources\BeneficiaryResource\Schemas\BeneficiaryDynamicInfolist;
 use App\Filament\Shelter\Resources\BeneficiaryResource\Schemas\BeneficiaryForm;
 use App\Filament\Shelter\Resources\BeneficiaryResource\Schemas\BeneficiaryInfolist;
@@ -57,6 +58,8 @@ class BeneficiaryResource extends Resource
                 Forms\Components\Section::make()
                     ->columns(2)
                     ->schema(BeneficiaryForm::getSchema()),
+
+                ...BeneficiaryDynamicForm::getSchema(),
             ]);
     }
 
