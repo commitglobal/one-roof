@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Filament\Shelter\Resources\RequestResource\Schemas;
 
+use App\Infolists\Components\Notice;
 use App\Infolists\Components\TableRepeatableEntry;
 use App\Models\Request;
+use App\Models\Shelter;
 use Filament\Infolists\Components\Grid;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
@@ -18,6 +20,25 @@ class RequestInfolist
             Section::make()
                 ->columns(3)
                 ->schema([
+                    Notice::make('referral_notice')
+                        ->icon('heroicon-s-information-circle')
+                        ->visible(fn (Request $record) => $record->isReferred())
+                        ->color('success')
+                        ->state(function (Request $record) {
+                            $event = $record->activities()
+                                ->where('event', 'referred')
+                                ->first();
+
+                            $shelter = Shelter::find(data_get($event, 'changes.old.shelter_id'));
+
+                            return __('app.request.referred_by', ['name' => $shelter->name]);
+                        }),
+
+                    TextEntry::make('referral_notes')
+                        ->label(__('app.field.referral_notes'))
+                        ->visible(fn (Request $record) => $record->isReferred())
+                        ->columnSpanFull(),
+
                     TextEntry::make('status')
                         ->label(__('app.field.status'))
                         ->badge(),
@@ -41,6 +62,7 @@ class RequestInfolist
                     TextEntry::make('reason_rejected')
                         ->label(__('app.field.reason_rejected'))
                         ->visible(fn (Request $record) => $record->isRejected()),
+
                 ]),
 
             Grid::make()
