@@ -339,6 +339,11 @@ return [
             'organizations' => 'Total organizations',
             'shelters' => 'Total shelters',
         ],
+        'beneficiaries' => [
+            'nationalities' => 'Total beneficiaries per nationality',
+            'residencies' => 'Total beneficiaries per country of residence',
+            'genders' => 'Total beneficiaries per gender',
+        ],
     ],
     'request' => [
         'label' => [
