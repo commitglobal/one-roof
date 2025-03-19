@@ -7,6 +7,7 @@ namespace App\Filament\Shelter\Resources\BeneficiaryResource\Schemas;
 use App\Enums\Form\FieldType;
 use App\Models\Form\Field;
 use App\Models\Form\Response;
+use Carbon\Carbon;
 use Filament\Infolists\Components\Group;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
@@ -35,8 +36,8 @@ class BeneficiaryDynamicInfolist
                                 ->description($section->description)
                                 ->columns(3)
                                 ->collapsible()
-                                ->schema(function () use ($section, &$fieldIndex) {
-                                    return $section->fields->map(function (Field $field) use (&$fieldIndex) {
+                                ->schema(
+                                    $section->fields->map(function (Field $field) use (&$fieldIndex) {
                                         $component = TextEntry::make("fields.{$fieldIndex}.value")
                                             ->label($field->label);
 
@@ -54,13 +55,15 @@ class BeneficiaryDynamicInfolist
                                                 break;
 
                                             case FieldType::DATE:
-                                                $component->date();
+                                                $component->formatStateUsing(function ($state) {
+                                                    return rescue(fn () => Carbon::parse($state)->toFormattedDate(), $state, false);
+                                                });
                                                 break;
                                         }
 
                                         return $component;
-                                    })->all();
-                                });
+                                    })->all()
+                                );
                         })->all();
                 }),
         ];

@@ -7,6 +7,7 @@ namespace App\Filament\Shelter\Resources\BeneficiaryResource\Pages;
 use App\Enums\Form\Type;
 use App\Filament\Concerns\UsesBreadcrumbFromTitle;
 use App\Filament\Shelter\Resources\BeneficiaryResource;
+use App\Filament\Shelter\Resources\BeneficiaryResource\Schemas\BeneficiaryDynamicForm;
 use App\Filament\Shelter\Resources\BeneficiaryResource\Schemas\BeneficiaryForm;
 use App\Filament\Shelter\Resources\BeneficiaryResource\Schemas\StayForm;
 use App\Models\Beneficiary;
@@ -65,7 +66,7 @@ class CreateBeneficiary extends CreateRecord
                     Grid::make(3)
                         ->schema(BeneficiaryForm::getSchema()),
 
-                    ...Form::render(Type::PERSONAL),
+                    ...BeneficiaryDynamicForm::getSchema(),
                 ]),
 
             Step::make(__('app.beneficiary.steps.stay'))

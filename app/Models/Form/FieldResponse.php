@@ -14,6 +14,7 @@ class FieldResponse extends Model
     protected $table = 'form_field_responses';
 
     protected $fillable = [
+        'response_id',
         'field_id',
         'value',
     ];
