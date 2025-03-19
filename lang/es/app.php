@@ -190,7 +190,7 @@ return [
         ],
     ],
     'placeholder' => [
-        'create_beneficiary_search' => 'Empieza a escribir para buscar un beneficiario...',
+        'create_beneficiary_search' => 'Empieza a escribir para buscar un beneficiario…',
     ],
     'field_help' => [
         'one_per_line' => 'Añadir un artículo por renglón.',
@@ -332,9 +332,9 @@ return [
             'refer' => [
                 'button' => 'Solicitud de remisión',
                 'confirm' => [
-                    'description' => '¿Está seguro de que desea remitir esta solicitud?',
-                    'title' => 'Solicitud de remisión',
-                    'success' => 'La solicitud se remitió correctamente.',
+                    'description' => '¿Está seguro de que desea remitir esta solicitud al refugio «:shelter»?',
+                    'title' => 'Referir número de solicitud: solicitud',
+                    'success' => 'La solicitud se remitió correctamente al refugio «:shelter».',
                 ],
             ],
             'reject' => [

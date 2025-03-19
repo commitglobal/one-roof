@@ -97,7 +97,7 @@ return [
         'variables' => 'Variables',
     ],
     'placeholder' => [
-        'create_beneficiary_search' => 'Start typing to search for a beneficiary...',
+        'create_beneficiary_search' => 'Start typing to search for a beneficiary…',
     ],
     'field_help' => [
         'one_per_line' => 'Add one item per line.',
