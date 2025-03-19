@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 return [
     'navigation' => [
         'activity' => 'Activity',
@@ -69,6 +72,7 @@ return [
         'phone' => 'Phone',
         'photo' => 'Photo',
         'reason_rejected' => 'Reason rejected',
+        'referral_notes' => 'Referral notes',
         'request_group' => 'Request for a group',
         'request_shelter' => 'Where do you seek accommodation?',
         'request_somebody_else' => 'Request for somebody else',
@@ -345,6 +349,7 @@ return [
             'obsolete' => 'Obsolete',
             'duplicate' => 'Duplicate',
         ],
+        'referred_by' => 'This request was referred by :name.',
         'sent' => [
             'title' => 'Request submitted successfully.',
             'message' => 'Your request has been submitted successfully.',
