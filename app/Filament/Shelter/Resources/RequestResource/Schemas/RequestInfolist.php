@@ -22,7 +22,7 @@ class RequestInfolist
                 ->schema([
                     Notice::make('referral_notice')
                         ->icon('heroicon-s-information-circle')
-                        ->visible(fn (Request $record) => $record->isReferred())
+                        ->visible(fn (Request $record, mixed $state) => $record->isReferred() && filled($state))
                         ->color('success')
                         ->state(function (Request $record) {
                             $event = $record->activities()
@@ -30,6 +30,10 @@ class RequestInfolist
                                 ->first();
 
                             $shelter = Shelter::find(data_get($event, 'changes.old.shelter_id'));
+
+                            if (blank($shelter)) {
+                                return null;
+                            }
 
                             return __('app.request.referred_by', ['name' => $shelter->name]);
                         }),
