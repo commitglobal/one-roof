@@ -190,7 +190,7 @@ return [
         ],
     ],
     'placeholder' => [
-        'create_beneficiary_search' => 'Empieza a escribir para buscar un beneficiario...',
+        'create_beneficiary_search' => 'Empieza a escribir para buscar un beneficiario…',
     ],
     'field_help' => [
         'one_per_line' => 'Añadir un artículo por renglón.',
@@ -279,6 +279,8 @@ return [
         'woman' => 'Mujer',
         'nonbinary' => 'No binario',
         'other' => 'Prefiero no decirlo',
+        'trans_man' => 'Hombre transgénero',
+        'trans_woman' => 'Mujer transgénero',
     ],
     'id_type' => [
         'passport' => 'Pasaporte',
@@ -332,9 +334,9 @@ return [
             'refer' => [
                 'button' => 'Solicitud de remisión',
                 'confirm' => [
-                    'description' => '¿Está seguro de que desea remitir esta solicitud?',
-                    'title' => 'Solicitud de remisión',
-                    'success' => 'La solicitud se remitió correctamente.',
+                    'description' => '¿Está seguro de que desea remitir esta solicitud al refugio «:shelter»?',
+                    'title' => 'Referir número de solicitud: solicitud',
+                    'success' => 'La solicitud se remitió correctamente al refugio «:shelter».',
                 ],
             ],
             'reject' => [
@@ -434,5 +436,15 @@ return [
             'singular' => 'estancia',
         ],
         'details' => 'Detalles de la estancia',
+        'actions' => [
+            'extend' => [
+                'button' => 'Prolongar estancia',
+                'confirm' => [
+                    'description' => 'Amplíe la estancia de un beneficiario actualizando la fecha de finalización.',
+                    'title' => 'Prolongar estancia #:stay:start_date—:end_date',
+                    'success' => 'Manténgase extendido con éxito.',
+                ],
+            ],
+        ],
     ],
 ];

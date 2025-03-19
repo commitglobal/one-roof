@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Filament\Shelter\Resources;
 
+use App\Enums\Gender;
 use App\Filament\Shelter\Resources\BeneficiaryResource\Pages;
 use App\Filament\Shelter\Resources\BeneficiaryResource\Schemas\BeneficiaryDynamicInfolist;
 use App\Filament\Shelter\Resources\BeneficiaryResource\Schemas\BeneficiaryForm;
 use App\Filament\Shelter\Resources\BeneficiaryResource\Schemas\BeneficiaryInfolist;
+use App\Filters\DateFilter;
 use App\Models\Beneficiary;
 use App\Models\Stay;
 use Filament\Facades\Filament;
@@ -19,6 +21,8 @@ use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Enums\FiltersLayout;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 
 class BeneficiaryResource extends Resource
@@ -103,6 +107,7 @@ class BeneficiaryResource extends Resource
                 TextColumn::make('name')
                     ->label(__('app.field.name'))
                     ->sortable()
+                    ->searchable()
                     ->shrink(),
 
                 TextColumn::make('latestStay')
@@ -114,8 +119,30 @@ class BeneficiaryResource extends Resource
                     )),
             ])
             ->filters([
-                //
-            ])
+                SelectFilter::make('gender')
+                    ->label(__('app.field.gender'))
+                    ->options(Gender::options())
+                    ->multiple(),
+
+                SelectFilter::make('nationality')
+                    ->relationship('nationality', 'name')
+                    ->label(__('app.field.nationality'))
+                    ->preload()
+                    ->multiple(),
+
+                SelectFilter::make('residenceCountry')
+                    ->relationship('residenceCountry', 'name')
+                    ->label(__('app.field.residence_country'))
+                    ->preload()
+                    ->multiple(),
+
+                DateFilter::make('date_of_birth')
+                    ->label(__('app.field.date_of_birth')),
+
+                DateFilter::make('created_at')
+                    ->label(__('app.field.registration_date')),
+
+            ], FiltersLayout::AboveContent)
             ->actions([
                 Tables\Actions\ViewAction::make(),
             ]);

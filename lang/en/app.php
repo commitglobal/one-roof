@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 return [
     'navigation' => [
         'activity' => 'Activity',
@@ -69,6 +72,8 @@ return [
         'phone' => 'Phone',
         'photo' => 'Photo',
         'reason_rejected' => 'Reason rejected',
+        'referral_notes' => 'Referral notes',
+        'registration_date' => 'Registration date',
         'request_group' => 'Request for a group',
         'request_shelter' => 'Where do you seek accommodation?',
         'request_somebody_else' => 'Request for somebody else',
@@ -92,8 +97,12 @@ return [
         'variable_name' => 'Variable name',
         'variables' => 'Variables',
     ],
+    'filters' => [
+        'date_from' => 'From date',
+        'date_until' => 'Until date',
+    ],
     'placeholder' => [
-        'create_beneficiary_search' => 'Start typing to search for a beneficiary...',
+        'create_beneficiary_search' => 'Start typing to search for a beneficiary…',
     ],
     'field_help' => [
         'one_per_line' => 'Add one item per line.',
@@ -330,6 +339,11 @@ return [
             'organizations' => 'Total organizations',
             'shelters' => 'Total shelters',
         ],
+        'beneficiaries' => [
+            'nationalities' => 'Total beneficiaries per nationality',
+            'residencies' => 'Total beneficiaries per country of residence',
+            'genders' => 'Total beneficiaries per gender',
+        ],
     ],
     'request' => [
         'label' => [
@@ -345,6 +359,7 @@ return [
             'obsolete' => 'Obsolete',
             'duplicate' => 'Duplicate',
         ],
+        'referred_by' => 'This request was referred by :name.',
         'sent' => [
             'title' => 'Request submitted successfully.',
             'message' => 'Your request has been submitted successfully.',

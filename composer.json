@@ -25,7 +25,8 @@
         "maatwebsite/excel": "^3.1",
         "sentry/sentry-laravel": "^4.13",
         "spatie/laravel-activitylog": "^4.10",
-        "spatie/laravel-data": "^4.14"
+        "spatie/laravel-data": "^4.14",
+        "tpetry/laravel-query-expressions": "^1.5"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.14",
