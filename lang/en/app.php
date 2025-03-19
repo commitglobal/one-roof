@@ -13,6 +13,7 @@ return [
     'no' => 'No',
     'submit' => 'Submit',
     'more_actions' => 'More actions',
+    'add_another' => 'Add another',
     'field' => [
         'active' => 'Active',
         'address' => 'Address',
