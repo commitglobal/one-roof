@@ -98,7 +98,8 @@ class FilamentServiceProvider extends ServiceProvider
     protected function configureFormComponents(): void
     {
         Forms\Components\Repeater::configureUsing(function (Forms\Components\Repeater $repeater) {
-            return $repeater->addActionAlignment(Alignment::Left);
+            return $repeater->addActionAlignment(Alignment::Left)
+                ->addActionLabel(__('app.add_another'));
         });
 
         Forms\Components\TextInput::configureUsing(function (Forms\Components\TextInput $input) {
