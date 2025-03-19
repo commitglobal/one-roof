@@ -80,6 +80,8 @@ return [
         'usage' => 'Uso',
         'variable_name' => 'Nombre de variable',
         'variables' => 'Variables',
+        'referral_notes' => 'Notas de remisión',
+        'registration_date' => 'Fecha de registro',
     ],
     'form' => [
         'label' => [
@@ -187,6 +189,11 @@ return [
             'beneficiaries' => 'Total de beneficiarios acogidos',
             'beneficiaries_in_shelter' => 'Total de beneficiarios en el refugio',
             'available_places' => 'Total de plazas disponibles',
+        ],
+        'beneficiaries' => [
+            'genders' => 'Total de beneficiarios por género',
+            'nationalities' => 'Total de beneficiarios por nacionalidad',
+            'residencies' => 'Total de beneficiarios por país de residencia',
         ],
     ],
     'placeholder' => [
@@ -368,6 +375,7 @@ return [
             'title' => 'La solicitud se ha enviado correctamente.',
             'message' => 'Su solicitud se ha enviado correctamente.',
         ],
+        'referred_by' => 'Esta solicitud fue referida por:name.',
     ],
     'submit' => 'Enviar',
     'navigation' => [
@@ -447,4 +455,9 @@ return [
             ],
         ],
     ],
+    'filters' => [
+        'date_from' => 'A partir de la fecha',
+        'date_until' => 'Hasta la fecha',
+    ],
+    'add_another' => 'Añadir otro',
 ];
