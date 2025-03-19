@@ -55,7 +55,6 @@ return [
         'legal_name' => 'Legal name',
         'legal_representative' => 'Legal representative',
         'location' => 'Location',
-        'location' => 'Location',
         'logo' => 'Logo',
         'max_length' => 'Maximum length',
         'max_value' => 'Maximum value',
