@@ -27,14 +27,14 @@ class BeneficiariesNationalitiesTableStats extends BaseWidget
                     ->whereInShelter(Filament::getTenant())
                     ->join('countries', 'beneficiaries.nationality_id', 'countries.id')
                     ->select([
-                        new Alias('countries.name', 'country'),
+                        new Alias('countries.name', 'country_name'),
                         new Alias(new Count('*'), 'count'),
                         new Alias(new Min('beneficiaries.id'), 'id'),
                     ])
-                    ->groupBy('country')
+                    ->groupBy('country_name')
             )
             ->columns([
-                TextColumn::make('country')
+                TextColumn::make('country_name')
                     ->label(__('app.field.country')),
 
                 TextColumn::make('count')

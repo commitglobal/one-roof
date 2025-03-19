@@ -20,11 +20,13 @@ use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Translatable\HasTranslations;
 
 class Beneficiary extends Model implements HasMedia
 {
     /** @use HasFactory<BeneficiaryFactory> */
     use HasFactory;
+    use HasTranslations;
     use InteractsWithMedia;
     use LogsActivity;
 
@@ -41,6 +43,10 @@ class Beneficiary extends Model implements HasMedia
         'phone',
         'email',
         'notes',
+    ];
+
+    public array $translatable = [
+        'country_name',
     ];
 
     protected function casts(): array
