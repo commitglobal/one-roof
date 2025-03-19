@@ -35,12 +35,14 @@ class BeneficiariesNationalitiesTableStats extends BaseWidget
             )
             ->columns([
                 TextColumn::make('country_name')
-                    ->label(__('app.field.country')),
+                    ->label(__('app.field.country'))
+                    ->wrap(),
 
                 TextColumn::make('count')
                     ->label(Str::ucfirst(__('app.beneficiary.label.plural')))
-                    ->numeric()
+                    ->alignRight()
                     ->sortable()
+                    ->numeric()
                     ->shrink(),
             ])
             ->defaultSort('count', 'desc')

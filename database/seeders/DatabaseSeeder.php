@@ -68,32 +68,36 @@ class DatabaseSeeder extends Seeder
     {
         Form::factory()
             ->personal()
+            ->withSections(1)
             ->create();
 
         Form::factory()
             ->personal()
             ->obsolete()
+            ->withSections(1)
             ->create();
 
         Form::factory()
             ->personal()
             ->published()
-            ->withSections(3)
+            ->withSections(1)
             ->create();
 
         Form::factory()
             ->request()
+            ->withSections(1)
             ->create();
 
         Form::factory()
             ->request()
             ->obsolete()
+            ->withSections(1)
             ->create();
 
         Form::factory()
             ->request()
             ->published()
-            ->withSections(3)
+            ->withSections(1)
             ->create();
     }
 }

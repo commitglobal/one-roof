@@ -39,8 +39,9 @@ class BeneficiariesGendersTableStats extends BaseWidget
 
                 TextColumn::make('count')
                     ->label(Str::ucfirst(__('app.beneficiary.label.plural')))
-                    ->numeric()
+                    ->alignRight()
                     ->sortable()
+                    ->numeric()
                     ->shrink(),
             ])
             ->defaultSort('count', 'desc');
