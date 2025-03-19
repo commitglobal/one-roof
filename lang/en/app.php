@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 return [
     'navigation' => [
         'activity' => 'Activity',
@@ -329,6 +332,11 @@ return [
             'beneficiaries' => 'Total hosted beneficiaries',
             'organizations' => 'Total organizations',
             'shelters' => 'Total shelters',
+        ],
+        'beneficiaries' => [
+            'nationalities' => 'Total beneficiaries per nationality',
+            'residencies' => 'Total beneficiaries per country of residence',
+            'genders' => 'Total beneficiaries per gender',
         ],
     ],
     'request' => [
