@@ -71,9 +71,17 @@ class BeneficiaryResource extends Resource
                     ->columns(3)
                     ->heading(__('app.beneficiary.steps.personal_details'))
                     ->headerActions([
+                        Action::make('data')
+                            ->label(__('app.form.actions.history'))
+                            ->url(fn (Beneficiary $record) => static::getUrl('versions.index', ['record' => $record]))
+                            ->visible(fn (Beneficiary $record) => $record->hasMoreThanOneForm())
+                            ->icon('heroicon-o-clock')
+                            ->link()
+                            ->outlined(),
+
                         Action::make('edit')
                             ->label(__('filament-actions::edit.single.label'))
-                            ->url(fn ($record) => static::getUrl('edit', ['record' => $record]))
+                            ->url(fn (Beneficiary $record) => static::getUrl('edit', ['record' => $record]))
                             ->icon('heroicon-o-pencil-square')
                             ->color('gray')
                             ->outlined(),
@@ -171,8 +179,12 @@ class BeneficiaryResource extends Resource
             'create' => Pages\CreateBeneficiary::route('/create'),
             'view' => Pages\ViewBeneficiary::route('/{record}'),
             'edit' => Pages\EditBeneficiary::route('/{record}/edit'),
+
             'stay' => Pages\ViewStay::route('/{record}/stay/{stay}'),
             'document' => Pages\ViewDocument::route('/{record}/document/{document}'),
+
+            'versions.index' => Pages\ListPersonalDataVersions::route('/{record}/data'),
+            'versions.view' => Pages\ViewPersonalDataVersion::route('/{record}/data/{response}'),
         ];
     }
 }

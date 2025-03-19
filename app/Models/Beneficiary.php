@@ -123,4 +123,9 @@ class Beneficiary extends Model implements HasMedia
     {
         return $query->whereRelation('stays', 'shelter_id', $shelter->id);
     }
+
+    public function hasMoreThanOneForm(): bool
+    {
+        return $this->personal()->count() > 1;
+    }
 }

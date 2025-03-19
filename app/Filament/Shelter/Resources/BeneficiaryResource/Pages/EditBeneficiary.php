@@ -8,6 +8,7 @@ use App\Enums\Form\Type;
 use App\Filament\Shelter\Resources\BeneficiaryResource;
 use App\Models\Form;
 use App\Models\Form\FieldResponse;
+use App\Models\Form\Response;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
@@ -36,24 +37,23 @@ class EditBeneficiary extends EditRecord
 
     protected function mutateFormDataBeforeSave(array $data): array
     {
+        $form = Form::query()
+            ->latestPublished(Type::PERSONAL)
+            ->first(['id']);
+
+        /** @var Response */
         $response = $this->getRecord()
             ->latestPersonal()
-            ->firstOr(function () {
-                $form = Form::query()
-                    ->latestPublished(Type::PERSONAL)
-                    ->first(['id']);
+            ->where('form_id', $form->id)
+            ->firstOr(
+                fn () => $this->getRecord()
+                    ->personal()->create([
+                        'form_id' => $form->id,
+                    ])
+            );
 
-                if (blank($form)) {
-                    return;
-                }
-
-                return $this->getRecord()->personal()->create([
-                    'form_id' => $form->id,
-                ]);
-            });
-
-        $this->wrapInDatabaseTransaction(
-            fn () => collect(data_get($data, 'form'))->each(
+        $this->wrapInDatabaseTransaction(function () use ($data, $response) {
+            collect(data_get($data, 'form'))->each(
                 fn ($value, int $field_id) => FieldResponse::updateOrCreate(
                     [
                         'response_id' => $response->id,
@@ -63,8 +63,10 @@ class EditBeneficiary extends EditRecord
                         'value' => $value,
                     ]
                 )
-            )
-        );
+            );
+
+            $response->touch();
+        });
 
         return $data;
     }

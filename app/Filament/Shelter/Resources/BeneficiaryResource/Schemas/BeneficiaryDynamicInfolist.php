@@ -25,47 +25,50 @@ class BeneficiaryDynamicInfolist
                         return [];
                     }
 
-                    $state->loadMissing('form.sections.fields:id,label,type,section_id');
-
-                    $fieldIndex = 0;
-
-                    return $state->form
-                        ->sections
-                        ->map(function ($section) use (&$fieldIndex) {
-                            return Section::make($section->name)
-                                ->description($section->description)
-                                ->columns(3)
-                                ->collapsible()
-                                ->schema(
-                                    $section->fields->map(function (Field $field) use (&$fieldIndex) {
-                                        $component = TextEntry::make("fields.{$fieldIndex}.value")
-                                            ->label($field->label);
-
-                                        $fieldIndex++;
-
-                                        switch ($field->type) {
-                                            case FieldType::CHECKBOX:
-                                            case FieldType::RADIO:
-                                            case FieldType::SELECT:
-                                                $component->listWithLineBreaks();
-                                                break;
-
-                                            case FieldType::NUMBER:
-                                                $component->numeric();
-                                                break;
-
-                                            case FieldType::DATE:
-                                                $component->formatStateUsing(function ($state) {
-                                                    return rescue(fn () => Carbon::parse($state)->toFormattedDate(), $state, false);
-                                                });
-                                                break;
-                                        }
-
-                                        return $component;
-                                    })->all()
-                                );
-                        })->all();
+                    return static::getSchemaForResponse($state);
                 }),
         ];
+    }
+
+    public static function getSchemaForResponse(Response $response): array
+    {
+        $fieldIndex = 0;
+
+        return $response->form
+            ->sections
+            ->map(function ($section) use (&$fieldIndex) {
+                return Section::make($section->name)
+                    ->description($section->description)
+                    ->columns(3)
+                    ->collapsible()
+                    ->schema(
+                        $section->fields->map(function (Field $field) use (&$fieldIndex) {
+                            $component = TextEntry::make("fields.{$fieldIndex}.value")
+                                ->label($field->label);
+
+                            $fieldIndex++;
+
+                            switch ($field->type) {
+                                case FieldType::CHECKBOX:
+                                case FieldType::RADIO:
+                                case FieldType::SELECT:
+                                    $component->listWithLineBreaks();
+                                    break;
+
+                                case FieldType::NUMBER:
+                                    $component->numeric();
+                                    break;
+
+                                case FieldType::DATE:
+                                    $component->formatStateUsing(function ($state) {
+                                        return rescue(fn () => Carbon::parse($state)->toFormattedDate(), $state, false);
+                                    });
+                                    break;
+                            }
+
+                            return $component;
+                        })->all()
+                    );
+            })->all();
     }
 }

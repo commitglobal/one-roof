@@ -25,7 +25,6 @@ class ViewDocument extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-
             Actions\DeleteAction::make()
                 ->label(__('app.documents.actions.delete'))
                 ->record($this->document)
@@ -59,7 +58,6 @@ class ViewDocument extends ViewRecord
 
                     return response()->download($mediaItem->getPath(), $mediaItem->file_name);
                 }),
-
         ];
     }
 

@@ -165,6 +165,7 @@ return [
             'obsolete' => 'Obsolete',
         ],
         'actions' => [
+            'history' => 'Form history',
             'draft' => [
                 'button' => 'Draft',
                 'confirm' => [
