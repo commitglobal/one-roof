@@ -279,6 +279,8 @@ return [
         'woman' => 'Mujer',
         'nonbinary' => 'No binario',
         'other' => 'Prefiero no decirlo',
+        'trans_man' => 'Hombre transgénero',
+        'trans_woman' => 'Mujer transgénero',
     ],
     'id_type' => [
         'passport' => 'Pasaporte',
@@ -434,5 +436,15 @@ return [
             'singular' => 'estancia',
         ],
         'details' => 'Detalles de la estancia',
+        'actions' => [
+            'extend' => [
+                'button' => 'Prolongar estancia',
+                'confirm' => [
+                    'description' => 'Amplíe la estancia de un beneficiario actualizando la fecha de finalización.',
+                    'title' => 'Prolongar estancia #:stay:start_date—:end_date',
+                    'success' => 'Manténgase extendido con éxito.',
+                ],
+            ],
+        ],
     ],
 ];
