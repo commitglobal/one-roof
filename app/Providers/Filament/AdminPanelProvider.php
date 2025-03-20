@@ -39,6 +39,7 @@ class AdminPanelProvider extends PanelProvider
             ->sidebarCollapsibleOnDesktop()
             ->maxContentWidth(MaxWidth::Full)
             ->viteTheme('resources/css/filament/common/theme.css')
+            ->brandLogo(fn () => view('filament.brand'))
             ->discoverResources(
                 in: app_path('Filament/Admin/Resources'),
                 for: 'App\\Filament\\Admin\\Resources',

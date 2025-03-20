@@ -2,3 +2,7 @@
 @import '/vendor/awcodes/filament-table-repeater/resources/css/plugin.css';
 
 @config 'tailwind.config.js';
+
+.fi-logo {
+    @apply justify-center w-full;
+}
