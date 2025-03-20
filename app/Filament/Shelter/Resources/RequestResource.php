@@ -47,14 +47,15 @@ class RequestResource extends Resource
     {
         $shelterId = Filament::getTenant()->getKey();
 
-        return Cache::remember(
-            "shelter_{$shelterId}_requests_count",
-            now()->addMinutes(5),
-            fn () => (string) static::getModel()::query()
-                ->whereNewOrReferred()
-                ->where('shelter_id', $shelterId)
-                ->count()
-        );
+        return Cache::driver('array')
+            ->remember(
+                "shelter_{$shelterId}_requests_count",
+                now()->addMinutes(5),
+                fn () => (string) static::getModel()::query()
+                    ->whereNewOrReferred()
+                    ->where('shelter_id', $shelterId)
+                    ->count()
+            );
     }
 
     public static function getNavigationBadgeColor(): ?string
