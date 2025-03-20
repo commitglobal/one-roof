@@ -39,6 +39,7 @@ return [
         'enabled' => 'Enabled',
         'end_date' => 'End date',
         'fields' => 'Fields',
+        'form_sections' => 'Form sections',
         'form_type' => 'Form type',
         'gender' => 'Gender',
         'group_size' => 'No.',
@@ -165,6 +166,7 @@ return [
             'obsolete' => 'Obsolete',
         ],
         'actions' => [
+            'history' => 'Form history',
             'draft' => [
                 'button' => 'Draft',
                 'confirm' => [
