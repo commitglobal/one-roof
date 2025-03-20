@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Admin\Resources;
 
-use App\Filament\Admin\Actions\MergeBulkAction;
+use App\Filament\Admin\Resources\LocationResource\Actions\MergeLocationsBulkAction;
 use App\Filament\Admin\Resources\LocationResource\Pages;
 use App\Models\Location;
 use Filament\Forms\Components\TextInput;
@@ -47,7 +47,7 @@ class LocationResource extends Resource
                 TextInput::make('name')
                     ->label(__('app.field.name'))
                     ->columnSpanFull()
-                    ->maxLength(200)
+                    ->maxLength(100)
                     ->required(),
             ]);
     }
@@ -64,6 +64,9 @@ class LocationResource extends Resource
 
                 TextColumn::make('name')
                     ->label(__('app.field.name'))
+                    ->lineClamp(2)
+                    ->limit(100)
+                    ->wrap()
                     ->searchable()
                     ->sortable(),
             ])
@@ -77,7 +80,7 @@ class LocationResource extends Resource
                 ]),
             ])
             ->bulkActions([
-                MergeBulkAction::make(),
+                MergeLocationsBulkAction::make(),
             ]);
     }
 

@@ -45,6 +45,9 @@ class SheltersRelationManager extends RelationManager
 
                 TextColumn::make('location.name')
                     ->label(__('app.field.location'))
+                    ->lineClamp(2)
+                    ->limit(100)
+                    ->wrap()
                     ->searchable()
                     ->sortable(),
 

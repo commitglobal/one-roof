@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Admin;
 
-use App\Filament\Admin\Actions\MergeBulkAction;
+use App\Filament\Admin\Resources\LocationResource\Actions\MergeLocationsBulkAction;
 use App\Filament\Admin\Resources\LocationResource\Pages\ManageLocations;
 use App\Models\Location;
 use App\Models\User;
@@ -87,7 +87,7 @@ class LocationsTest extends TestCase
 
         Livewire::test(ManageLocations::class)
             ->assertCountTableRecords(2)
-            ->callTableBulkAction(MergeBulkAction::class, $locations->pluck('id'))
+            ->callTableBulkAction(MergeLocationsBulkAction::class, $locations->pluck('id'))
             ->assertHasNoTableActionErrors()
             ->assertCountTableRecords(1)
             ->assertSeeText($locations->pluck('name')->join(', '));

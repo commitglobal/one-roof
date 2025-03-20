@@ -8,6 +8,8 @@ use App\Concerns\LogsActivity;
 use Database\Factories\LocationFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Translatable\HasTranslations;
 
 class Location extends Model
@@ -16,6 +18,7 @@ class Location extends Model
     use HasFactory;
     use HasTranslations;
     use LogsActivity;
+    use SoftDeletes;
 
     protected static string $factory = LocationFactory::class;
 
@@ -26,4 +29,14 @@ class Location extends Model
     public array $translatable = [
         'name',
     ];
+
+    public function organizations(): HasMany
+    {
+        return $this->hasMany(Organization::class);
+    }
+
+    public function shelters(): HasMany
+    {
+        return $this->hasMany(Shelter::class);
+    }
 }
