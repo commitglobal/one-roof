@@ -9,6 +9,7 @@ return [
         'shelter_configuration' => 'Shelter configuration',
         'manual' => 'Manual',
     ],
+    'developed_by' => 'Developed by',
     'yes' => 'Yes',
     'no' => 'No',
     'submit' => 'Submit',
