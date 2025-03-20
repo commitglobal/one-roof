@@ -61,7 +61,6 @@ class RequestsWidget extends BaseWidget
             ->actions([
                 ViewAction::make()
                     ->url(fn (Request $record) => RequestResource::getUrl('view', ['record' => $record])),
-            ])
-            ->paginationPageOptions([10]);
+            ]);
     }
 }
