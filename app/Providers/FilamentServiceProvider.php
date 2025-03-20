@@ -170,6 +170,10 @@ class FilamentServiceProvider extends ServiceProvider
         });
 
         ActionGroup::configureUsing(function (ActionGroup $group) {
+            if ($group instanceof Tables\Actions\ActionGroup) {
+                return $group;
+            }
+
             return $group
                 ->label(__('app.more_actions'))
                 ->iconPosition(IconPosition::After)
