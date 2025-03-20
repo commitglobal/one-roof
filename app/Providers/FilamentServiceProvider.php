@@ -197,6 +197,11 @@ class FilamentServiceProvider extends ServiceProvider
         );
 
         FilamentView::registerRenderHook(
+            PanelsRenderHook::SIDEBAR_NAV_END,
+            fn () => view('filament.sidebar-footer')
+        );
+
+        FilamentView::registerRenderHook(
             PanelsRenderHook::USER_MENU_PROFILE_AFTER,
             fn () => view('components.locale-switcher.panel', [
                 'locales' => active_locales(),
