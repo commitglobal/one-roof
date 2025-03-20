@@ -84,6 +84,7 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
                 EnsureUserIsActive::class,
-            ]);
+            ])
+            ->unsavedChangesAlerts();
     }
 }

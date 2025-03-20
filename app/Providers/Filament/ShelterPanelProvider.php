@@ -33,7 +33,6 @@ class ShelterPanelProvider extends PanelProvider
             ->default()
             ->id('shelter')
             ->login(Login::class)
-
             ->tenant(Shelter::class)
             ->tenantRoutePrefix('shelter')
             ->colors([
@@ -79,6 +78,7 @@ class ShelterPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
                 EnsureUserIsActive::class,
-            ]);
+            ])
+            ->unsavedChangesAlerts();
     }
 }
