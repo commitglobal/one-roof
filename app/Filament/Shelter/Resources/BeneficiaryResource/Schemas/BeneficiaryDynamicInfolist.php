@@ -34,6 +34,8 @@ class BeneficiaryDynamicInfolist
     {
         $fieldIndex = 0;
 
+        $response->loadMissing('form.sections.fields');
+
         return $response->form
             ->sections
             ->map(function ($section) use (&$fieldIndex) {

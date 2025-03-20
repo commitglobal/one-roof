@@ -21,11 +21,9 @@ class ViewPersonalDataVersion extends ViewRecord
 
     protected static string $resource = BeneficiaryResource::class;
 
-    protected function getHeaderActions(): array
+    public function getTitle(): string
     {
-        return [
-            //
-        ];
+        return __('app.form.actions.history') . ' #' . $this->response->id;
     }
 
     public function infolist(Infolist $infolist): Infolist

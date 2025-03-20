@@ -23,6 +23,11 @@ class ListPersonalDataVersions extends ViewRecord
         abort_unless($this->getRecord()->hasMoreThanOneForm(), 404);
     }
 
+    public function getTitle(): string
+    {
+        return __('app.form.actions.history');
+    }
+
     protected function fillForm(): void
     {
         //
