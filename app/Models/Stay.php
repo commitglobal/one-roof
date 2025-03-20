@@ -26,6 +26,7 @@ class Stay extends Model
         'start_date',
         'end_date',
         'beneficiary_id',
+        'request_id',
         'children_count',
         'children_notes',
         'notes',
@@ -65,6 +66,25 @@ class Stay extends Model
     {
         return Attribute::make(
             get: fn (mixed $value, array $attributes) => filled($attributes['children_count']) || filled($attributes['children_notes']),
+        );
+    }
+
+    public function hasRequest(): Attribute
+    {
+        return Attribute::make(
+            get: fn (mixed $value, array $attributes) => filled($attributes['request_id']),
+        );
+    }
+
+    public function title(): Attribute
+    {
+        return Attribute::make(
+            fn () => \sprintf(
+                '#%s %s–%s',
+                $this->id,
+                $this->start_date->toFormattedDate(),
+                $this->end_date->toFormattedDate()
+            )
         );
     }
 }

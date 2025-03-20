@@ -6,6 +6,7 @@ namespace App\Filament\Shelter\Resources\BeneficiaryResource\Widgets;
 
 use App\Filament\Shelter\Resources\BeneficiaryResource;
 use App\Filament\Shelter\Resources\BeneficiaryResource\Schemas\StayForm;
+use App\Filament\Shelter\Resources\RequestResource;
 use App\Models\Beneficiary;
 use App\Models\Stay;
 use Filament\Tables\Actions\CreateAction;
@@ -46,6 +47,20 @@ class StaysWidget extends BaseWidget
                 TextColumn::make('shelter.name')
                     ->label(__('app.field.shelter'))
                     ->sortable()
+                    ->shrink(),
+
+                TextColumn::make('request.title')
+                    ->label(__('app.field.request'))
+                    ->url(function (Stay $record) {
+                        if (blank($record->request_id)) {
+                            return null;
+                        }
+
+                        return RequestResource::getUrl('view', [
+                            'record' => $record->request_id,
+                        ]);
+                    })
+                    ->color('primary')
                     ->shrink(),
             ])
             ->headerActions([

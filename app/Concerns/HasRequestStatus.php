@@ -37,7 +37,22 @@ trait HasRequestStatus
 
     public function scopeWhereNewOrReferred(Builder $query): Builder
     {
-        return $query->whereIn('status', [RequestStatus::NEW, RequestStatus::REFERRED]);
+        return $query->whereIn('status', [
+            RequestStatus::NEW,
+            RequestStatus::REFERRED,
+        ]);
+    }
+
+    public function scopeWhereAllocatable(Builder $query): Builder
+    {
+        return $query
+            ->whereDoesntHave('stay')
+            ->whereIn('status', [
+                RequestStatus::NEW,
+                RequestStatus::REFERRED,
+                RequestStatus::PENDING,
+                RequestStatus::ACCEPTED,
+            ]);
     }
 
     public function scopeWherePending(Builder $query): Builder
