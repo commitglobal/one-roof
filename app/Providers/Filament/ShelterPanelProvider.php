@@ -43,6 +43,7 @@ class ShelterPanelProvider extends PanelProvider
             ->maxContentWidth(MaxWidth::Full)
             ->viteTheme('resources/css/filament/common/theme.css')
             ->brandLogo(fn () => view('filament.brand'))
+            ->brandLogoHeight('3rem')
             ->discoverResources(
                 in: app_path('Filament/Shelter/Resources'),
                 for: 'App\\Filament\\Shelter\\Resources',
