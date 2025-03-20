@@ -4,14 +4,18 @@ declare(strict_types=1);
 
 namespace App\Filament\Shelter\Resources\BeneficiaryResource\Schemas;
 
+use App\Models\Request;
+use Filament\Facades\Filament;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Get;
+use Illuminate\Support\Str;
 
 class StayForm
 {
@@ -54,6 +58,31 @@ class StayForm
                                 ->maxLength(500)
                                 ->rows(5),
                         ]),
+
+                    Checkbox::make('has_request')
+                        ->label(__('app.field.has_request'))
+                        ->columnSpanFull()
+                        ->live(),
+
+                    Select::make('request_id')
+                        ->label(__('app.field.request'))
+                        ->visible(fn (Get $get) => $get('has_request'))
+                        ->columnSpanFull()
+                        ->searchable()
+                        ->preload()
+                        ->required()
+                        ->getSearchResultsUsing(
+                            fn (string $search) => Request::query()
+                                ->whereAllocatable()
+                                ->where('shelter_id', Filament::getTenant()->getKey())
+                                ->where(function ($query) use ($search) {
+                                    $query->whereLike('id', Str::remove('#', $search) . '%')
+                                        ->orWhereLike('beneficiary->name', "%{$search}%");
+                                })
+                                ->get()
+                                ->pluck('optionLabel', 'id')
+                        )
+                        ->getOptionLabelUsing(fn ($value) => Request::find($value)->optionLabel()),
 
                 ]),
         ];

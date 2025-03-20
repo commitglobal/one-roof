@@ -13,9 +13,11 @@ use App\Enums\RequestStatus;
 use App\Enums\SpecialNeed;
 use Database\Factories\RequestFactory;
 use Illuminate\Database\Eloquent\Casts\AsEnumCollection;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Spatie\LaravelData\DataCollection;
 
 class Request extends Model
@@ -82,6 +84,11 @@ class Request extends Model
         return $this->belongsTo(Shelter::class);
     }
 
+    public function stay(): HasOne
+    {
+        return $this->hasOne(Stay::class);
+    }
+
     public function referToShelter(Shelter $shelter, ?string $notes = null): void
     {
         $this->update([
@@ -106,5 +113,16 @@ class Request extends Model
 
         $activity->event = 'referred';
         $activity->description = 'referred';
+    }
+
+    public function title(): Attribute
+    {
+        return Attribute::make(
+            fn () => \sprintf(
+                '#%s - %s',
+                $this->id,
+                $this->beneficiary->name,
+            )
+        );
     }
 }

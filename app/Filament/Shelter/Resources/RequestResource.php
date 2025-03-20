@@ -110,6 +110,21 @@ class RequestResource extends Resource
                 TextColumn::make('special_needs')
                     ->label(__('app.field.special_needs')),
 
+                TextColumn::make('stay.title')
+                    ->label(__('app.field.stay'))
+                    ->url(function (Request $record) {
+                        if (blank($record->stay)) {
+                            return null;
+                        }
+
+                        return BeneficiaryResource::getUrl('stay', [
+                            'record' => $record->stay->beneficiary_id,
+                            'stay' => $record->stay->id,
+                        ]);
+                    })
+                    ->color('primary')
+                    ->shrink(),
+
                 TextColumn::make('status')
                     ->label(__('app.field.status'))
                     ->badge(),

@@ -37,11 +37,9 @@ class ViewStay extends ViewRecord
     public function getTitle(): string
     {
         return \sprintf(
-            '%s #%s %s–%s',
+            '%s %s',
             Str::ucfirst(__('app.stay.label.singular')),
-            $this->stay->id,
-            $this->stay->start_date->toFormattedDate(),
-            $this->stay->end_date->toFormattedDate()
+            $this->stay->title
         );
     }
 

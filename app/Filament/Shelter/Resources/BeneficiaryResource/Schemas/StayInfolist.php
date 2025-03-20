@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Shelter\Resources\BeneficiaryResource\Schemas;
 
+use App\Filament\Shelter\Resources\RequestResource;
 use App\Models\Stay;
 use Filament\Infolists\Components\Group;
 use Filament\Infolists\Components\Section;
@@ -54,6 +55,13 @@ class StayInfolist
                                 ->label(__('app.field.children_notes')),
                         ]),
 
+                    TextEntry::make('request.title')
+                        ->visible(fn (Stay $record) => $record->has_request)
+                        ->label(__('app.field.request'))
+                        ->url(fn (Stay $record) => RequestResource::getUrl('view', [
+                            'record' => $record->request_id,
+                        ]))
+                        ->color('primary'),
                 ]),
         ];
     }

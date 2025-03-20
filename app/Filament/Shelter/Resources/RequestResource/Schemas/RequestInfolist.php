@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Shelter\Resources\RequestResource\Schemas;
 
+use App\Filament\Shelter\Resources\BeneficiaryResource;
 use App\Infolists\Components\Notice;
 use App\Infolists\Components\TableRepeatableEntry;
 use App\Models\Request;
@@ -62,6 +63,15 @@ class RequestInfolist
                     TextEntry::make('end_date')
                         ->label(__('app.field.end_date'))
                         ->date(),
+
+                    TextEntry::make('stay.title')
+                        ->visible(fn (Request $record) => $record->stay()->exists())
+                        ->label(__('app.field.stay'))
+                        ->url(fn (Request $record) => BeneficiaryResource::getUrl('stay', [
+                            'record' => $record->stay->beneficiary_id,
+                            'stay' => $record->stay->id,
+                        ]))
+                        ->color('primary'),
 
                     TextEntry::make('reason_rejected')
                         ->label(__('app.field.reason_rejected'))
