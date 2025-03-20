@@ -190,6 +190,11 @@ class FilamentServiceProvider extends ServiceProvider
     protected function renderHooks(): void
     {
         FilamentView::registerRenderHook(
+            PanelsRenderHook::HEAD_START,
+            fn () => view('filament.favicons')
+        );
+
+        FilamentView::registerRenderHook(
             PanelsRenderHook::FOOTER,
             fn () => view('filament.version', [
                 'version' => config()->get('app.version'),
