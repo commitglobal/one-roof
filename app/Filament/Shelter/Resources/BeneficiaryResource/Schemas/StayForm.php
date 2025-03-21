@@ -80,9 +80,9 @@ class StayForm
                                         ->orWhereLike('beneficiary->name', "%{$search}%");
                                 })
                                 ->get()
-                                ->pluck('optionLabel', 'id')
+                                ->pluck('title', 'id')
                         )
-                        ->getOptionLabelUsing(fn ($value) => Request::find($value)->optionLabel()),
+                        ->getOptionLabelUsing(fn ($value) => Request::find($value)->title()),
 
                 ]),
         ];
