@@ -41,6 +41,10 @@ class EditBeneficiary extends EditRecord
             ->latestPublished(Type::PERSONAL)
             ->first(['id']);
 
+        if (blank($form)) {
+            return $data;
+        }
+
         /** @var Response */
         $response = $this->getRecord()
             ->latestPersonal()
