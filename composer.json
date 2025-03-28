@@ -29,10 +29,10 @@
         "tpetry/laravel-query-expressions": "^1.5"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.14",
+        "barryvdh/laravel-debugbar": "^3.15",
         "barryvdh/laravel-ide-helper": "^3.5",
         "fakerphp/faker": "^1.24",
-        "friendsofphp/php-cs-fixer": "^3.72",
+        "friendsofphp/php-cs-fixer": "^3.74",
         "laravel/pail": "^1.2",
         "laravel/sail": "^1.41",
         "mockery/mockery": "^1.6",
