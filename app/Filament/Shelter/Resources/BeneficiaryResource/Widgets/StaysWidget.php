@@ -49,6 +49,20 @@ class StaysWidget extends BaseWidget
                     ->sortable()
                     ->shrink(),
 
+                TextColumn::make('group.title')
+                    ->label(__('app.field.group'))
+                    ->url(function (Stay $record) {
+                        if (blank($record->group_id)) {
+                            return null;
+                        }
+
+                        // TODO: use action to open infolist modal
+                        return '#';
+                    })
+                    ->color('primary')
+                    ->wrap()
+                    ->shrink(),
+
                 TextColumn::make('request.title')
                     ->label(__('app.field.request'))
                     ->url(function (Stay $record) {

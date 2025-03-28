@@ -45,6 +45,11 @@ class Stay extends Model
         return $this->belongsTo(Beneficiary::class);
     }
 
+    public function group(): BelongsTo
+    {
+        return $this->belongsTo(Group::class);
+    }
+
     public function request(): BelongsTo
     {
         return $this->belongsTo(Request::class);
