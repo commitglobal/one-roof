@@ -30,7 +30,7 @@ class BeneficiaryResource extends Resource
 {
     protected static ?string $model = Beneficiary::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-user-group';
+    protected static ?string $navigationIcon = 'heroicon-o-user';
 
     protected static ?string $recordTitleAttribute = 'name';
 

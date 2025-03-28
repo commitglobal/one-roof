@@ -43,6 +43,8 @@ return [
         'form_sections' => 'Form sections',
         'form_type' => 'Form type',
         'gender' => 'Gender',
+        'group_name' => 'Group name',
+        'group_members' => 'Members',
         'group_size' => 'No.',
         'group' => 'Group',
         'has_children' => 'Accompanied by children',
@@ -140,6 +142,12 @@ return [
                     'success' => 'Stay extended successfully.',
                 ],
             ],
+        ],
+    ],
+    'group' => [
+        'label' => [
+            'singular' => 'group',
+            'plural' => 'groups',
         ],
     ],
     'country' => [

@@ -30,7 +30,6 @@ return new class extends Migration
             $table->tinyInteger('children_count')->nullable();
             $table->text('children_notes')->nullable();
 
-            // TODO: Group
             $table->foreignIdFor(Request::class)
                 ->nullable()
                 ->constrained()

@@ -87,6 +87,7 @@ class AppServiceProvider extends ServiceProvider
             'country' => \App\Models\Country::class,
             'document' => \App\Models\Document::class,
             'form' => \App\Models\Form::class,
+            'group' => \App\Models\Group::class,
             'location' => \App\Models\Location::class,
             'media' => \App\Models\Media::class,
             'membership' => \App\Models\Membership::class,

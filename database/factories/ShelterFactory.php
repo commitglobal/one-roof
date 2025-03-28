@@ -7,6 +7,7 @@ namespace Database\Factories;
 use App\Data\PersonData;
 use App\Models\Beneficiary;
 use App\Models\Country;
+use App\Models\Group;
 use App\Models\Location;
 use App\Models\Organization;
 use App\Models\Request;
@@ -45,12 +46,18 @@ class ShelterFactory extends Factory
 
     public function configure(): static
     {
-        $beneficiaries = Beneficiary::pluck('id')
-            ->map(fn (int $id) => [
-                'beneficiary_id' => $id,
-            ]);
+        return $this->afterCreating(function (Shelter $shelter) {
+            $groups = Group::factory()
+                ->count(10)
+                ->for($shelter)
+                ->create();
 
-        return $this->afterCreating(function (Shelter $shelter) use ($beneficiaries) {
+            $beneficiaries = Beneficiary::pluck('id')
+                ->map(fn (int $id) => [
+                    'beneficiary_id' => $id,
+                    'group_id' => fake()->boolean() ? $groups->random()->id : null,
+                ]);
+
             Stay::factory()
                 ->count($beneficiaries->count())
                 ->sequence(...$beneficiaries)
