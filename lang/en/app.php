@@ -130,6 +130,7 @@ return [
             'singular' => 'stay',
             'plural' => 'stays',
         ],
+        'indefinite' => 'Indefinite',
         'details' => 'Stay details',
         'actions' => [
             'extend' => [
