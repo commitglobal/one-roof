@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace App\Filament\Shelter\Resources;
 
 use App\Filament\Shelter\Resources\GroupResource\Pages;
+use App\Filament\Shelter\Resources\GroupResource\RelationManagers\StaysRelationManager;
+use App\Filament\Shelter\Resources\GroupResource\Schemas\GroupForm;
+use App\Filament\Shelter\Resources\GroupResource\Schemas\GroupInfolist;
 use App\Models\Group;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
-use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -45,29 +45,14 @@ class GroupResource extends Resource
     {
         return $form
             ->columns(1)
-            ->schema([
-                TextInput::make('name')
-                    ->label(__('app.field.group_name')),
-
-                Select::make('stays')
-                    ->relationship('stays', 'id')
-                    ->multiple()
-                    ->required(),
-            ]);
+            ->schema(GroupForm::getSchema());
     }
 
     public static function infolist(Infolist $infolist): Infolist
     {
         return $infolist
             ->columns(1)
-            ->schema([
-                TextEntry::make('name')
-                    ->label(__('app.field.group_name')),
-
-                TextEntry::make('stays.id')
-                    ->label(__('app.field.group_members'))
-                    ->listWithLineBreaks(),
-            ]);
+            ->schema(GroupInfolist::getSchema());
     }
 
     public static function table(Table $table): Table
@@ -102,10 +87,20 @@ class GroupResource extends Resource
             ]);
     }
 
+    public static function getRelations(): array
+    {
+        return [
+            StaysRelationManager::class,
+        ];
+    }
+
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManageGroups::route('/'),
+            'index' => Pages\ListGroups::route('/'),
+            'create' => Pages\CreateGroup::route('/create'),
+            'view' => Pages\ViewGroup::route('/{record}'),
+            'edit' => Pages\EditGroup::route('/{record}/edit'),
         ];
     }
 }

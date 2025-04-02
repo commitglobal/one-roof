@@ -21,10 +21,10 @@ class StayInfolist
                     TextEntry::make('id')
                         ->label(__('app.field.id'))
                         ->prefix('#'),
+
                     TextEntry::make('created_at')
                         ->label(__('app.field.created_at'))
                         ->dateTime(),
-
                 ]),
 
             Section::make(__('app.stay.details'))
@@ -61,6 +61,14 @@ class StayInfolist
                         ->url(fn (Stay $record) => RequestResource::getUrl('view', [
                             'record' => $record->request_id,
                         ]))
+                        ->color('primary'),
+
+                    TextEntry::make('group.title')
+                        ->visible(fn (Stay $record) => $record->has_group)
+                        ->label(__('app.field.group'))
+
+                        // TODO: implement
+                        // ->action()
                         ->color('primary'),
                 ]),
         ];
