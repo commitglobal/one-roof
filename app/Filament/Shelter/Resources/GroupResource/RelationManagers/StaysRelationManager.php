@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Shelter\Resources\GroupResource\RelationManagers;
 
+use App\Filament\Shelter\Resources\BeneficiaryResource;
 use App\Models\Shelter;
 use App\Models\Stay;
 use Carbon\Carbon;
@@ -76,6 +77,11 @@ class StaysRelationManager extends RelationManager
                     }),
             ])
             ->actions([
+                Tables\Actions\ViewAction::make()
+                    ->url(fn (Stay $record) => BeneficiaryResource::getUrl('view', [
+                        'record' => $record->beneficiary_id,
+                    ])),
+
                 Tables\Actions\DissociateAction::make(),
             ])
             ->paginated(false);

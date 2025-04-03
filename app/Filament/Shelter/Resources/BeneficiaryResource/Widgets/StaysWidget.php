@@ -6,12 +6,11 @@ namespace App\Filament\Shelter\Resources\BeneficiaryResource\Widgets;
 
 use App\Filament\Shelter\Resources\BeneficiaryResource;
 use App\Filament\Shelter\Resources\BeneficiaryResource\Schemas\StayForm;
-use App\Filament\Shelter\Resources\GroupResource\Schemas\GroupInfolist;
+use App\Filament\Shelter\Resources\GroupResource;
 use App\Filament\Shelter\Resources\RequestResource;
 use App\Models\Beneficiary;
 use App\Models\Stay;
 use Carbon\Carbon;
-use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\CreateAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
@@ -63,20 +62,15 @@ class StaysWidget extends BaseWidget
 
                 TextColumn::make('group.title')
                     ->label(__('app.field.group'))
-                    ->action(
-                        fn (Stay $record) => Action::make('view')
-                            ->record($record->group)
-                            ->infolist(GroupInfolist::getSchema())
-                            ->modal()
-                    )
-                    // ->url(function (Stay $record) {
-                    //     if (blank($record->group_id)) {
-                    //         return null;
-                    //     }
+                    ->url(function (Stay $record) {
+                        if (blank($record->group_id)) {
+                            return null;
+                        }
 
-                    //     // TODO: use action to open infolist modal
-                    //     return '#';
-                    // })
+                        return GroupResource::getUrl('view', [
+                            'record' => $record->group_id,
+                        ]);
+                    })
                     ->color('primary')
                     ->wrap()
                     ->shrink(),

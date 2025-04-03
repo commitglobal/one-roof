@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Shelter\Resources\BeneficiaryResource\Schemas;
 
+use App\Filament\Shelter\Resources\GroupResource;
 use App\Filament\Shelter\Resources\RequestResource;
 use App\Models\Stay;
 use Carbon\Carbon;
@@ -66,9 +67,9 @@ class StayInfolist
                     TextEntry::make('group.title')
                         ->visible(fn (Stay $record) => $record->has_group)
                         ->label(__('app.field.group'))
-
-                        // TODO: implement
-                        // ->action()
+                        ->url(fn (Stay $record) => GroupResource::getUrl('view', [
+                            'record' => $record->group_id,
+                        ]))
                         ->color('primary'),
                 ]),
         ];
