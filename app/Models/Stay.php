@@ -120,7 +120,7 @@ class Stay extends Model
                 $this->id,
                 $this->beneficiary->name,
                 $this->start_date->toFormattedDate(),
-                $this->end_date->toFormattedDate()
+                $this->end_date?->toFormattedDate() ?? __('app.stay.indefinite')
             )
         );
     }
@@ -157,7 +157,6 @@ class Stay extends Model
                     [
                         'name' => 'end_date',
                         'type' => 'string',
-                        'optional' => true,
                     ],
                 ],
             ],
@@ -184,7 +183,11 @@ class Stay extends Model
             'beneficiary_id' => (string) $this->beneficiary_id,
             'beneficiary_name' => $this->beneficiary->name,
             'start_date' => $this->start_date->toFormattedDate(),
-            'end_date' => $this->end_date?->toFormattedDate(),
+            'end_date' => $this->end_date?->toFormattedDate() ??
+                locales()
+                    ->map(fn (Language $language) => __('app.stay.indefinite', locale: $language->code))
+                    ->unique()
+                    ->join(', '),
         ];
     }
 }

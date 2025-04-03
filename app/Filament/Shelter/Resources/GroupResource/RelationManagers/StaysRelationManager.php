@@ -6,6 +6,7 @@ namespace App\Filament\Shelter\Resources\GroupResource\RelationManagers;
 
 use App\Models\Shelter;
 use App\Models\Stay;
+use Carbon\Carbon;
 use Filament\Forms\Components\Select;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
@@ -45,7 +46,16 @@ class StaysRelationManager extends RelationManager
 
                 TextColumn::make('end_date')
                     ->label(__('app.field.end_date'))
-                    ->date()
+                    ->default(__('app.stay.indefinite'))
+                    ->formatStateUsing(function (TextColumn $column, $state) {
+                        if (blank($state) || $state === __('app.stay.indefinite')) {
+                            return $state;
+                        }
+
+                        return Carbon::parse($state)
+                            ->setTimezone($column->getTimezone())
+                            ->translatedFormat($column->evaluate(Table::$defaultDateDisplayFormat));
+                    })
                     ->sortable(),
             ])
             ->headerActions([
@@ -79,9 +89,9 @@ class StaysRelationManager extends RelationManager
                     fn (Builder $query) => $query
                         ->whereBelongsTo($shelter)
                         ->with('beneficiary:id,name')
+                        ->limit(50)
                 )
                 ->where('shelter_id', $shelter->id)
-                ->limit(50)
                 ->get();
         } else {
             $options = Stay::query()
