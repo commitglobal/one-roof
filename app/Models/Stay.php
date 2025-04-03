@@ -54,12 +54,22 @@ class Stay extends Model
     {
         return $query
             ->whereDate('start_date', '<=', today())
-            ->whereDate('end_date', '>=', today());
+            ->where(function (Builder $query) {
+                $query->whereDate('end_date', '>=', today())
+                    ->orWhereNull('end_date');
+            });
     }
 
     public function scopeWhereInShelter(Builder $query, Shelter $shelter): Builder
     {
         return $query->where('shelter_id', $shelter->id);
+    }
+
+    protected function isIndefinite(): Attribute
+    {
+        return Attribute::make(
+            get: fn (mixed $value, array $attributes) => blank($attributes['end_date']),
+        );
     }
 
     public function hasChildren(): Attribute
@@ -80,10 +90,10 @@ class Stay extends Model
     {
         return Attribute::make(
             fn () => \sprintf(
-                '#%s %s–%s',
+                '#%s %s - %s',
                 $this->id,
                 $this->start_date->toFormattedDate(),
-                $this->end_date->toFormattedDate()
+                $this->end_date?->toFormattedDate() ?? __('app.stay.indefinite')
             )
         );
     }

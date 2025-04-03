@@ -57,6 +57,13 @@ class ShelterFactory extends Factory
                 ->for($shelter)
                 ->create();
 
+            Stay::factory()
+                ->count($beneficiaries->count())
+                ->sequence(...$beneficiaries)
+                ->for($shelter)
+                ->indefinite()
+                ->create();
+
             Request::factory()
                 ->count(10)
                 ->for($shelter)

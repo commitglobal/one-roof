@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace App\Filament\Shelter\Resources\BeneficiaryResource\Actions;
 
+use App\Filament\Shelter\Resources\BeneficiaryResource\Schemas\StayForm;
 use App\Models\Stay;
 use Filament\Actions\Action;
-use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Hidden;
 
 class ExtendStayAction extends Action
 {
@@ -29,9 +30,7 @@ class ExtendStayAction extends Action
 
         $this->modalHeading(
             fn (Stay $record) => __('app.stay.actions.extend.confirm.title', [
-                'stay' => $record->id,
-                'start_date' => $record->start_date->toFormattedDate(),
-                'end_date' => $record->end_date->toFormattedDate(),
+                'title' => $record->title,
             ])
         );
 
@@ -39,12 +38,17 @@ class ExtendStayAction extends Action
 
         $this->modalWidth('md');
 
+        $this->fillForm(fn (Stay $record) => [
+            'start_date' => $record->start_date,
+            'end_date' => $record->end_date,
+            'is_indefinite' => $record->is_indefinite,
+        ]);
+
         $this->form([
-            DatePicker::make('end_date')
-                ->label(__('app.field.end_date'))
-                ->after(fn (Stay $record) => $record->end_date->toDateString())
-                ->default(fn (Stay $record) => $record->end_date->toDateString())
-                ->required(),
+            Hidden::make('start_date')
+                ->label(__('app.field.start_date')),
+
+            StayForm::getEndDateGroup(),
         ]);
 
         $this->action(function (Stay $record, array $data) {

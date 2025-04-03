@@ -77,7 +77,7 @@ class Beneficiary extends Model implements HasMedia
 
     public function latestStay(): HasOne
     {
-        return $this->hasOne(Stay::class)->latestOfMany('end_date');
+        return $this->hasOne(Stay::class)->latestOfMany();
     }
 
     public function documents(): HasMany
