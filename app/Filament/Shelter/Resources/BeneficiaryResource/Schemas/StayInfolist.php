@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Shelter\Resources\BeneficiaryResource\Schemas;
 
+use App\Filament\Shelter\Resources\GroupResource;
 use App\Filament\Shelter\Resources\RequestResource;
 use App\Models\Stay;
 use Carbon\Carbon;
@@ -23,10 +24,10 @@ class StayInfolist
                     TextEntry::make('id')
                         ->label(__('app.field.id'))
                         ->prefix('#'),
+
                     TextEntry::make('created_at')
                         ->label(__('app.field.created_at'))
                         ->dateTime(),
-
                 ]),
 
             Section::make(__('app.stay.details'))
@@ -60,6 +61,14 @@ class StayInfolist
                         ->label(__('app.field.request'))
                         ->url(fn (Stay $record) => RequestResource::getUrl('view', [
                             'record' => $record->request_id,
+                        ]))
+                        ->color('primary'),
+
+                    TextEntry::make('group.title')
+                        ->visible(fn (Stay $record) => $record->has_group)
+                        ->label(__('app.field.group'))
+                        ->url(fn (Stay $record) => GroupResource::getUrl('view', [
+                            'record' => $record->group_id,
                         ]))
                         ->color('primary'),
                 ]),
