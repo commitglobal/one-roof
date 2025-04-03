@@ -124,7 +124,7 @@ class BeneficiaryResource extends Resource
                     ->formatStateUsing(fn (Stay $state) => \sprintf(
                         '%s – %s',
                         $state->start_date->toFormattedDate(),
-                        $state->end_date->toFormattedDate(),
+                        $state->end_date?->toFormattedDate() ?? __('app.stay.indefinite')
                     )),
             ])
             ->filters([

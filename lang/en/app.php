@@ -54,6 +54,7 @@ return [
         'id_type' => 'ID type',
         'id' => 'ID',
         'identifier' => 'Identifier',
+        'is_indefinite' => 'Indefinite end date',
         'label' => 'Label',
         'latest_stay' => 'Latest stay',
         'legal_documents' => 'Legal documents',
@@ -132,13 +133,14 @@ return [
             'singular' => 'stay',
             'plural' => 'stays',
         ],
+        'indefinite' => 'Indefinite',
         'details' => 'Stay details',
         'actions' => [
             'extend' => [
                 'button' => 'Extend stay',
                 'confirm' => [
                     'description' => 'Extend a beneficiary\'s stay by updating the end date.',
-                    'title' => 'Extend stay #:stay :start_date—:end_date',
+                    'title' => 'Extend stay :title',
                     'success' => 'Stay extended successfully.',
                 ],
             ],

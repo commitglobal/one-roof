@@ -33,4 +33,11 @@ class StayFactory extends Factory
             'children_notes' => $children ? fake()->optional()->sentence() : null,
         ];
     }
+
+    public function indefinite(): static
+    {
+        return $this->state([
+            'end_date' => null,
+        ]);
+    }
 }

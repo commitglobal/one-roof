@@ -15,6 +15,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Get;
+use Filament\Forms\Set;
 use Illuminate\Support\Str;
 
 class StayForm
@@ -32,10 +33,7 @@ class StayForm
                         ->label(__('app.field.start_date'))
                         ->required(),
 
-                    DatePicker::make('end_date')
-                        ->label(__('app.field.end_date'))
-                        ->afterOrEqual('start_date')
-                        ->required(),
+                    static::getEndDateGroup(),
 
                     Checkbox::make('has_children')
                         ->label(__('app.field.has_children'))
@@ -86,5 +84,26 @@ class StayForm
 
                 ]),
         ];
+    }
+
+    public static function getEndDateGroup(): Group
+    {
+        return Group::make()
+            ->schema([
+                DatePicker::make('end_date')
+                    ->label(__('app.field.end_date'))
+                    ->afterOrEqual('start_date')
+                    ->required(fn (Get $get) => ! $get('is_indefinite'))
+                    ->disabled(fn (Get $get) => $get('is_indefinite')),
+
+                Checkbox::make('is_indefinite')
+                    ->label(__('app.field.is_indefinite'))
+                    ->live()
+                    ->afterStateUpdated(function (bool $state, Set $set) {
+                        if ($state) {
+                            $set('end_date', null);
+                        }
+                    }),
+            ]);
     }
 }

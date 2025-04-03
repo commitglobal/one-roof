@@ -6,9 +6,11 @@ namespace App\Filament\Shelter\Resources\BeneficiaryResource\Schemas;
 
 use App\Filament\Shelter\Resources\RequestResource;
 use App\Models\Stay;
+use Carbon\Carbon;
 use Filament\Infolists\Components\Group;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Infolist;
 
 class StayInfolist
 {
@@ -34,9 +36,7 @@ class StayInfolist
                         ->label(__('app.field.start_date'))
                         ->date(),
 
-                    TextEntry::make('end_date')
-                        ->label(__('app.field.end_date'))
-                        ->date(),
+                    static::getEndDateTextEntry(),
 
                     TextEntry::make('has_children')
                         ->label(__('app.field.has_children'))
@@ -72,5 +72,21 @@ class StayInfolist
                         ->color('primary'),
                 ]),
         ];
+    }
+
+    public static function getEndDateTextEntry(): TextEntry
+    {
+        return TextEntry::make('end_date')
+            ->label(__('app.field.end_date'))
+            ->date()
+            ->formatStateUsing(function (TextEntry $component, $state) {
+                if (blank($state) || $component->getDefaultState() === $state) {
+                    return __('app.stay.indefinite');
+                }
+
+                return Carbon::parse($state)
+                    ->setTimezone($component->getTimezone())
+                    ->translatedFormat($component->evaluate(Infolist::$defaultDateDisplayFormat));
+            });
     }
 }
