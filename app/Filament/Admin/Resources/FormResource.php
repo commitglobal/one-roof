@@ -145,8 +145,12 @@ class FormResource extends Resource
                     Tables\Actions\EditAction::make(),
 
                     PublishAction::make(),
-                    // TODO: ignore status field
-                    Tables\Actions\ReplicateAction::make(),
+
+                    Tables\Actions\ReplicateAction::make()
+                        ->excludeAttributes(['status'])
+                        ->after(function (FormModel $record, FormModel $replica) {
+                            // TODO: Add logic to copy sections and fields from $record to $replica
+                        }),
 
                     Tables\Actions\DeleteAction::make(),
                 ]),
