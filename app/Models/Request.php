@@ -6,6 +6,7 @@ namespace App\Models;
 
 use App\Concerns\HasRequestStatus;
 use App\Concerns\LogsActivity;
+use App\Concerns\Searchable;
 use App\Data\GroupMemberData;
 use App\Data\PersonData;
 use App\Enums\Gender;
@@ -26,6 +27,7 @@ class Request extends Model
     use HasFactory;
     use HasRequestStatus;
     use LogsActivity;
+    use Searchable;
 
     protected static string $factory = RequestFactory::class;
 
@@ -124,5 +126,45 @@ class Request extends Model
                 $this->beneficiary->name,
             )
         );
+    }
+
+    public static function typesenseModelSettings(): array
+    {
+        return [
+            'collection-schema' => [
+                'fields' => [
+                    [
+                        'name' => 'id',
+                        'type' => 'string',
+                    ],
+                    [
+                        'name' => 'searchable_id',
+                        'type' => 'string',
+                    ],
+                    [
+                        'name' => 'shelter_id',
+                        'type' => 'int64',
+                        'optional' => true,
+                    ],
+                    [
+                        'name' => 'beneficiary_name',
+                        'type' => 'string',
+                    ],
+                ],
+            ],
+            'search-parameters' => [
+                'query_by' => 'searchable_id,beneficiary_name',
+            ],
+        ];
+    }
+
+    public function toSearchableArray(): array
+    {
+        return [
+            'id' => (string) $this->id,
+            'searchable_id' => (string) $this->id,
+            'shelter_id' => $this->shelter_id,
+            'beneficiary_name' => $this->beneficiary->name,
+        ];
     }
 }

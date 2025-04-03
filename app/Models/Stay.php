@@ -28,6 +28,7 @@ class Stay extends Model
         'start_date',
         'end_date',
         'beneficiary_id',
+        'group_id',
         'request_id',
         'children_count',
         'children_notes',

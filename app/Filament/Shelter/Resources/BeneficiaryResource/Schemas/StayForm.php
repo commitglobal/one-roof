@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Filament\Shelter\Resources\BeneficiaryResource\Schemas;
 
+use App\Models\Group as GroupModel;
 use App\Models\Request;
+use App\Models\Shelter;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\DatePicker;
@@ -16,7 +18,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
-use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Builder;
 
 class StayForm
 {
@@ -57,6 +59,21 @@ class StayForm
                                 ->rows(5),
                         ]),
 
+                    Checkbox::make('has_group')
+                        ->label(__('app.field.has_group'))
+                        ->columnSpanFull()
+                        ->live(),
+
+                    Select::make('group_id')
+                        ->label(__('app.field.group'))
+                        ->visible(fn (Get $get) => $get('has_group'))
+                        ->columnSpanFull()
+                        ->searchable()
+                        ->preload()
+                        ->required()
+                        ->getSearchResultsUsing(fn (string $search) => static::getGroupOptions(Filament::getTenant(), $search))
+                        ->options(fn () => static::getGroupOptions(Filament::getTenant())),
+
                     Checkbox::make('has_request')
                         ->label(__('app.field.has_request'))
                         ->columnSpanFull()
@@ -69,19 +86,8 @@ class StayForm
                         ->searchable()
                         ->preload()
                         ->required()
-                        ->getSearchResultsUsing(
-                            fn (string $search) => Request::query()
-                                ->whereAllocatable()
-                                ->where('shelter_id', Filament::getTenant()->getKey())
-                                ->where(function ($query) use ($search) {
-                                    $query->whereLike('id', Str::remove('#', $search) . '%')
-                                        ->orWhereLike('beneficiary->name', "%{$search}%");
-                                })
-                                ->get()
-                                ->pluck('title', 'id')
-                        )
-                        ->getOptionLabelUsing(fn ($value) => Request::find($value)->title()),
-
+                        ->getSearchResultsUsing(fn (string $search) => static::getRequestOptions(Filament::getTenant(), $search))
+                        ->options(fn () => static::getRequestOptions(Filament::getTenant())),
                 ]),
         ];
     }
@@ -105,5 +111,51 @@ class StayForm
                         }
                     }),
             ]);
+    }
+
+    protected static function getGroupOptions(Shelter $shelter, ?string $search = null): array
+    {
+        if (filled($search)) {
+            $options = GroupModel::search($search)
+                ->query(
+                    fn (Builder $query) => $query
+                        ->whereBelongsTo($shelter)
+                        ->limit(50)
+                )
+                ->where('shelter_id', $shelter->id)
+                ->get();
+        } else {
+            $options = GroupModel::query()
+                ->whereBelongsTo($shelter)
+                ->limit(50)
+                ->get();
+        }
+
+        return $options
+            ->pluck('title', 'id')
+            ->all();
+    }
+
+    protected static function getRequestOptions(Shelter $shelter, ?string $search = null): array
+    {
+        if (filled($search)) {
+            $options = Request::search($search)
+                ->query(
+                    fn (Builder $query) => $query
+                        ->whereBelongsTo($shelter)
+                        ->limit(50)
+                )
+                ->where('shelter_id', $shelter->id)
+                ->get();
+        } else {
+            $options = Request::query()
+                ->whereBelongsTo($shelter)
+                ->limit(50)
+                ->get();
+        }
+
+        return $options
+            ->pluck('title', 'id')
+            ->all();
     }
 }
