@@ -449,7 +449,7 @@ return [
                 'button' => 'Prolongar estancia',
                 'confirm' => [
                     'description' => 'Amplíe la estancia de un beneficiario actualizando la fecha de finalización.',
-                    'title' => 'Prolongar estancia #:stay:start_date—:end_date',
+                    'title' => 'Prolongar estancia :title',
                     'success' => 'Manténgase extendido con éxito.',
                 ],
             ],

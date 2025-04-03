@@ -9,6 +9,7 @@ use App\Filament\Shelter\Resources\BeneficiaryResource\Schemas\StayForm;
 use App\Filament\Shelter\Resources\RequestResource;
 use App\Models\Beneficiary;
 use App\Models\Stay;
+use Carbon\Carbon;
 use Filament\Tables\Actions\CreateAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
@@ -40,7 +41,16 @@ class StaysWidget extends BaseWidget
 
                 TextColumn::make('end_date')
                     ->label(__('app.field.end_date'))
-                    ->date()
+                    ->default(__('app.stay.indefinite'))
+                    ->formatStateUsing(function (TextColumn $column, $state) {
+                        if (blank($state) || $state === __('app.stay.indefinite')) {
+                            return $state;
+                        }
+
+                        return Carbon::parse($state)
+                            ->setTimezone($column->getTimezone())
+                            ->translatedFormat($column->evaluate(Table::$defaultDateDisplayFormat));
+                    })
                     ->sortable()
                     ->shrink(),
 

@@ -93,7 +93,7 @@ class StayForm
                 DatePicker::make('end_date')
                     ->label(__('app.field.end_date'))
                     ->afterOrEqual('start_date')
-                    ->required()
+                    ->required(fn (Get $get) => ! $get('is_indefinite'))
                     ->disabled(fn (Get $get) => $get('is_indefinite')),
 
                 Checkbox::make('is_indefinite')
