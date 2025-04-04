@@ -26,6 +26,7 @@ class ShelterAttribute extends Model
         'name',
         'type',
         'is_enabled',
+        'is_listed',
     ];
 
     public array $translatable = [
@@ -37,6 +38,7 @@ class ShelterAttribute extends Model
         return [
             'type' => AttributeType::class,
             'is_enabled' => 'boolean',
+            'is_listed' => 'boolean',
         ];
     }
 
@@ -57,5 +59,12 @@ class ShelterAttribute extends Model
     public function scopeWhereAttribute(Builder $query): Builder
     {
         return $query->where('type', AttributeType::ATTRIBUTE);
+    }
+
+    public function scopeWhereListed(Builder $query): Builder
+    {
+        return $query
+            ->where('is_enabled', true)
+            ->where('is_listed', true);
     }
 }

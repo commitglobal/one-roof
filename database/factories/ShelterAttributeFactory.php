@@ -25,6 +25,7 @@ class ShelterAttributeFactory extends Factory
             'name' => fake()->word(),
             'is_enabled' => true,
             'type' => AttributeType::ATTRIBUTE,
+            'is_listed' => fake()->boolean(),
         ];
     }
 
