@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace App\Filament\Admin\Resources\OrganizationResource\RelationManagers;
 
+use App\Filament\Admin\Resources\OrganizationResource\Actions\ListShelterAction;
+use App\Filament\Admin\Resources\OrganizationResource\Actions\UnlistShelterAction;
 use App\Filament\Admin\Resources\OrganizationResource\Schemas\SheltersForm;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -26,6 +29,11 @@ class SheltersRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('name')
             ->columns([
+                IconColumn::make('is_listed')
+                    ->label(__('app.field.is_listed'))
+                    ->boolean()
+                    ->shrink(),
+
                 TextColumn::make('name')
                     ->label(__('app.field.name'))
                     ->searchable()
@@ -50,7 +58,6 @@ class SheltersRelationManager extends RelationManager
                     ->wrap()
                     ->searchable()
                     ->sortable(),
-
             ])
             ->filters([
                 //
@@ -60,9 +67,17 @@ class SheltersRelationManager extends RelationManager
                     ->createAnother(false),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\ViewAction::make(),
+
+                    Tables\Actions\EditAction::make(),
+
+                    ListShelterAction::make(),
+
+                    UnlistShelterAction::make(),
+
+                    Tables\Actions\DeleteAction::make(),
+                ]),
             ]);
     }
 }

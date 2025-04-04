@@ -41,6 +41,7 @@ class ShelterFactory extends Factory
                 phone: fake()->e164PhoneNumber(),
             ),
             'notes' => fake()->paragraph(),
+            'is_listed' => fake()->boolean(),
         ];
     }
 

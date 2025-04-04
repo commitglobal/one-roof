@@ -56,6 +56,7 @@ return [
         'id' => 'ID',
         'identifier' => 'Identifier',
         'is_indefinite' => 'Indefinite end date',
+        'is_listed' => 'Listed',
         'label' => 'Label',
         'latest_stay' => 'Latest stay',
         'legal_documents' => 'Legal documents',
@@ -258,6 +259,24 @@ return [
             'plural' => 'shelters',
         ],
         'profile' => 'Profile',
+        'actions' => [
+            'list' => [
+                'button' => 'List shelter',
+                'confirm' => [
+                    'description' => 'Once a shelter is listed, it will be displayed in the public request form and in the referral process. In order to eliminate the shelter from these lists, it needs to be unlisted.',
+                    'title' => 'List shelter',
+                    'success' => 'Shelter listed successfully.',
+                ],
+            ],
+            'unlist' => [
+                'button' => 'Unlist shelter',
+                'confirm' => [
+                    'description' => 'Once a shelter is unlisted, it will no longer be displayed in the public request form or in the referral process. To include the shelter in these lists again, it needs to be listed.',
+                    'title' => 'Unlist shelter',
+                    'success' => 'Shelter unlisted successfully.',
+                ],
+            ],
+        ],
     ],
     'user' => [
         'label' => [
