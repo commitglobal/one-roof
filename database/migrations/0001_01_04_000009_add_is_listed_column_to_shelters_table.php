@@ -12,7 +12,7 @@ return new class extends Migration
     {
         Schema::table('shelters', function (Blueprint $table) {
             $table->boolean('is_listed')
-                ->default(true)
+                ->default(false)
                 ->after('capacity');
         });
     }

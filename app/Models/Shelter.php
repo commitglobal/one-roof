@@ -95,4 +95,28 @@ class Shelter extends Model
                 ->count(),
         );
     }
+
+    public function isListed(): bool
+    {
+        return $this->is_listed;
+    }
+
+    public function isUnlisted(): bool
+    {
+        return ! $this->isListed();
+    }
+
+    public function list(): bool
+    {
+        return $this->update([
+            'is_listed' => true,
+        ]);
+    }
+
+    public function unlist(): bool
+    {
+        return $this->update([
+            'is_listed' => false,
+        ]);
+    }
 }
