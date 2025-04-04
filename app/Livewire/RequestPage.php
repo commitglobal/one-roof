@@ -87,6 +87,7 @@ class RequestPage extends SimplePage implements TranslatablePage
     public function form(Form $form): Form
     {
         $shelters = Shelter::query()
+            ->whereListed()
             ->get(['id', 'name', 'address']);
 
         return $form

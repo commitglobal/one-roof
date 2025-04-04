@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
 
 class SheltersRelationManager extends RelationManager
@@ -26,6 +27,10 @@ class SheltersRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('name')
             ->columns([
+                ToggleColumn::make('is_listed')
+                    ->label(__('app.field.is_listed'))
+                    ->shrink(),
+
                 TextColumn::make('name')
                     ->label(__('app.field.name'))
                     ->searchable()
@@ -50,7 +55,6 @@ class SheltersRelationManager extends RelationManager
                     ->wrap()
                     ->searchable()
                     ->sortable(),
-
             ])
             ->filters([
                 //

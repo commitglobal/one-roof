@@ -56,6 +56,7 @@ return [
         'id' => 'ID',
         'identifier' => 'Identifier',
         'is_indefinite' => 'Indefinite end date',
+        'is_listed' => 'Listed',
         'label' => 'Label',
         'latest_stay' => 'Latest stay',
         'legal_documents' => 'Legal documents',

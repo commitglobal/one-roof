@@ -8,6 +8,7 @@ use App\Concerns\BelongsToOrganization;
 use App\Concerns\LogsActivity;
 use App\Data\PersonData;
 use Database\Factories\ShelterFactory;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -32,6 +33,7 @@ class Shelter extends Model
         'address',
         'coordinator',
         'notes',
+        'is_listed',
     ];
 
     protected function casts(): array
@@ -39,6 +41,7 @@ class Shelter extends Model
         return [
             'capacity' => 'integer',
             'coordinator' => PersonData::class,
+            'is_listed' => 'boolean',
         ];
     }
 
@@ -73,6 +76,15 @@ class Shelter extends Model
     public function shelterVariables(): BelongsToMany
     {
         return $this->belongsToMany(ShelterVariable::class);
+    }
+
+    public function scopeWhereListed(Builder $query): Builder
+    {
+        return $query
+            ->where('is_listed', true)
+            ->whereHas('organization', function (Builder $query) {
+                $query->whereActive();
+            });
     }
 
     public function availableCapacity(): Attribute

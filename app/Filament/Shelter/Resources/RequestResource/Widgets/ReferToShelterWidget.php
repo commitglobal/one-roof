@@ -33,6 +33,7 @@ class ReferToShelterWidget extends BaseWidget
         return $table
             ->query(
                 fn () => Shelter::query()
+                    ->whereListed()
                     ->whereNot('id', Filament::getTenant()->id)
                     ->with('shelterVariables')
             )
