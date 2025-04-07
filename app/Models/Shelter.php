@@ -68,6 +68,11 @@ class Shelter extends Model
         return $this->hasMany(Request::class);
     }
 
+    public function groups(): HasMany
+    {
+        return $this->hasMany(Group::class);
+    }
+
     public function stays(): HasMany
     {
         return $this->hasMany(Stay::class);
