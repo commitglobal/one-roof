@@ -277,6 +277,10 @@ return [
                 ],
             ],
         ],
+        'empty_state' => [
+            'header' => 'No shelter found',
+            'description' => 'Please try again with a different filter.',
+        ],
     ],
     'user' => [
         'label' => [

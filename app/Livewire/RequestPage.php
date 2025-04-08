@@ -8,27 +8,32 @@ use App\Concerns\HasTranslatablePage;
 use App\Contracts\TranslatablePage;
 use App\Enums\Gender;
 use App\Enums\SpecialNeed;
+use App\Forms\Components\RadioCard;
 use App\Forms\Components\TableRepeater;
 use App\Models\Country;
+use App\Models\Location;
 use App\Models\Request;
 use App\Models\Shelter;
+use App\Models\ShelterAttribute;
 use Awcodes\TableRepeater\Header;
 use DanHarrin\LivewireRateLimiting\Exceptions\TooManyRequestsException;
 use DanHarrin\LivewireRateLimiting\WithRateLimiting;
 use Filament\Actions\Action;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\Radio;
+use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\View;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Notifications\Notification;
 use Filament\Pages\Concerns\InteractsWithFormActions;
 use Filament\Pages\SimplePage;
 use Filament\Support\Enums\MaxWidth;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 
@@ -88,7 +93,21 @@ class RequestPage extends SimplePage implements TranslatablePage
     {
         $shelters = Shelter::query()
             ->whereListed()
-            ->get(['id', 'name', 'address']);
+            ->with('shelterVariables')
+            ->when(
+                data_get($this->data, 'filters.variables'),
+                fn (Builder $query, array $variables) => $query->whereHasShelterVariables($variables)
+            )
+            ->when(
+                data_get($this->data, 'filters.locations'),
+                fn (Builder $query, array $locations) => $query->whereIn('location_id', $locations)
+            )
+            ->get();
+
+        $attributes = ShelterAttribute::query()
+            ->with('shelterVariables')
+            ->whereListed()
+            ->get();
 
         return $form
             ->schema([
@@ -102,7 +121,6 @@ class RequestPage extends SimplePage implements TranslatablePage
                         Checkbox::make('for_group')
                             ->label(__('app.field.request_group'))
                             ->live(),
-
                     ]),
 
                 Section::make(__('app.field.requester'))
@@ -169,13 +187,51 @@ class RequestPage extends SimplePage implements TranslatablePage
 
                 Section::make(__('app.field.request_shelter'))
                     ->schema([
-                        Radio::make('shelter_id')
+                        Grid::make()
+                            ->statePath('filters')
+                            ->schema([
+                                Select::make('locations')
+                                    ->label(__('app.field.location'))
+                                    ->options(
+                                        Location::query()
+                                            ->whereHas('shelters')
+                                            ->get()
+                                            ->pluck('name', 'id')
+                                    )
+                                    ->searchable()
+                                    ->multiple()
+                                    ->lazy(),
+
+                                ...$attributes->map(
+                                    fn (ShelterAttribute $shelterAttribute) => Select::make("variables.{$shelterAttribute->id}")
+                                        ->label($shelterAttribute->name)
+                                        ->options($shelterAttribute->shelterVariables->pluck('name', 'id'))
+                                        ->searchable()
+                                        ->multiple()
+                                        ->lazy(),
+                                )->all(),
+                            ]),
+
+                        RadioCard::make('shelter_id')
                             ->label(__('app.field.request_shelter'))
                             ->columns()
                             ->hiddenLabel()
                             ->options($shelters->mapWithKeys(fn (Shelter $shelter) => [$shelter->id => $shelter->name]))
-                            ->descriptions($shelters->mapWithKeys(fn (Shelter $shelter) => [$shelter->id => $shelter->address]))
+                            ->descriptions($shelters->mapWithKeys(fn (Shelter $shelter) => [
+                                $shelter->id => view('forms.components.shelter-radio-card-content', [
+                                    'shelter' => $shelter,
+                                    'attributes' => $attributes,
+                                ]),
+                            ]))
                             ->required(),
+
+                        View::make('filament-tables::components.empty-state.index')
+                            ->visible($shelters->isEmpty())
+                            ->viewData([
+                                'icon' => 'heroicon-o-magnifying-glass',
+                                'heading' => __('app.shelter.empty_state.header'),
+                                'description' => __('app.shelter.empty_state.description'),
+                            ]),
                     ]),
 
                 Section::make(__('app.field.group'))
@@ -217,6 +273,7 @@ class RequestPage extends SimplePage implements TranslatablePage
                     ->schema([
                         DatePicker::make('start_date')
                             ->label(__('app.field.start_date'))
+                            ->afterOrEqual('today')
                             ->required(),
 
                         DatePicker::make('end_date')
