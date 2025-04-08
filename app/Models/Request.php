@@ -143,7 +143,7 @@ class Request extends Model
                     ],
                     [
                         'name' => 'shelter_id',
-                        'type' => 'int64',
+                        'type' => 'string',
                         'optional' => true,
                     ],
                     [
@@ -163,7 +163,7 @@ class Request extends Model
         return [
             'id' => (string) $this->id,
             'searchable_id' => (string) $this->id,
-            'shelter_id' => $this->shelter_id,
+            'shelter_id' => (string) $this->shelter_id,
             'beneficiary_name' => $this->beneficiary->name,
         ];
     }

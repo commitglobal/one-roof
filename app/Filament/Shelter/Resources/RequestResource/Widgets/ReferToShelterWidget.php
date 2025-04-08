@@ -19,6 +19,7 @@ use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Illuminate\Support\HtmlString;
 
@@ -30,6 +31,10 @@ class ReferToShelterWidget extends BaseWidget
 
     public function table(Table $table): Table
     {
+        $attributes = ShelterAttribute::query()
+            ->with('shelterVariables')
+            ->get();
+
         return $table
             ->query(
                 fn () => Shelter::query()
@@ -75,6 +80,14 @@ class ReferToShelterWidget extends BaseWidget
             ->filters([
                 SelectFilter::make('location')
                     ->relationship('location', 'name'),
+
+                ...$attributes->map(
+                    fn (ShelterAttribute $shelterAttribute) => SelectFilter::make("attribute.{$shelterAttribute->id}")
+                        ->query(fn (Builder $query, array $state) => $query->whereHasShelterVariables($state))
+                        ->options($shelterAttribute->shelterVariables->pluck('name', 'id'))
+                        ->label($shelterAttribute->name)
+                        ->multiple()
+                ),
 
             ], FiltersLayout::AboveContent)
             ->paginated(false);

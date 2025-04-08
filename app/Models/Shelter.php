@@ -92,6 +92,21 @@ class Shelter extends Model
             });
     }
 
+    public function scopeWhereHasShelterVariables(Builder $query, array $variables): Builder
+    {
+        $variables = collect($variables)
+            ->filter(fn (array $value) => filled($value));
+
+        if ($variables->isEmpty()) {
+            return $query;
+        }
+
+        return $query
+            ->whereHas('shelterVariables', function (Builder $query) use ($variables) {
+                $variables->each(fn (array $values) => $query->whereIn('shelter_variables.id', $values));
+            });
+    }
+
     public function availableCapacity(): Attribute
     {
         return Attribute::make(
