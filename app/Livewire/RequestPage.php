@@ -189,6 +189,7 @@ class RequestPage extends SimplePage implements TranslatablePage
                     ->schema([
                         Grid::make()
                             ->statePath('filters')
+                            ->columns(3)
                             ->schema([
                                 Select::make('locations')
                                     ->label(__('app.field.location'))
