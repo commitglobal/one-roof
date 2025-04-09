@@ -13,6 +13,7 @@ use Filament\Tables;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class SheltersRelationManager extends RelationManager
 {
@@ -41,6 +42,24 @@ class SheltersRelationManager extends RelationManager
 
                 TextColumn::make('capacity')
                     ->label(__('app.field.capacity'))
+                    ->sortable()
+                    ->numeric()
+                    ->alignRight()
+                    ->shrink(),
+
+                TextColumn::make('current_stays_count')
+                    ->label(__('app.field.occupancy'))
+                    ->counts([
+                        'stays as current_stays_count' => fn (Builder $query) => $query->whereCurrent(),
+                    ])
+                    ->sortable()
+                    ->numeric()
+                    ->alignRight()
+                    ->shrink(),
+
+                TextColumn::make('stays_count')
+                    ->label(__('app.field.all_time_beneficiaries'))
+                    ->counts('stays')
                     ->sortable()
                     ->numeric()
                     ->alignRight()
