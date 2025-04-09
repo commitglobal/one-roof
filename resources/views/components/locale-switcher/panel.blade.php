@@ -12,7 +12,6 @@
             @foreach ($locales as $locale)
                 <x-filament::dropdown.list.item
                     :color="$locale->isCurrent() ? 'primary' : null"
-                    2icon="heroicon-m-chevron-right"
                     :action="route('preferred-locale', ['locale' => $locale->code])"
                     method="post"
                     tag="form">
