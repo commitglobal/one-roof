@@ -1,5 +1,5 @@
 <div class="text-sm leading-6 text-gray-600 dark:text-gray-400">
-    {{ $shelter->address }}
+    {{ $shelter->full_address }}
 </div>
 
 <dl class="grid grid-cols-2 gap-4">

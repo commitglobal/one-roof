@@ -93,7 +93,11 @@ class RequestPage extends SimplePage implements TranslatablePage
     {
         $shelters = Shelter::query()
             ->whereListed()
-            ->with('shelterVariables')
+            ->with([
+                'country',
+                'location',
+                'shelterVariables',
+            ])
             ->when(
                 data_get($this->data, 'filters.variables'),
                 fn (Builder $query, array $variables) => $query->whereHasShelterVariables($variables)

@@ -500,6 +500,22 @@ return [
                     'success' => 'Attribute deactivated successfully.',
                 ],
             ],
+            'list' => [
+                'button' => 'List attribute',
+                'confirm' => [
+                    'description' => 'Once a attribute is listed, it will be displayed in the public request form. In order to eliminate the attribute from this lists, it needs to be unlisted.',
+                    'title' => 'List shelter attribute',
+                    'success' => 'Shelter attribute listed successfully.',
+                ],
+            ],
+            'unlist' => [
+                'button' => 'Unlist attribute',
+                'confirm' => [
+                    'description' => 'Once a attribute is unlisted, it will no longer be displayed in the public request form. To include the attribute in this lists again, it needs to be listed.',
+                    'title' => 'Unlist shelter attribute',
+                    'success' => 'Shelter attribute unlisted successfully.',
+                ],
+            ],
         ],
     ],
 ];

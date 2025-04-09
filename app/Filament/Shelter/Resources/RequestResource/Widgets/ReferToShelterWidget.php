@@ -40,7 +40,11 @@ class ReferToShelterWidget extends BaseWidget
                 fn () => Shelter::query()
                     ->whereListed()
                     ->whereNot('id', Filament::getTenant()->id)
-                    ->with('shelterVariables')
+                    ->with([
+                        'country',
+                        'location',
+                        'shelterVariables',
+                    ])
             )
             ->contentGrid([
                 'md' => 2,
@@ -53,9 +57,9 @@ class ReferToShelterWidget extends BaseWidget
                         ->weight(FontWeight::Bold)
                         ->searchable(),
 
-                    TextColumn::make('address')
+                    TextColumn::make('full_address')
                         ->color(Color::Gray)
-                        ->searchable(),
+                        ->searchable('address'),
 
                     Split::make([
                         TextColumn::make('capacity')
