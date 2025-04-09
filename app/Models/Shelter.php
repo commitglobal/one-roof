@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Str;
 
 class Shelter extends Model
 {
@@ -113,6 +114,17 @@ class Shelter extends Model
             fn (mixed $value, array $attributes) => $attributes['capacity'] - $this->stays()
                 ->whereDate('end_date', '>', today())
                 ->count(),
+        );
+    }
+
+    public function fullAddress(): Attribute
+    {
+        return Attribute::make(
+            get: fn (mixed $value) => Str::trim(collect([
+                $this->address,
+                $this->location->name,
+                $this->country->name,
+            ])->filter()->implode(', ')),
         );
     }
 

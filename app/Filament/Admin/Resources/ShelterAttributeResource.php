@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Filament\Admin\Resources;
 
+use App\Filament\Admin\Resources\ShelterAttributeResource\Actions\ListAction;
+use App\Filament\Admin\Resources\ShelterAttributeResource\Actions\UnlistAction;
 use App\Filament\Admin\Resources\ShelterAttributeResource\Pages;
 use App\Forms\Components\TableRepeater;
 use App\Models\ShelterAttribute;
@@ -104,7 +106,11 @@ class ShelterAttributeResource extends Resource
 
                 TextColumn::make('shelter_variables_count')
                     ->label(__('app.field.variables'))
-                    ->counts('shelterVariables'),
+                    ->counts('shelterVariables')
+                    ->sortable()
+                    ->numeric()
+                    ->alignRight()
+                    ->shrink(),
 
                 // TextColumn::make('shelters_count')
                 //     ->label(__('app.field.usage'))
@@ -113,13 +119,29 @@ class ShelterAttributeResource extends Resource
 
                 IconColumn::make('is_enabled')
                     ->label(__('app.field.active'))
-                    ->boolean(),
+                    ->boolean()
+                    ->shrink(),
+
+                IconColumn::make('is_listed')
+                    ->label(__('app.field.is_listed'))
+                    ->boolean()
+                    ->shrink(),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\ViewAction::make(),
+
+                    Tables\Actions\EditAction::make(),
+
+                    ListAction::make(),
+
+                    UnlistAction::make(),
+
+                    Tables\Actions\DeleteAction::make(),
+                ]),
             ]);
     }
 
