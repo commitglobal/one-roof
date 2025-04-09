@@ -101,13 +101,12 @@ class User extends Authenticatable implements FilamentUser, HasTenants, HasLocal
 
     public function canAccessPanel(Panel $panel): bool
     {
-        // return true;
         if ($panel->getId() === 'admin') {
             return $this->hasElevatedPrivileges();
         }
 
         if ($panel->getId() === 'shelter') {
-            return true;
+            return $this->getTenants($panel)->isNotEmpty();
         }
 
         return false;
