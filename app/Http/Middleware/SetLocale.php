@@ -8,6 +8,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Number;
 use Symfony\Component\HttpFoundation\Response;
 
 class SetLocale
@@ -24,6 +25,8 @@ class SetLocale
         } else {
             $this->setLocaleForUser($request);
         }
+
+        Number::useLocale(App::getLocale());
 
         return $next($request);
     }
