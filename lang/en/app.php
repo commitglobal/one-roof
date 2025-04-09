@@ -377,6 +377,9 @@ return [
             'beneficiaries' => 'Total hosted beneficiaries',
             'organizations' => 'Total organizations',
             'shelters' => 'Total shelters',
+            'average_capacity' => 'Average shelter capacity',
+            'total_capacity' => 'Total shelter capacity',
+            'total_occupancy' => 'Total current occupancy',
         ],
         'beneficiaries' => [
             'nationalities' => 'Total beneficiaries per nationality',
