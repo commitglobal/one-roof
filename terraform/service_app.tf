@@ -111,22 +111,10 @@ module "ecs_app" {
       name  = "SENTRY_PROFILES_SAMPLE_RATE"
       value = 0.5
     },
-    # {
-    #   name  = "AWS_BUCKET_ROOT"
-    #   value = "media"
-    # },
-    # {
-    #   name  = "REDIS_HOST"
-    #   value = aws_elasticache_cluster.main.cache_nodes.0.address
-    # },
-    # {
-    #   name  = "REDIS_PORT"
-    #   value = aws_elasticache_cluster.main.cache_nodes.0.port
-    # },
-    # {
-    #   name  = "SCOUT_DRIVER",
-    #   value = "typesense"
-    # },
+    {
+      name  = "SCOUT_DRIVER",
+      value = "database"
+    },
     {
       name  = "PHP_PM_MAX_CHILDREN",
       value = 128
