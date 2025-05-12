@@ -109,16 +109,6 @@ class Beneficiary extends Model implements HasMedia
         return $this->belongsTo(Country::class, 'residence_country_id');
     }
 
-    public function scopeWhereCurrentlyInShelter(Builder $query, ?Shelter $shelter = null): Builder
-    {
-        return $query->whereHas('stays', function (Builder $query) use ($shelter) {
-            return $query
-                ->whereDate('start_date', '<=', today())
-                ->whereDate('end_date', '>=', today())
-                ->when($shelter, fn (Builder $query) => $query->where('shelter_id', $shelter->id));
-        });
-    }
-
     public function scopeWhereInShelter(Builder $query, Shelter $shelter): Builder
     {
         return $query->whereRelation('stays', 'shelter_id', $shelter->id);
