@@ -63,7 +63,7 @@ class Stay extends Model
         return $query
             ->whereDate('start_date', '<=', today())
             ->where(function (Builder $query) {
-                $query->whereDate('end_date', '>=', today())
+                $query->whereDate('end_date', '>', today())
                     ->orWhereNull('end_date');
             });
     }
