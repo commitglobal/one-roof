@@ -22,6 +22,7 @@
 /storage/framework/views/*
 /storage/logs/*
 /tests
+/terraform
 /vendor
 _ide_helper_models.php
 _ide_helper.php
