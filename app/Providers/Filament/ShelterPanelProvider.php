@@ -33,6 +33,7 @@ class ShelterPanelProvider extends PanelProvider
             ->default()
             ->id('shelter')
             ->login(Login::class)
+            ->passwordReset()
             ->tenant(Shelter::class)
             ->tenantRoutePrefix('shelter')
             ->colors([
