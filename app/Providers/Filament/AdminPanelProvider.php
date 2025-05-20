@@ -24,6 +24,7 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Jeffgreco13\FilamentBreezy\BreezyCore;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -42,6 +43,17 @@ class AdminPanelProvider extends PanelProvider
             ->viteTheme('resources/css/filament/common/theme.css')
             ->brandLogo(fn () => view('filament.brand'))
             ->brandLogoHeight('3rem')
+            ->plugins([
+                BreezyCore::make()
+                    ->myProfile(slug: 'settings'),
+
+                SpatieLaravelTranslatablePlugin::make()
+                    ->defaultLocales(
+                        ! app()->runningInConsole()
+                           ? active_locales()->pluck('code')->all()
+                           : [app()->getLocale()]
+                    ),
+            ])
             ->discoverResources(
                 in: app_path('Filament/Admin/Resources'),
                 for: 'App\\Filament\\Admin\\Resources',
@@ -50,14 +62,6 @@ class AdminPanelProvider extends PanelProvider
                 in: app_path('Filament/Admin/Pages'),
                 for: 'App\\Filament\\Admin\\Pages',
             )
-            ->plugins([
-                SpatieLaravelTranslatablePlugin::make()
-                    ->defaultLocales(
-                        ! app()->runningInConsole()
-                           ? active_locales()->pluck('code')->all()
-                           : [app()->getLocale()]
-                    ),
-            ])
             ->pages([
                 Dashboard::class,
             ])
@@ -65,7 +69,6 @@ class AdminPanelProvider extends PanelProvider
                 in: app_path('Filament/Admin/Widgets'),
                 for: 'App\\Filament\\Admin\\Widgets',
             )
-            ->readOnlyRelationManagersOnResourceViewPagesByDefault(false)
             ->widgets([
                 // Widgets\AccountWidget::class,
                 // Widgets\FilamentInfoWidget::class,
@@ -86,6 +89,7 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
                 EnsureUserIsActive::class,
             ])
+            ->readOnlyRelationManagersOnResourceViewPagesByDefault(false)
             ->unsavedChangesAlerts();
     }
 }

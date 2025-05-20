@@ -24,6 +24,7 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Jeffgreco13\FilamentBreezy\BreezyCore;
 
 class ShelterPanelProvider extends PanelProvider
 {
@@ -44,6 +45,10 @@ class ShelterPanelProvider extends PanelProvider
             ->viteTheme('resources/css/filament/common/theme.css')
             ->brandLogo(fn () => view('filament.brand'))
             ->brandLogoHeight('3rem')
+            ->plugins([
+                BreezyCore::make()
+                    ->myProfile(slug: 'settings'),
+            ])
             ->discoverResources(
                 in: app_path('Filament/Shelter/Resources'),
                 for: 'App\\Filament\\Shelter\\Resources',
@@ -59,7 +64,6 @@ class ShelterPanelProvider extends PanelProvider
                 in: app_path('Filament/Shelter/Widgets'),
                 for: 'App\\Filament\\Shelter\\Widgets',
             )
-            ->readOnlyRelationManagersOnResourceViewPagesByDefault(false)
             ->widgets([
                 // Widgets\AccountWidget::class,
                 // Widgets\FilamentInfoWidget::class,
@@ -80,6 +84,7 @@ class ShelterPanelProvider extends PanelProvider
                 Authenticate::class,
                 EnsureUserIsActive::class,
             ])
+            ->readOnlyRelationManagersOnResourceViewPagesByDefault(false)
             ->unsavedChangesAlerts();
     }
 }
