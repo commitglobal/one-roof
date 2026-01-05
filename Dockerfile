@@ -1,8 +1,6 @@
-FROM code4romania/php:8.2 AS vendor
+FROM code4romania/php:8.4 AS vendor
 
-WORKDIR /var/www
-
-COPY --chown=www-data:www-data . /var/www
+COPY --chown=www-data:www-data . /var/www/html
 
 RUN set -ex; \
     composer install \
@@ -12,7 +10,7 @@ RUN set -ex; \
     --no-dev \
     --prefer-dist
 
-FROM node:22-alpine AS assets
+FROM node:24-alpine AS assets
 
 WORKDIR /build
 
@@ -26,7 +24,7 @@ COPY \
 RUN set -ex; \
     npm ci --no-audit --ignore-scripts
 
-COPY --from=vendor /var/www /build
+COPY --from=vendor /var/www/html /build
 
 RUN set -ex; \
     npm run build
@@ -36,11 +34,6 @@ FROM vendor
 ARG VERSION
 ARG REVISION
 
-RUN echo "$VERSION (${REVISION:0:7})" > /var/www/.version
+RUN echo "$VERSION (${REVISION:0:7})" > /var/www/html/.version
 
-COPY docker/s6-rc.d /etc/s6-overlay/s6-rc.d
-COPY --from=assets --chown=www-data:www-data /build/public/build /var/www/public/build
-
-ENV SENTRY_SAMPLE_RATE=1.0
-
-EXPOSE 80
+COPY --from=assets --chown=www-data:www-data /build/public/build /var/www/html/public/build
