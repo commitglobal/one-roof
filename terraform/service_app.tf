@@ -32,7 +32,7 @@ module "ecs_app" {
   log_group_name                 = module.ecs_cluster.log_group_name
   service_discovery_namespace_id = module.ecs_cluster.service_discovery_namespace_id
 
-  container_port          = 80
+  container_port          = 8080
   network_mode            = "awsvpc"
   network_security_groups = [aws_security_group.ecs.id]
   network_subnets         = [aws_subnet.private.0.id]
