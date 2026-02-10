@@ -2,7 +2,7 @@ locals {
   namespace = "one-roof-${var.env}"
   image = {
     repo = "commitglobal/one-roof",
-    tag  = "0.6.1"
+    tag  = "0.7.0"
   }
 
   availability_zone = data.aws_availability_zones.current.names[0]
