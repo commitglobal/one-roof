@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e2681203d204bb360db131ad33af00f8",
+    "content-hash": "3f974cd5d3f4812d0af122d34bdcca14",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -203,16 +203,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.369.24",
+            "version": "3.371.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "17f404a47879c1fb47175ac2b61881ab0dc2dc5c"
+                "reference": "d300ec1c861e52dc8f17ca3d75dc754da949f065"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/17f404a47879c1fb47175ac2b61881ab0dc2dc5c",
-                "reference": "17f404a47879c1fb47175ac2b61881ab0dc2dc5c",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/d300ec1c861e52dc8f17ca3d75dc754da949f065",
+                "reference": "d300ec1c861e52dc8f17ca3d75dc754da949f065",
                 "shasum": ""
             },
             "require": {
@@ -276,11 +276,11 @@
             "authors": [
                 {
                     "name": "Amazon Web Services",
-                    "homepage": "http://aws.amazon.com"
+                    "homepage": "https://aws.amazon.com"
                 }
             ],
             "description": "AWS SDK for PHP - Use Amazon Web Services in your PHP project",
-            "homepage": "http://aws.amazon.com/sdkforphp",
+            "homepage": "https://aws.amazon.com/sdk-for-php",
             "keywords": [
                 "amazon",
                 "aws",
@@ -294,9 +294,9 @@
             "support": {
                 "forum": "https://github.com/aws/aws-sdk-php/discussions",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.369.24"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.371.3"
             },
-            "time": "2026-01-30T19:14:32+00:00"
+            "time": "2026-02-27T19:05:40+00:00"
         },
         {
             "name": "blade-ui-kit/blade-heroicons",
@@ -3558,16 +3558,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "3.31.0",
+            "version": "3.32.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "1717e0b3642b0df65ecb0cc89cdd99fa840672ff"
+                "reference": "254b1595b16b22dbddaaef9ed6ca9fdac4956725"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/1717e0b3642b0df65ecb0cc89cdd99fa840672ff",
-                "reference": "1717e0b3642b0df65ecb0cc89cdd99fa840672ff",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/254b1595b16b22dbddaaef9ed6ca9fdac4956725",
+                "reference": "254b1595b16b22dbddaaef9ed6ca9fdac4956725",
                 "shasum": ""
             },
             "require": {
@@ -3635,22 +3635,22 @@
             ],
             "support": {
                 "issues": "https://github.com/thephpleague/flysystem/issues",
-                "source": "https://github.com/thephpleague/flysystem/tree/3.31.0"
+                "source": "https://github.com/thephpleague/flysystem/tree/3.32.0"
             },
-            "time": "2026-01-23T15:38:47+00:00"
+            "time": "2026-02-25T17:01:41+00:00"
         },
         {
             "name": "league/flysystem-aws-s3-v3",
-            "version": "3.31.0",
+            "version": "3.32.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem-aws-s3-v3.git",
-                "reference": "e36a2bc60b06332c92e4435047797ded352b446f"
+                "reference": "a1979df7c9784d334ea6df356aed3d18ac6673d0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem-aws-s3-v3/zipball/e36a2bc60b06332c92e4435047797ded352b446f",
-                "reference": "e36a2bc60b06332c92e4435047797ded352b446f",
+                "url": "https://api.github.com/repos/thephpleague/flysystem-aws-s3-v3/zipball/a1979df7c9784d334ea6df356aed3d18ac6673d0",
+                "reference": "a1979df7c9784d334ea6df356aed3d18ac6673d0",
                 "shasum": ""
             },
             "require": {
@@ -3690,9 +3690,9 @@
                 "storage"
             ],
             "support": {
-                "source": "https://github.com/thephpleague/flysystem-aws-s3-v3/tree/3.31.0"
+                "source": "https://github.com/thephpleague/flysystem-aws-s3-v3/tree/3.32.0"
             },
-            "time": "2026-01-23T15:30:45+00:00"
+            "time": "2026-02-25T16:46:44+00:00"
         },
         {
             "name": "league/flysystem-local",
@@ -8344,16 +8344,16 @@
         },
         {
             "name": "symfony/filesystem",
-            "version": "v8.0.1",
+            "version": "v8.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "d937d400b980523dc9ee946bb69972b5e619058d"
+                "reference": "7bf9162d7a0dff98d079b72948508fa48018a770"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/d937d400b980523dc9ee946bb69972b5e619058d",
-                "reference": "d937d400b980523dc9ee946bb69972b5e619058d",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/7bf9162d7a0dff98d079b72948508fa48018a770",
+                "reference": "7bf9162d7a0dff98d079b72948508fa48018a770",
                 "shasum": ""
             },
             "require": {
@@ -8390,7 +8390,7 @@
             "description": "Provides basic utilities for the filesystem",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/filesystem/tree/v8.0.1"
+                "source": "https://github.com/symfony/filesystem/tree/v8.0.6"
             },
             "funding": [
                 {
@@ -8410,7 +8410,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-12-01T09:13:36+00:00"
+            "time": "2026-02-25T16:59:43+00:00"
         },
         {
             "name": "symfony/finder",
