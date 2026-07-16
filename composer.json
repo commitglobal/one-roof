@@ -28,7 +28,7 @@
         "sentry/sentry-laravel": "^4.21",
         "spatie/laravel-activitylog": "^4.12",
         "spatie/laravel-data": "^4.20",
-        "tpetry/laravel-query-expressions": "^1.5",
+        "tpetry/laravel-query-expressions": "^1.6",
         "typesense/typesense-php": "^6.0"
     },
     "require-dev": {
