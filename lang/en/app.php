@@ -388,6 +388,9 @@ return [
             'residencies' => 'Total beneficiaries per country of residence',
             'genders' => 'Total beneficiaries per gender',
         ],
+        'requests' => [
+            'status' => 'Total requests per status',
+        ],
     ],
     'request' => [
         'label' => [
