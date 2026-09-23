@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1c8e9655b66cb7901eec1cb66d2fd312",
+    "content-hash": "dd7e6b6959b07e4cea5609a2d922d06c",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -3020,16 +3020,16 @@
         },
         {
             "name": "laravel/scout",
-            "version": "v10.24.0",
+            "version": "v11.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/scout.git",
-                "reference": "f9864d9a727a0c0d6b95e08ed92df8c301ae6d2c"
+                "reference": "176a97da0a33bbd66bc4eaa2884249bf629d3d31"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/scout/zipball/f9864d9a727a0c0d6b95e08ed92df8c301ae6d2c",
-                "reference": "f9864d9a727a0c0d6b95e08ed92df8c301ae6d2c",
+                "url": "https://api.github.com/repos/laravel/scout/zipball/176a97da0a33bbd66bc4eaa2884249bf629d3d31",
+                "reference": "176a97da0a33bbd66bc4eaa2884249bf629d3d31",
                 "shasum": ""
             },
             "require": {
@@ -3057,6 +3057,7 @@
             },
             "suggest": {
                 "algolia/algoliasearch-client-php": "Required to use the Algolia engine (^3.2).",
+                "laravel/ai": "Required to generate embeddings for semantic and hybrid search.",
                 "meilisearch/meilisearch-php": "Required to use the Meilisearch engine (^1.0).",
                 "typesense/typesense-php": "Required to use the Typesense engine (^4.9)."
             },
@@ -3068,7 +3069,7 @@
                     ]
                 },
                 "branch-alias": {
-                    "dev-master": "10.x-dev"
+                    "dev-master": "11.x-dev"
                 }
             },
             "autoload": {
@@ -3096,7 +3097,7 @@
                 "issues": "https://github.com/laravel/scout/issues",
                 "source": "https://github.com/laravel/scout"
             },
-            "time": "2026-02-10T18:44:39+00:00"
+            "time": "2026-09-08T15:48:21+00:00"
         },
         {
             "name": "laravel/serializable-closure",
