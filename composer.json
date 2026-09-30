@@ -25,7 +25,7 @@
         "league/flysystem-aws-s3-v3": "^3.35",
         "league/flysystem-read-only": "^3.31",
         "maatwebsite/excel": "^4.0",
-        "sentry/sentry-laravel": "^4.27",
+        "sentry/sentry-laravel": "^4.28",
         "spatie/laravel-activitylog": "^4.12",
         "spatie/laravel-data": "^4.23",
         "tpetry/laravel-query-expressions": "^1.6",
