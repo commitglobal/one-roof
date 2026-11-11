@@ -21,7 +21,7 @@
         "laravel/framework": "^12.53",
         "haydenpierce/class-finder": "^0.6.0",
         "laravel/scout": "^11.9",
-        "laravel/tinker": "^3.0",
+        "laravel/tinker": "^3.1",
         "league/flysystem-aws-s3-v3": "^3.35",
         "league/flysystem-read-only": "^3.31",
         "maatwebsite/excel": "^4.0",
